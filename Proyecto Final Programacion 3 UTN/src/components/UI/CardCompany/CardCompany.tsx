@@ -21,8 +21,17 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
 
   return (
     <>
-      <Card className={styles.card} style={{ width: '18rem' }}>
+      <Card className={styles.cardContainer} style={{ width: '18rem' }}>
         <Card.Body>
+          <img 
+            src={
+              company.logo instanceof File 
+                ? URL.createObjectURL(company.logo)  // Si es un archivo File
+                : company.logo 
+                  ? company.logo  // Si es una cadena de texto
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s"  // Si es null o undefined
+            }  
+            alt="" />
           <Card.Title>{company.name}</Card.Title>
           <Card.Subtitle>Razon social: {company.social_razon}</Card.Subtitle>
           <div className={styles.buttonContainer}>

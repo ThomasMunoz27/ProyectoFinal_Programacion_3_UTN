@@ -8,10 +8,12 @@
     margin: 15px;
     width: 18rem;
     background-color: rgb(3, 3, 41);
-
+    margin: 10px
 }
 
-
+.cardContainer img{
+    width: 250px;
+}
 
 .buttonContainer{
     margin-top: 5px;
