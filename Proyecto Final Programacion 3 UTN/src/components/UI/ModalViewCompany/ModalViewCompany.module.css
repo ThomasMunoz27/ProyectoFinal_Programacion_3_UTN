@@ -1,14 +1,16 @@
 .containerPrincipalOn{
-    height: 60vh;
-    width: 25vw;
+    min-height: 60vh;
+    min-width: 25vw;
     background-color: white;
     border-radius: 3vh;
     box-shadow: 5px 5px 25px;
     position: absolute;
-    right: 470px;
-    bottom: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 20px;
     color: #000;
+    z-index: 2;
 }
 .containerTitle{
     text-align: center;
