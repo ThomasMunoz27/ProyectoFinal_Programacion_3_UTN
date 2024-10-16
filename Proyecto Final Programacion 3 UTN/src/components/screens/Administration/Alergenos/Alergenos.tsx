@@ -1,4 +1,4 @@
-import { Header } from "../../UI/Header"
+
 
 
 export const Alergenos = () => {
