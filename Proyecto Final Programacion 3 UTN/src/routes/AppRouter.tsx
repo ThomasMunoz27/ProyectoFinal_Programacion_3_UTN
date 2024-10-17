@@ -11,12 +11,9 @@ export const AppRouter = () => {
   return (
     <>
     <Header/>
-    
-    
     <Routes>
 
-        <Route path="/home" element={<Home/>
-        }></Route>
+        <Route path="/" element={<Home/>}></Route>
 
         
 
