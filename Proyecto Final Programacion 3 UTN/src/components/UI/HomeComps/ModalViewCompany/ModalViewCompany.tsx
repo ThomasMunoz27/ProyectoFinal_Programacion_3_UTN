@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import styles from "./ModalViewCompany.module.css";
 import { FC } from "react";
-import { ICompany } from "../../../Types/ICompany";
+import { ICompany } from "../../../../Types/ICompany";
 
 interface IModalViewCompany {
     company : ICompany;

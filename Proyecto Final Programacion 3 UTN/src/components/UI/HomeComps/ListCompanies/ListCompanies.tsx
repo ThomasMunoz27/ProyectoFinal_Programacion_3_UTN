@@ -1,6 +1,6 @@
-import { ICompany } from "../../../Types/ICompany"
 import { FC } from "react"
 import { CardCompany } from "../CardCompany/CardCompany"
+import { ICompany } from "../../../../Types/ICompany"
 
 interface IListCompanies{
   companies: ICompany[]

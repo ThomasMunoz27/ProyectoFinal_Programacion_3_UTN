@@ -1,8 +1,8 @@
 import { FC, useState } from "react"
-import { ICompany } from "../../../Types/ICompany"
 import { Button, Card } from "react-bootstrap"
 import styles from "./CardCompany.module.css"
 import ModalViewCompany from "../ModalViewCompany/ModalViewCompany"
+import { ICompany } from "../../../../Types/ICompany"
 
 interface ICardCompany{
   company: ICompany

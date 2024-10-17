@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom"
-import { Aside } from "../components/UI/Aside/Aside"
-import { Header } from "../components/UI/HomeHeader/Header"
+import { Header } from "../components/UI/HomeComps/HomeHeader/Header"
+
+import { Home } from "../components/screens/Home/Home"
+
 
 
 
@@ -9,11 +11,12 @@ export const AppRouter = () => {
   return (
     <>
     <Header/>
-    <Aside/>
+    
     
     <Routes>
 
-        <Route></Route>
+        <Route path="/home" element={<Home/>
+        }></Route>
 
         
 

@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap"
 import { ListCompanies } from "../ListCompanies/ListCompanies"
-import { companiesData } from "../../../data/companiesData"
 import styles from "./Aside.module.css"
+import { companiesData } from "../../../../data/companiesData"
 
 export const Aside = () => {
   return (
