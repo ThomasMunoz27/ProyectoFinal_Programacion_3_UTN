@@ -3,6 +3,7 @@ import { Button, Card } from "react-bootstrap"
 import styles from "./CardCompany.module.css"
 import ModalViewCompany from "../ModalViewCompany/ModalViewCompany"
 import { ICompany } from "../../../../Types/ICompany"
+import ModalEditCompany from "../ModalEditCompany/ModalEditCompany"
 
 interface ICardCompany{
   company: ICompany
@@ -10,13 +11,22 @@ interface ICardCompany{
 
 export const CardCompany : FC<ICardCompany>= ({company}) => {
   const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
+  const [showModalEdit, setShowModalEdit] = useState(false); //Estado que se va a usar para editar la empresa
   
-  const handleButtonShow = () =>{ //Muestra el modal
-    setShowModal(true)
+  const handleButtonShow = () =>{ //Muestra el modal de View
+      setShowModal(true);
   }
 
-  const handleCloseModal = () =>{ //Deja de mostrar el modal
-    setShowModal(false)
+  const handleCloseModal = () =>{ //Deja de mostrar el modal de View
+    setShowModal(false);
+  }
+
+  const handleButtonEdit = () =>{
+    setShowModalEdit(true);
+  }
+
+  const handleCloseModalEdit = () =>{
+    setShowModalEdit(false);
   }
 
   return (
@@ -36,14 +46,45 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
           <Card.Subtitle>Razon social: {company.social_razon}</Card.Subtitle>
           <div className={styles.buttonContainer}>
             <Button onClick={handleButtonShow}>Ver</Button>
-            <Button>Editar</Button>
+            <Button onClick={handleButtonEdit}>Editar</Button>
           </div>
         </Card.Body>
       </Card>
-      {showModal && (
-    <ModalViewCompany company={company} modalClose={handleCloseModal} /> //Si showModal es verdadero muestra el componente
-      )}
 
+      {showModal && (
+        <>
+        {/* Meto un div abajo para que impida pulsar otro elemento */}
+          <div style={{
+            backgroundColor : 'rgba(0, 0, 0, 0.5)',
+            position: 'fixed',            
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex :'2' 
+          }}>
+          </div>
+          <ModalViewCompany company={company} modalClose={handleCloseModal} /> 
+        </>
+              )}
+        
+        {showModalEdit && (
+          <>
+            <div style={{
+              backgroundColor : 'rgba(0, 0, 0, 0.5)',
+              position: 'fixed',            
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex :'2' 
+            }}>
+            </div>
+            <ModalEditCompany  modalCloseEdit={handleCloseModalEdit}/>  
+          </>
+          
+        )}
     </>
   )
 }
+

@@ -13,12 +13,9 @@ export const ListCompanies : FC<IListCompanies> = ({companies}) => {
     <div>
         <div>
           {companies.map((company)=>(
-            <CardCompany company={company} key={company.id} />
+            <CardCompany company={company} key={company.id}/>
           ))}
         </div>
-
-        
-        
     </div>
     </>
   )
