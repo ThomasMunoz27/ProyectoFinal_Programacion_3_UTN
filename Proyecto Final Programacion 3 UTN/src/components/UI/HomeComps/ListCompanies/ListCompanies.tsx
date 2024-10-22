@@ -1,9 +1,10 @@
 import { FC } from "react"
 import { CardCompany } from "../CardCompany/CardCompany"
-import { ICompany } from "../../../../Types/ICompany"
+import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa"
+
 
 interface IListCompanies{
-  companies: ICompany[]
+  companies: IEmpresa[]
 }
 
 export const ListCompanies : FC<IListCompanies> = ({companies}) => {

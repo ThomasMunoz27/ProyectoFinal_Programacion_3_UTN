@@ -2,11 +2,11 @@ import { FC, useState } from "react"
 import { Button, Card } from "react-bootstrap"
 import styles from "./CardCompany.module.css"
 import ModalViewCompany from "../ModalViewCompany/ModalViewCompany"
-import { ICompany } from "../../../../Types/ICompany"
 import ModalEditCompany from "../ModalEditCompany/ModalEditCompany"
+import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa"
 
 interface ICardCompany{
-  company: ICompany
+  company: IEmpresa
 }
 
 export const CardCompany : FC<ICardCompany>= ({company}) => {
@@ -35,15 +35,11 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
         <Card.Body>
           <img 
             src={
-              company.logo instanceof File 
-                ? URL.createObjectURL(company.logo)  // Si es un archivo File
-                : company.logo 
-                  ? company.logo  // Si es una cadena de texto
-                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s"  // Si es null o undefined
+              company.logo ? company.logo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s"  // Si es null o undefined
             }  
             alt="" />
-          <Card.Title>{company.name}</Card.Title>
-          <Card.Subtitle>Razon social: {company.social_razon}</Card.Subtitle>
+          <Card.Title>{company.nombre}</Card.Title>
+          <Card.Subtitle>Razon social: {company.razonSocial}</Card.Subtitle>
           <div className={styles.buttonContainer}>
             <Button onClick={handleButtonShow}>Ver</Button>
             <Button onClick={handleButtonEdit}>Editar</Button>
