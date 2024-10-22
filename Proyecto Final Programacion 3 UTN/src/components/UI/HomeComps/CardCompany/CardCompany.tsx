@@ -13,6 +13,10 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
   const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
   const [showModalEdit, setShowModalEdit] = useState(false); //Estado que se va a usar para editar la empresa
   
+  const handleVistOfSucursals = ()=>{
+    //quiero que mande company a otro componente llamado ViewSucursals
+  }
+
   const handleButtonShow = () =>{ //Muestra el modal de View
       setShowModal(true);
   }
@@ -31,7 +35,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
 
   return (
     <>
-      <Card className={styles.cardContainer} style={{ width: '18rem' }}>
+      <Card onClick={handleVistOfSucursals} className={styles.cardContainer} style={{ width: '18rem' }}>
         <Card.Body>
           <img 
             src={
@@ -50,15 +54,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
       {showModal && (
         <>
         {/* Meto un div abajo para que impida pulsar otro elemento */}
-          <div style={{
-            backgroundColor : 'rgba(0, 0, 0, 0.5)',
-            position: 'fixed',            
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex :'2' 
-          }}>
+          <div className={styles.backgroundDisabled}>
           </div>
           <ModalViewCompany company={company} modalClose={handleCloseModal} /> 
         </>
@@ -66,15 +62,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
         
         {showModalEdit && (
           <>
-            <div style={{
-              backgroundColor : 'rgba(0, 0, 0, 0.5)',
-              position: 'fixed',            
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              zIndex :'2' 
-            }}>
+            <div className={styles.backgroundDisabled}>
             </div>
             <ModalEditCompany  modalCloseEdit={handleCloseModalEdit}/>  
           </>
