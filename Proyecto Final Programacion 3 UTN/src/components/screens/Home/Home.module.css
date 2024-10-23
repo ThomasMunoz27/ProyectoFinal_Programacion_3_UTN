@@ -1,0 +1,7 @@
+.mainContainer{
+    display: grid;
+    text-align: center;
+    grid-template-columns: 350px 1fr;
+    
+    
+}
