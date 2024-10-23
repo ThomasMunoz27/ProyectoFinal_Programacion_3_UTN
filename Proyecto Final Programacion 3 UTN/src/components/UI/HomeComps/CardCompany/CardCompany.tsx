@@ -4,6 +4,8 @@ import styles from "./CardCompany.module.css"
 import ModalViewCompany from "../ModalViewCompany/ModalViewCompany"
 import ModalEditCompany from "../ModalEditCompany/ModalEditCompany"
 import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa"
+// import { useDispatch } from "react-redux"
+// import { setSelectedCompany } from "../../../../redux/slices/companySlice"
 
 interface ICardCompany{
   company: IEmpresa
@@ -13,9 +15,11 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
   const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
   const [showModalEdit, setShowModalEdit] = useState(false); //Estado que se va a usar para editar la empresa
   
-  const handleVistOfSucursals = ()=>{
-    //quiero que mande company a otro componente llamado ViewSucursals
-  }
+//  const dispatch = useDispatch
+
+  // const handleSelect = ()=>{
+  //   dispatch(setSelectedCompany(company))
+  // }
 
   const handleButtonShow = () =>{ //Muestra el modal de View
       setShowModal(true);
@@ -35,7 +39,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
 
   return (
     <>
-      <Card onClick={handleVistOfSucursals} className={styles.cardContainer} style={{ width: '18rem' }}>
+      <Card onClick={handleSelect} className={styles.cardContainer} style={{ width: '18rem' }}>
         <Card.Body>
           <img 
             src={
