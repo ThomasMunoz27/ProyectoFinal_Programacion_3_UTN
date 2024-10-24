@@ -10,6 +10,6 @@ export const adressData: IDomicilio[]=[
         piso: 0,
         eliminado: false,
         nroDpto: 0,
-        localidad : localitiesData[1]
+        localidad : localitiesData[0]
         }
 ]

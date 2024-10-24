@@ -5,6 +5,6 @@ export const alergenosData: IAlergenos[]=[
     {
         id: 1,
         denominacion: "Celiacos",
-        imagen: imageData[1]
+        imagen: imageData[0]
     }
 ]

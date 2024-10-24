@@ -1,6 +1,7 @@
 import { IEmpresa } from "../types/dtos/empresa/IEmpresa";
 import { countriesData } from "./countriesData";
 
+
 export const companiesData: IEmpresa[]=[
     {
         nombre: "Jebbs",
@@ -9,7 +10,7 @@ export const companiesData: IEmpresa[]=[
         logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqQJ5OTgl81AyQhX4yjtfC-DXgAzXUOUAi_w&s",
         id:1,
         sucursales:[],
-        pais: countriesData[1]
+        pais: countriesData[0]
     },
     {
         nombre: "Vea",
@@ -18,6 +19,6 @@ export const companiesData: IEmpresa[]=[
         logo: "",
         id:2,
         sucursales:[],
-        pais: countriesData[1]
+        pais: countriesData[0]
     }
 ]

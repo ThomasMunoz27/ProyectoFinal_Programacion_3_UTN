@@ -1,8 +1,8 @@
 import { FC } from "react"
 import { useSelector } from "react-redux"
-import { RootState } from "../../../../redux/store/store"
 import styles from "./ViewSucursals.module.css"
 import { CardSucursal } from "../CardSucursals/CardSucursal"
+import { RootState } from "../../../../redux/store/store"
 
 export const ViewSucursals: FC = () => {
 
@@ -21,8 +21,12 @@ export const ViewSucursals: FC = () => {
     }
 
 
-  return (
+ console.log(selectedCompany)
+   return (
     <div className={styles.sucursalsContainer}>
+      <div>
+        {}
+      </div>
       <h2>Sucursales de: {selectedCompany.nombre}</h2>
       <div>
           {selectedCompany.sucursales.length === 0 ?

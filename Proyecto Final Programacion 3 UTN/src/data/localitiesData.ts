@@ -5,6 +5,6 @@ export const localitiesData: ILocalidad[]=[
     {
         id: 1,
         nombre: "Godoy Cruz",
-        provincia: provinceData[1]
+        provincia: provinceData[0]
     }
 ]
