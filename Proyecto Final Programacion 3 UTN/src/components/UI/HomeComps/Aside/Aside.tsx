@@ -1,43 +1,11 @@
 import { Button } from "react-bootstrap"
 import { ListCompanies } from "../ListCompanies/ListCompanies"
 import styles from "./Aside.module.css"
+import { IEmpresas } from "../../../../types/dtos/empresa/IEmpresas";
 
-
-
-/*
-
-interface IEmpresas {
-  id: number;
-  nombre: string;
-  // otros campos que definen la interfaz
-}
-
-async function getEmpresas(): Promise<IEmpresas[]> {
-  const response = await fetch('http://190.221.207.224:8090/empresas');
-  const empresas: IEmpresas[] = await response.json();
-  console.log(empresas);
-  return empresas;
-}
-
-// Llamada a la función
-getEmpresas().then((empresas) => {
-  // Aquí puedes usar las empresas obtenidas
-  console.log(empresas);
-});
-
-
-*/
 
 export const Aside = () => {
-  interface IEmpresas {
-    id: number;
-    eliminado: boolean;
-    nombre: string;
-    razonSocial: string;
-    cuit: number;
-    logo: string;
-  }
-   
+
   
   
   async function getEmpresas(): Promise<IEmpresas[]> {
@@ -48,7 +16,7 @@ export const Aside = () => {
   }
   
   // Llamada a la función
-  const e = getEmpresas().then((empresas) => {
+  const companies = getEmpresas().then((empresas) => {
    return empresas;
   });
   
@@ -66,7 +34,7 @@ export const Aside = () => {
       </div>
 
       <div>
-        <ListCompanies companies={e}/>
+        <ListCompanies companies={companies}/>
       </div>
     
     </div>
