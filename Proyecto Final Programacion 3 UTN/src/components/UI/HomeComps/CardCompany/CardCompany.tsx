@@ -68,7 +68,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
           <>
             <div className={styles.backgroundDisabled}>
             </div>
-            <ModalEditCompany  modalCloseEdit={handleCloseModalEdit}/>  
+            <ModalEditCompany  modalCloseEdit={handleCloseModalEdit} company={company}/>  
           </>
           
         )}
