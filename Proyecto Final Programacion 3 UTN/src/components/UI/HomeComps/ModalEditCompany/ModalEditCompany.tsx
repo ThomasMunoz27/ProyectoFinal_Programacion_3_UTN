@@ -62,7 +62,7 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
                     timer: 1500
                 });
                 modalCloseEdit();
-                
+                window.location.reload() 
             }else{
                 alert("Error al actualizar la empresa")
             }
