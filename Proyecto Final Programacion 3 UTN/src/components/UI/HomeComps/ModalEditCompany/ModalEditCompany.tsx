@@ -2,24 +2,16 @@ import { Button } from "react-bootstrap";
 import styles from "./ModalEditCompany.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa";
+import { IUpdateEmpresaDto } from "../../../../types/dtos/empresa/IUpdateEmpresaDto";
 
 interface IModalEditCompany {
     modalCloseEdit : () => void; //Funcion que recibe desde CardCompany para cerrar el modal
     company : IEmpresa
 }
 
-interface formValues{ // Interfaz para tipear los campos de los inputs
-    id: number,
-    eliminado: boolean,
-    nombre : string,
-    razonSocial : string,
-    cuit : number,
-    logo : string
-}
-
 const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => {
 
-    const[formValues, setFormValues] = useState<formValues>({ // Estado para manejar los valores de los inputs
+    const[formValues, setFormValues] = useState<IUpdateEmpresaDto>({ // Estado para manejar los valores de los inputs
         //Inicializo con los valores de la compania
         id : company.id,
         eliminado: company.eliminado,
@@ -41,7 +33,7 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
     };
 
     //Fucnion que maneja el envio de los campos del form a la api
-    const handleSubmit = async (e : any ) => {
+    const handleSubmit = async (e :  React.MouseEvent<HTMLButtonElement> ) => {
         e.preventDefault();
         const sendData = JSON.stringify(formValues) //Convierto a json el objeto
         try{
@@ -54,6 +46,7 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
             });
 
             if(response.ok){
+                
                 alert("Empresa actualizada");
                 modalCloseEdit();
             }else{
@@ -81,7 +74,7 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
                     <label htmlFor="">Cuit</label>
                     <input type="text" placeholder="Cuit de la empresa" name="cuit" value={formValues.cuit} onChange={handleChange}/>
                     <label htmlFor="">Imagen</label>                    
-                    <input type="text" placeholder="Link de imagen" name="imagen" value={formValues.logo} onChange={handleChange}/>
+                    <input type="text" placeholder="Link de imagen" name="imagen" value={formValues.logo || ""} onChange={handleChange}/>
                     
                 </form>
                 <div className={styles.containerButtons}>
