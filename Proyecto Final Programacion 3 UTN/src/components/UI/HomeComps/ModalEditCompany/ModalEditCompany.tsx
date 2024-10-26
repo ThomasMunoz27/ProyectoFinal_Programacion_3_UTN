@@ -56,6 +56,7 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
             if(response.ok){
                 alert("Empresa actualizada");
                 modalCloseEdit();
+                // Aqui deberiamos re-renderizar.
             }else{
                 alert("Error al actualizar la empresa")
             }
