@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import styles from "./ModalEditCompany.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa";
+import Swal from "sweetalert2";
 
 interface IModalEditCompany {
     modalCloseEdit : () => void; //Funcion que recibe desde CardCompany para cerrar el modal
@@ -54,7 +55,12 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
             });
 
             if(response.ok){
-                alert("Empresa actualizada");
+                Swal.fire({
+                    icon: "success",
+                    title: "Empresa actualizada",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 modalCloseEdit();
             }else{
                 alert("Error al actualizar la empresa")
