@@ -40,7 +40,9 @@ export const ViewSucursals: FC = () => {
   }, [selectedCompanyId]);
 
   if (loading) {
-    return <div>Cargando sucursales...</div>;
+    return <div>
+                <h3>Seleccione una empresa para ver sus sucursales</h3>
+            </div>;
   }
 
   if (error) {
@@ -48,17 +50,25 @@ export const ViewSucursals: FC = () => {
   }
 
   return (
-    <div className={styles.sucursalsContainer}>
+    <>
+    
+    <div className={styles.sucursalsMainContainer}>
       <h2>Sucursales de {selectedCompany?.nombre}</h2>
       <div>
         {sucursals.length === 0 ? (
           <h3>No hay sucursales</h3>
         ) : (
-          sucursals.map((sucursal) => (
-            <CardSucursal sucursal={sucursal} key={sucursal.id} />
-          ))
+          <div className={styles.sucursalsCardContainer}>
+            {
+              sucursals.map((sucursal) => (
+                <CardSucursal sucursal={sucursal} key={sucursal.id} />
+              ))
+            }
+          </div>
         )}
       </div>
     </div>
+
+    </>
   );
 };

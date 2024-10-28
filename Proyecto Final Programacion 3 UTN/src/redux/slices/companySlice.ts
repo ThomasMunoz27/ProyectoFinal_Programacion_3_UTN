@@ -18,7 +18,8 @@ const companySlice = createSlice({
             },
             clearSelectedCompany: (state) => {
                 state.selectedCompany = null
-            }
+            },
+            
         },
         
     }
