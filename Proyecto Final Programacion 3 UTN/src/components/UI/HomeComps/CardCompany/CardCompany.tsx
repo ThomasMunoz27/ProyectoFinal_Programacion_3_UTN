@@ -15,7 +15,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
   const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
   const [showModalEdit, setShowModalEdit] = useState(false); //Estado que se va a usar para editar la empresa
   
- const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const handleSelect = ()=>{
     dispatch(setSelectedCompany(company))
@@ -26,7 +26,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
   }
 
   const handleCloseModal = () =>{ //Deja de mostrar el modal de View
-    setShowModal(false);
+    setShowModal(false);  
   }
 
   const handleButtonEdit = () =>{
