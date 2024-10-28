@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import companySlice from '../slices/companySlice'
+import sucursalSlice from '../slices/sucursalSlice'
 
 
 export const store = configureStore({
   reducer: {
     company: companySlice,
+    sucursal: sucursalSlice,
 }})
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

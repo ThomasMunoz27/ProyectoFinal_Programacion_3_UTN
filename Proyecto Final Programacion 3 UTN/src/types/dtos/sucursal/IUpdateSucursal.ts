@@ -1,4 +1,4 @@
-import { ICategorias } from "../../ICategorias";
+import { ICategorias } from "../../dtos/categorias/ICategorias";
 import { baseDto } from "../baseDto/baseDto";
 
 export interface IUpdateSucursal extends baseDto {
