@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import style from "./ModalAddCompany.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { ICreateEmpresaDto } from "../../../../types/dtos/empresa/ICreateEmpresaDto";
+import Swal from "sweetalert2";
 
 interface IModalAdd{
     closeModalAdd : () => void //Funcion que recibe desde CardCompany para cerrar el modal
@@ -40,16 +41,22 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
 
         try{
             const response = await fetch('http://190.221.207.224:8090/empresas',{
-                method : 'POST',
+                method : 'POST', //Metodo para crear
                 headers : {
-                    'ContentType' : 'application/json',
+                    'Content-Type' : 'application/json',
                 },
                 body: sendData
             });
             
             if(response.ok){
-                alert("Empresa creada")
+                Swal.fire({
+                    icon: "success",
+                    title: "Empresa actualizada",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
                 closeModalAdd();
+                window.location.reload()
             }else{
                 alert("Error al crear la empresa");
             }
@@ -75,7 +82,7 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
                     <label htmlFor="">Cuit</label>
                     <input type="text" placeholder="Cuit de la empresa" name="cuit" value={values.cuit} onChange={handleChange}/>
                     <label htmlFor="">Imagen</label>                    
-                    <input type="text"  placeholder="Link de imagen" name="imagen" value={values.logo || ""} onChange={handleChange}/>
+                    <input type="text"  placeholder="Link de imagen" name="logo" value={values.logo || ""} onChange={handleChange}/>
                     
                 </form>
                 <div className={style.containerButtons}>

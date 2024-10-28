@@ -4,7 +4,7 @@
     background-color: white;
     border-radius: 3vh;
     box-shadow: 5px 5px 25px;
-    position: absolute;
+     position: fixed; /* Cambio para que el pop-up siempre este centrado */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
