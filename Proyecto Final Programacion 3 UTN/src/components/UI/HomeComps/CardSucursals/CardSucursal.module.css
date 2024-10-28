@@ -1,0 +1,27 @@
+.card{
+    width: 25%;
+    height: fit-content;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.cardImg{
+    width: 100%;
+    height: 300px;
+}
+
+.containerButtons{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 2vh;
+}
+
+.containerButtons button{
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+}
