@@ -20,3 +20,12 @@
         grid-template-columns: repeat(3, 1fr); /* Tres columnas */
     }
 }
+.containerHeader{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 90%;
+
+    justify-content: space-between;
+    padding: 10px;
+}

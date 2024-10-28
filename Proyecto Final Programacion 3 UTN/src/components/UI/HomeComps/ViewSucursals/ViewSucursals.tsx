@@ -4,6 +4,7 @@ import { RootState } from "../../../../redux/store/store";
 import styles from "./ViewSucursals.module.css";
 import { CardSucursal } from "../CardSucursals/CardSucursal";
 import { ISucursal } from "../../../../types/dtos/sucursal/ISucursal";
+import { Button } from "react-bootstrap";
 
 
 
@@ -53,7 +54,9 @@ export const ViewSucursals: FC = () => {
     <>
     
     <div className={styles.sucursalsMainContainer}>
-      <h2>Sucursales de {selectedCompany?.nombre}</h2>
+      <div className={styles.containerHeader}>
+      <h2>Sucursales de {selectedCompany?.nombre}</h2><Button>Agregar sucursal</Button>
+      </div>
       <div>
         {sucursals.length === 0 ? (
           <h3>No hay sucursales</h3>
