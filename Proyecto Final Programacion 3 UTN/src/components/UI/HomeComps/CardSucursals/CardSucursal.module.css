@@ -1,7 +1,7 @@
 .card{
-    min-width: 270px !important ; 
+    min-width: 270px !important ;; 
     width: 25%;
-    height: fit-content;
+    height: 420px !important;
     padding: 10px;
     display: flex;
     justify-content: center;

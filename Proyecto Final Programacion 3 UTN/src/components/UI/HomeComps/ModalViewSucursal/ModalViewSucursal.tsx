@@ -19,8 +19,8 @@ const ModalViewSucursal: FC<IModalViewSucursal>  = ({sucursal, modalClose}) =>{
             
             <div className={ styles.containerData }>
                 <p>Nombre: {sucursal.nombre} </p>
-                <p>Casa matriz?: {sucursal.esCasaMatriz} </p>
-                <p>Apertura: {sucursal.horarioApertura}</p>
+                <p>Calle: {sucursal.domicilio.calle} </p>
+                <p>Horario de atención: {sucursal.horarioApertura}-{sucursal.horarioCierre}</p>
                 <div className={styles.containerLogo}>
                 <p>Logo: </p>
                     <img 
