@@ -5,7 +5,7 @@ import { ICategorias } from "../types/dtos/categorias/ICategorias";
 
 const BASE_URL = 'http://190.221.207.224:8090/categorias';
 
-export const companyService = {
+export const categoryService = {
 
     async getCategoriesByCompany(companyId: number): Promise<ICategorias[]> {
         const response = await axios.get<ICategorias[]>(`${BASE_URL}/allCategoriasPorEmpresa/${companyId}`);

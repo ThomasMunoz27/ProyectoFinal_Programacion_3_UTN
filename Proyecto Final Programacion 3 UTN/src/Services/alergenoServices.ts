@@ -7,5 +7,10 @@ export const alergenoService = {
     async getAllAlergenos(){
         const response = await axios.get(BASE_URL)
         return response.data;
+    },
+
+    async getAlergenoById(alergenoId: number){
+        const response = await axios.get(`${BASE_URL}/${alergenoId}`)
+        return response.data;
     }
 }
