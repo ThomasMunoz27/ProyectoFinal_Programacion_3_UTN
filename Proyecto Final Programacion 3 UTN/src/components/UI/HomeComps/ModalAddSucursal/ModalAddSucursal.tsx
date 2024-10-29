@@ -3,7 +3,6 @@ import style from "./ModalAddSucursal.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { ICreateSucursal } from "../../../../types/dtos/sucursal/ICreateSucursal";
 import Swal from "sweetalert2";
-import { companyService } from "../../../../Services/CompanyServices/companyServices";
 import { sucursalService } from "../../../../Services/SucursalServices/sucursalService";
 
 interface IModalAdd {
