@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ISucursal } from '../../types/dtos/sucursal/ISucursal';
+import { ICreateSucursal } from '../../types/dtos/sucursal/ICreateSucursal';
 
 const BASE_URL = 'http://190.221.207.224:8090';  // URL base de tu API
 
@@ -14,4 +15,9 @@ export const sucursalService = {
         }
     },
     // Puedes agregar más métodos para otras peticiones (POST, PUT, DELETE)
+    async createSucursal(nuevaEmpresa: ICreateSucursal): Promise<ISucursal> {
+        const response = await axios.post<ISucursal>(BASE_URL, nuevaEmpresa);
+        return response.data;
+      },
+    
 };

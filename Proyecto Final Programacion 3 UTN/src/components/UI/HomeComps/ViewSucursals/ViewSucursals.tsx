@@ -5,6 +5,8 @@ import styles from "./ViewSucursals.module.css";
 import { CardSucursal } from "../CardSucursals/CardSucursal";
 import { ISucursal } from "../../../../types/dtos/sucursal/ISucursal";
 import { sucursalService } from "../../../../Services/SucursalServices/sucursalService";
+import { Button } from "react-bootstrap";
+import ModalAddSucursal from "../ModalAddSucursal/ModalAddSucursal";
 
 
 
@@ -17,6 +19,17 @@ export const ViewSucursals: FC = () => {
 
   const [sucursals, setSucursals] = useState<ISucursal[]>([]);
 
+  const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
+  const[showModalAddSucursal, setShowModalAddSucursal] = useState<boolean>(false); //Estado para controlar el modal
+
+
+  const handleShowModal = () =>{
+    setShowModalAddSucursal(true); //Cambio el valor para que se muestre el Pop-up
+  }
+
+  const handleCloseModal = () =>{
+    setShowModalAddSucursal(false);
+  }
 
   // Función para cargar las sucursales de la empresa seleccionada
   useEffect(() => {
@@ -35,7 +48,10 @@ export const ViewSucursals: FC = () => {
     <>
     
     <div className={styles.sucursalsMainContainer}>
+      <div className={styles.containerHeader}>
       <h2>Sucursales de {selectedCompany?.nombre}</h2>
+      <Button onClick={handleShowModal}>Agregar Sucursal</Button>
+      </div>
       <div>
         {sucursals.length === 0 ? (
           <h3>No hay sucursales</h3>
@@ -51,6 +67,15 @@ export const ViewSucursals: FC = () => {
       </div>
     </div>
 
+
+    {showModalAddSucursal && (
+        <>
+        {/* Meto un div abajo para que impida pulsar otro elemento */}
+          <div className={styles.backgroundDisabled}>
+          </div>
+          <ModalAddSucursal closeModalAdd={handleCloseModal}/> 
+        </>
+              )}
     </>
   );
 };
