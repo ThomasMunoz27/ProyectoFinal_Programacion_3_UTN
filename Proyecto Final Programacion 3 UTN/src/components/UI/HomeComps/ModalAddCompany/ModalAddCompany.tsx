@@ -36,8 +36,6 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
             return;
         }
         
-        
-
         try{
             console.log("Datos enviados:", newCompany);
             await companyService.createCompany(newCompany);

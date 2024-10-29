@@ -36,7 +36,7 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
     //Funcion que maneja el envio de los campos del form a la api
     const handleSubmit = async (e :  React.MouseEvent<HTMLButtonElement> ) => {
         e.preventDefault();
-        const sendData = JSON.stringify(formValues) //Convierto a json el objeto
+    const sendData = JSON.stringify(formValues) //Convierto a json el objeto
         try{
             const response = await fetch(`http://190.221.207.224:8090/empresas/${company.id}`, {
                 method : 'PUT', //Metodo para actualizar
