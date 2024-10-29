@@ -3,6 +3,7 @@ import style from "./ModalAddCompany.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { ICreateEmpresaDto } from "../../../../types/dtos/empresa/ICreateEmpresaDto";
 import Swal from "sweetalert2";
+import { companyService } from "../../../../Services/CompanyServices/companyServices";
 
 interface IModalAdd{
     closeModalAdd : () => void //Funcion que recibe desde CardCompany para cerrar el modal
@@ -11,7 +12,7 @@ interface IModalAdd{
 
 const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
 
-    const [values, setValues] = useState<ICreateEmpresaDto>({
+    const [newCompany, setNewCompany] = useState<ICreateEmpresaDto>({
         nombre : '',
         razonSocial: '',
         cuit: 0,
@@ -21,49 +22,42 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
     //Funcion que maneja el cambio de los inputs
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
         const {name, value } = e.target;
-        setValues({
-            ...values, 
-            [name] : value
-        });
+        setNewCompany((prev) => ({...prev, 
+            [name]: name === 'cuit' ? Number(value) : value,
+        }));
     }
 
     //Funcion que majea el envio de los campos del form a la api
     const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault();
 
-        if(!values.nombre || !values.razonSocial || (!values.cuit || values.cuit <= 0) || !values.logo){
+        if(!newCompany.nombre || !newCompany.razonSocial || (!newCompany.cuit || newCompany.cuit <= 0) /* || !newCompany.logo */){
             alert("Complete todos los campos");
             return;
         }
-
-        //Convierto los datos a JSON
-        const sendData = JSON.stringify(values);
+        
+        
 
         try{
-            const response = await fetch('http://190.221.207.224:8090/empresas',{
-                method : 'POST', //Metodo para crear
-                headers : {
-                    'Content-Type' : 'application/json',
-                },
-                body: sendData
-            });
+            console.log("Datos enviados:", newCompany);
+            await companyService.createCompany(newCompany);
             
-            if(response.ok){
+            
                 Swal.fire({
                     icon: "success",
-                    title: "Empresa actualizada",
+                    title: "Empresa añadida",
                     showConfirmButton: false,
                     timer: 1500
                     });
                 closeModalAdd();
-                window.location.reload()
-            }else{
-                alert("Error al crear la empresa");
-            }
-
+                window.location.reload();
         }catch(error){
             console.error("El problema es: ", error);
-            alert("Hubo un problema");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
         }
     }
 
@@ -76,13 +70,13 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
             <div>
                 <form action=""  className={style.containerForm}>
                     <label htmlFor="">Nombre</label>
-                    <input type="text" placeholder="Nombre de la empresa" name="nombre" value={values.nombre} onChange={handleChange}/>
+                    <input type="text" placeholder="Nombre de la empresa" name="nombre" value={newCompany.nombre} onChange={handleChange}/>
                     <label htmlFor="">Razon Social</label>
-                    <input type="text" placeholder="Razon Social de la empresa" name="razonSocial" value={values.razonSocial} onChange={handleChange}/>
+                    <input type="text" placeholder="Razon Social de la empresa" name="razonSocial" value={newCompany.razonSocial} onChange={handleChange}/>
                     <label htmlFor="">Cuit</label>
-                    <input type="text" placeholder="Cuit de la empresa" name="cuit" value={values.cuit} onChange={handleChange}/>
+                    <input type="text" placeholder="Cuit de la empresa" name="cuit" value={newCompany.cuit} onChange={handleChange}/>
                     <label htmlFor="">Imagen</label>                    
-                    <input type="text"  placeholder="Link de imagen" name="logo" value={values.logo || ""} onChange={handleChange}/>
+                    <input type="text"  placeholder="Link de imagen" name="logo" value={newCompany.logo || ""} onChange={handleChange}/>
                     
                 </form>
                 <div className={style.containerButtons}>

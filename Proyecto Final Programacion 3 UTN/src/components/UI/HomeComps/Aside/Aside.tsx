@@ -1,13 +1,14 @@
 import { Button } from "react-bootstrap"
 import { ListCompanies } from "../ListCompanies/ListCompanies"
 import styles from "./Aside.module.css"
-import { IEmpresas } from "../../../../types/dtos/empresa/IEmpresas";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalAddCompany from "../ModalAddCompany/ModalAddCompany";
+import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa";
+import { companyService } from "../../../../Services/CompanyServices/companyServices";
 
 
 export const Aside = () => {
-
+  const[companies, setCompanies] = useState<IEmpresa[]>([]);
   const[showModalAddCompany, setShowModalAddCompany] = useState<boolean>(false); //Estado para controlar el modal
 
 
@@ -19,18 +20,18 @@ export const Aside = () => {
     setShowModalAddCompany(false);
   }
 
-  
-  async function getEmpresas(): Promise<IEmpresas[]> {
-    const response = await fetch('http://190.221.207.224:8090/empresas');
-    const empresas: IEmpresas[] = await response.json();
-    console.log(empresas);
-    return empresas;
-  }
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      const data = await companyService.getEmpresas();
+      setCompanies(data);
+    }
+    fetchCompanies();
+  }, []);
   
   // Llamada a la función
-  const companies = getEmpresas().then((empresas) => {
-   return empresas;
-  });
+  // const companies = getEmpresas().then((empresas) => {
+  // return empresas;
+  // });
   
   return (
     <div className={styles.asideContainer}>
