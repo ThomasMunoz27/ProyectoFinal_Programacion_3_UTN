@@ -4,7 +4,7 @@ import { RootState } from "../../../../redux/store/store";
 import styles from "./ViewSucursals.module.css";
 import { CardSucursal } from "../CardSucursals/CardSucursal";
 import { ISucursal } from "../../../../types/dtos/sucursal/ISucursal";
-import { sucursalService } from "../../../../Services/SucursalServices/sucursalService";
+import { sucursalService } from "../../../../Services/sucursalService";
 import { Button } from "react-bootstrap";
 import ModalAddSucursal from "../ModalAddSucursal/ModalAddSucursal";
 
@@ -36,7 +36,7 @@ export const ViewSucursals: FC = () => {
     if (selectedCompanyId) {
       const fetchSucursales = async () => {
 
-          const data = await sucursalService.getSucursales(selectedCompanyId);
+          const data = await sucursalService.getSucursalesByCompany(selectedCompanyId);
           setSucursals(data);
         }
         fetchSucursales();

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { IEmpresa } from '../../types/dtos/empresa/IEmpresa';
-import { ICreateEmpresaDto } from '../../types/dtos/empresa/ICreateEmpresaDto';
-import { IUpdateEmpresaDto } from '../../types/dtos/empresa/IUpdateEmpresaDto';
+import { IEmpresa } from '../types/dtos/empresa/IEmpresa';
+import { ICreateEmpresaDto } from '../types/dtos/empresa/ICreateEmpresaDto';
+import { IUpdateEmpresaDto } from '../types/dtos/empresa/IUpdateEmpresaDto';
 
 const BASE_URL = 'http://190.221.207.224:8090/empresas';
 

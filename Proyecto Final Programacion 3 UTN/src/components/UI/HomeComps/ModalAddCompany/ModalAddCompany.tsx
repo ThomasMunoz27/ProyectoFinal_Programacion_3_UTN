@@ -3,7 +3,7 @@ import style from "./ModalAddCompany.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { ICreateEmpresaDto } from "../../../../types/dtos/empresa/ICreateEmpresaDto";
 import Swal from "sweetalert2";
-import { companyService } from "../../../../Services/CompanyServices/companyServices";
+import { companyService } from "../../../../Services/companyServices";
 
 interface IModalAdd{
     closeModalAdd : () => void //Funcion que recibe desde CardCompany para cerrar el modal

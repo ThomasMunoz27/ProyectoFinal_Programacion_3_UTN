@@ -4,7 +4,7 @@ import { ChangeEvent, FC, useState } from "react";
 import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa";
 import Swal from "sweetalert2";
 import { IUpdateEmpresaDto } from "../../../../types/dtos/empresa/IUpdateEmpresaDto";
-import { companyService } from "../../../../Services/CompanyServices/companyServices";
+import { companyService } from "../../../../Services/companyServices";
 
 interface IModalEditCompany {
     modalCloseEdit : () => void; //Funcion que recibe desde CardCompany para cerrar el modal
