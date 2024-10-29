@@ -50,7 +50,7 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
                     timer: 1500
                     });
                 closeModalAdd();
-                setNewCompany(initialState);
+                window.location.reload();
         }catch(error){
             console.error("El problema es: ", error);
             Swal.fire({

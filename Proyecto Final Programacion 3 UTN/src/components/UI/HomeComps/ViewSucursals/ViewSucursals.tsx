@@ -49,11 +49,21 @@ export const ViewSucursals: FC = () => {
     
     <div className={styles.sucursalsMainContainer}>
       <div className={styles.containerHeader}>
-      <h2>Sucursales de {selectedCompany?.nombre}</h2>
-      <Button onClick={handleShowModal}>Agregar Sucursal</Button>
+      
+      {selectedCompany? ( 
+        <>
+        <h2>Sucursales de {selectedCompany?.nombre}</h2>
+        <Button onClick={handleShowModal}>Agregar Sucursal</Button>
+        </>
+      
+      ) : 
+
+      (<h1>Selecciona una empresa</h1>)}
+
+      
       </div>
       <div>
-        {sucursals.length === 0 ? (
+        {sucursals.length === 0 && selectedCompanyId ? (
           <h3>No hay sucursales</h3>
         ) : (
           <div className={styles.sucursalsCardContainer}>
