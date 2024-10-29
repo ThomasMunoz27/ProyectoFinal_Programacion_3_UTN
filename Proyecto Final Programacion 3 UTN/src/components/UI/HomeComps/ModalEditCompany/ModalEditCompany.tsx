@@ -4,6 +4,7 @@ import { ChangeEvent, FC, useState } from "react";
 import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa";
 import Swal from "sweetalert2";
 import { IUpdateEmpresaDto } from "../../../../types/dtos/empresa/IUpdateEmpresaDto";
+import { companyService } from "../../../../Services/CompanyServices/companyServices";
 
 interface IModalEditCompany {
     modalCloseEdit : () => void; //Funcion que recibe desde CardCompany para cerrar el modal
@@ -36,17 +37,10 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
     //Funcion que maneja el envio de los campos del form a la api
     const handleSubmit = async (e :  React.MouseEvent<HTMLButtonElement> ) => {
         e.preventDefault();
-        const sendData = JSON.stringify(formValues) //Convierto a json el objeto
+        
         try{
-            const response = await fetch(`http://190.221.207.224:8090/empresas/${company.id}`, {
-                method : 'PUT', //Metodo para actualizar
-                headers: {
-                    'Content-Type' : 'application/json',
-                },
-                body: sendData
-            });
+            await companyService.updateCompany(formValues.id, formValues);
 
-            if(response.ok){
                 Swal.fire({
                     icon: "success",
                     title: "Empresa actualizada",
@@ -55,12 +49,14 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
                     });
                 modalCloseEdit();
                 window.location.reload() 
-            }else{
-                alert("Error al actualizar la empresa")
-            }
+            
         }catch(error){
             console.error("El problema es: ", error)
-            alert("Hubo un problema")
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
         }
     }
     

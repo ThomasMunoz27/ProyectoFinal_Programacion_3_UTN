@@ -19,7 +19,7 @@ export const ViewSucursals: FC = () => {
 
   const [sucursals, setSucursals] = useState<ISucursal[]>([]);
 
-  const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
+  
   const[showModalAddSucursal, setShowModalAddSucursal] = useState<boolean>(false); //Estado para controlar el modal
 
 

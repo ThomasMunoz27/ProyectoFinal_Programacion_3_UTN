@@ -15,9 +15,9 @@ export const sucursalService = {
         }
     },
     // Puedes agregar más métodos para otras peticiones (POST, PUT, DELETE)
-    async createSucursal(nuevaEmpresa: ICreateSucursal): Promise<ISucursal> {
-        const response = await axios.post<ISucursal>(BASE_URL, nuevaEmpresa);
+    async createSucursal(nuevaSucursal: ICreateSucursal): Promise<ISucursal> {
+        const response = await axios.post<ISucursal>(`${BASE_URL}/sucursales/create`, nuevaSucursal);
         return response.data;
-      },
+    },
     
 };
