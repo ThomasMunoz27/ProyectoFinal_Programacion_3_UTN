@@ -53,12 +53,14 @@ const ModalAddSucursal: FC<IModalAdd> = ({ closeModalAdd }) => {
 
             Swal.fire({
                 icon: "success",
-                title: "Empresa añadida",
+                title: "Empresa actualizada",
                 showConfirmButton: false,
                 timer: 1500,
-            });
-            closeModalAdd();
-            window.location.reload();
+                willClose: ()=>{
+                    closeModalAdd()
+                    window.location.reload() 
+                }
+                });
         } catch (error) {
             console.error("El problema es: ", error);
             Swal.fire({
