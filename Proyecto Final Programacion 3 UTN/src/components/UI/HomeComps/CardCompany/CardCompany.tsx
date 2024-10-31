@@ -17,7 +17,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
   
   const dispatch = useDispatch()
 
-  const handleSelect = ()=>{
+  const handleSelectCompany = ()=>{
     dispatch(setSelectedCompany(company))
   }
 
@@ -39,7 +39,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
 
   return (
     <>
-      <Card onClick={handleSelect} className={styles.cardContainer} style={{ width: '18rem' }}>
+      <Card onClick={handleSelectCompany} className={styles.cardContainer} style={{ width: '18rem' }}>
         <Card.Body>
           <img 
             src={
