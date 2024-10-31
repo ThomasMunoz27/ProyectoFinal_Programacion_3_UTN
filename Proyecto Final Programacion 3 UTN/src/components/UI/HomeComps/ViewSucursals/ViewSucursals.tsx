@@ -4,7 +4,7 @@ import { RootState } from "../../../../redux/store/store";
 import styles from "./ViewSucursals.module.css";
 import { CardSucursal } from "../CardSucursals/CardSucursal";
 import { ISucursal } from "../../../../types/dtos/sucursal/ISucursal";
-import { sucursalService } from "../../../../Services/SucursalServices/sucursalService";
+import { sucursalService } from "../../../../Services/sucursalService";
 import { Button } from "react-bootstrap";
 import ModalAddSucursal from "../ModalAddSucursal/ModalAddSucursal";
 
@@ -19,7 +19,7 @@ export const ViewSucursals: FC = () => {
 
   const [sucursals, setSucursals] = useState<ISucursal[]>([]);
 
-  const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
+  
   const[showModalAddSucursal, setShowModalAddSucursal] = useState<boolean>(false); //Estado para controlar el modal
 
 
@@ -36,7 +36,7 @@ export const ViewSucursals: FC = () => {
     if (selectedCompanyId) {
       const fetchSucursales = async () => {
 
-          const data = await sucursalService.getSucursales(selectedCompanyId);
+          const data = await sucursalService.getSucursalesByCompany(selectedCompanyId);
           setSucursals(data);
         }
         fetchSucursales();
@@ -49,11 +49,21 @@ export const ViewSucursals: FC = () => {
     
     <div className={styles.sucursalsMainContainer}>
       <div className={styles.containerHeader}>
-      <h2>Sucursales de {selectedCompany?.nombre}</h2>
-      <Button onClick={handleShowModal}>Agregar Sucursal</Button>
+      
+      {selectedCompany? ( 
+        <>
+        <h2>Sucursales de {selectedCompany?.nombre}</h2>
+        <Button onClick={handleShowModal}>Agregar Sucursal</Button>
+        </>
+      
+      ) : 
+
+      (<h1>Selecciona una empresa</h1>)}
+
+      
       </div>
       <div>
-        {sucursals.length === 0 ? (
+        {sucursals.length === 0 && selectedCompanyId ? (
           <h3>No hay sucursales</h3>
         ) : (
           <div className={styles.sucursalsCardContainer}>

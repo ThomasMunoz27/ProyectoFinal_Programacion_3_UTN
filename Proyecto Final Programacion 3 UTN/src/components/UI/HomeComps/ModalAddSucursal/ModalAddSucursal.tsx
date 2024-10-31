@@ -3,7 +3,7 @@ import style from "./ModalAddSucursal.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { ICreateSucursal } from "../../../../types/dtos/sucursal/ICreateSucursal";
 import Swal from "sweetalert2";
-import { sucursalService } from "../../../../Services/SucursalServices/sucursalService";
+import { sucursalService } from "../../../../Services/sucursalService";
 
 interface IModalAdd {
     closeModalAdd: () => void; //Funcion que recibe desde CardCompany para cerrar el modal

@@ -4,7 +4,7 @@ import styles from "./Aside.module.css"
 import { useEffect, useState } from "react";
 import ModalAddCompany from "../ModalAddCompany/ModalAddCompany";
 import { IEmpresa } from "../../../../types/dtos/empresa/IEmpresa";
-import { companyService } from "../../../../Services/CompanyServices/companyServices";
+import { companyService } from "../../../../Services/companyServices";
 
 
 export const Aside = () => {

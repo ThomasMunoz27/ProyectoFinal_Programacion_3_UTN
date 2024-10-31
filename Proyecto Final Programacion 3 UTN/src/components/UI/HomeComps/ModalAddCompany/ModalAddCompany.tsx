@@ -3,7 +3,7 @@ import style from "./ModalAddCompany.module.css";
 import { ChangeEvent, FC, useState } from "react";
 import { ICreateEmpresaDto } from "../../../../types/dtos/empresa/ICreateEmpresaDto";
 import Swal from "sweetalert2";
-import { companyService } from "../../../../Services/CompanyServices/companyServices";
+import { companyService } from "../../../../Services/companyServices";
 
 interface IModalAdd{
     closeModalAdd : () => void //Funcion que recibe desde CardCompany para cerrar el modal
@@ -11,19 +11,19 @@ interface IModalAdd{
 
 
 const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
-
-    const [newCompany, setNewCompany] = useState<ICreateEmpresaDto>({
+    const initialState = {
         nombre : '',
         razonSocial: '',
         cuit: 0,
         logo : '',
-    })
+    }
+    const [newCompany, setNewCompany] = useState<ICreateEmpresaDto>(initialState)
 
     //Funcion que maneja el cambio de los inputs
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
         const {name, value } = e.target;
         setNewCompany((prev) => ({...prev, 
-            [name]: name === 'cuit' ? Number(value) : value,
+            [name]: value,
         }));
     }
 
@@ -72,7 +72,7 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
                     <label htmlFor="">Razon Social</label>
                     <input type="text" placeholder="Razon Social de la empresa" name="razonSocial" value={newCompany.razonSocial} onChange={handleChange}/>
                     <label htmlFor="">Cuit</label>
-                    <input type="text" placeholder="Cuit de la empresa" name="cuit" value={newCompany.cuit} onChange={handleChange}/>
+                    <input type="number" placeholder="Cuit de la empresa" name="cuit" value={newCompany.cuit} onChange={handleChange}/>
                     <label htmlFor="">Imagen</label>                    
                     <input type="text"  placeholder="Link de imagen" name="logo" value={newCompany.logo || ""} onChange={handleChange}/>
                     

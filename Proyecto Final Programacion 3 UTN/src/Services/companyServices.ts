@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { IEmpresa } from '../../types/dtos/empresa/IEmpresa';
-import { ICreateEmpresaDto } from '../../types/dtos/empresa/ICreateEmpresaDto';
+import { IEmpresa } from '../types/dtos/empresa/IEmpresa';
+import { ICreateEmpresaDto } from '../types/dtos/empresa/ICreateEmpresaDto';
+import { IUpdateEmpresaDto } from '../types/dtos/empresa/IUpdateEmpresaDto';
 
 const BASE_URL = 'http://190.221.207.224:8090/empresas';
 
@@ -24,7 +25,7 @@ export const companyService = {
     },
   
     // Actualizar una empresa existente (PUT)
-    async updateEmpresa(id: number, empresaActualizada: IEmpresa): Promise<IEmpresa> {
+    async updateCompany(id: number, empresaActualizada: IUpdateEmpresaDto): Promise<IEmpresa> {
       const response = await axios.put<IEmpresa>(`${BASE_URL}/${id}`, empresaActualizada);
       return response.data;
     }
