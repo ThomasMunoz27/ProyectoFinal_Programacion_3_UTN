@@ -41,14 +41,16 @@ const ModalEditCompany : FC<IModalEditCompany> = ({modalCloseEdit, company}) => 
         try{
             await companyService.updateCompany(formValues.id, formValues);
 
-                Swal.fire({
-                    icon: "success",
-                    title: "Empresa actualizada",
-                    showConfirmButton: false,
-                    timer: 1500
-                    });
-                modalCloseEdit();
-                window.location.reload() 
+            Swal.fire({
+                icon: "success",
+                title: "Empresa actualizada",
+                showConfirmButton: false,
+                timer: 1500,
+                willClose: ()=>{
+                    modalCloseEdit();
+                    window.location.reload() 
+                }
+                });
             
         }catch(error){
             console.error("El problema es: ", error)

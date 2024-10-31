@@ -1,7 +1,7 @@
 .card{
     min-width: 270px !important ;; 
     width: 25%;
-    height: 420px !important;
+    height: fit-content !important;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -10,8 +10,10 @@
 }
 
 .cardImg{
-    width: 90%;
-    height: 200px;
+    width: 80%;
+    max-width: 200px;
+    max-height: 300px;
+    object-fit: cover;
 }
 
 .containerButtons{
