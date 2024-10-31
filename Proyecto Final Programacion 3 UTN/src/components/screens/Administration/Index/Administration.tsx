@@ -3,13 +3,18 @@ import { AdministrationHeader } from "../../../UI/Administration/Header/Administ
 import { AdministrationHero } from "../../../UI/Administration/Hero/AdministrationHero"
 import styles from '../../../UI/Administration/Administration.module.css'
 
+
 export const Administration = () => {
+
+  
+
   return (
     <>
     <AdministrationHeader/>
     <div className={styles.main}>
-    <AdministrationAside/>
-    <AdministrationHero />
+      <AdministrationAside/> 
+
+      <AdministrationHero />
     </div>
     </>
   )

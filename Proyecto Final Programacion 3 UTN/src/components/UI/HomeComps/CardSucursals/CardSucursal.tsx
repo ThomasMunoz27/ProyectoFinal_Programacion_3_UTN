@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import { setSelectedSucursal} from "../../../../redux/slices/sucursalSlice"
 import ModalViewSucursal from "../ModalViewSucursal/ModalViewSucursal"
 import ModalEditSucursal from "../ModalEditSucursal/ModalEditSucursal"
+import { useNavigate } from "react-router-dom"
 
 
 interface ICardSucursal {
@@ -15,11 +16,13 @@ interface ICardSucursal {
 export const CardSucursal: FC<ICardSucursal> = ({sucursal}) => {
     const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
     const [showModalEdit, setShowModalEdit] = useState(false); //Estado que se va a usar para editar la empresa
+    const navigate = useNavigate();
     
     const dispatch = useDispatch()
   
-    const handleSelect = ()=>{
+    const handleSelectSucursal = ()=>{
       dispatch(setSelectedSucursal(sucursal))
+      navigate(`/administracion`)
     }
   
     const handleButtonShow = () =>{ //Muestra el modal de View
@@ -40,7 +43,7 @@ export const CardSucursal: FC<ICardSucursal> = ({sucursal}) => {
   
   return (
     <>
-        <Card onClick={handleSelect} className={styles.card}>
+        <Card onClick={handleSelectSucursal} className={styles.card}>
             <Card.Body>
                 <img className={styles.cardImg} 
                     src={

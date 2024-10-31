@@ -4,6 +4,7 @@ import { ChangeEvent, FC, useState } from "react";
 import Swal from "sweetalert2";
 import { IUpdateSucursal } from "../../../../types/dtos/sucursal/IUpdateSucursal";
 import { ISucursal } from "../../../../types/dtos/sucursal/ISucursal";
+import { sucursalService } from "../../../../Services/sucursalService";
 
 interface IModalEditSucursal {
     modalCloseEdit : () => void; //Funcion que recibe desde CardCompany para cerrar el modal
@@ -19,6 +20,7 @@ const ModalEditSucursal : FC<IModalEditSucursal> = ({modalCloseEdit, sucursal}) 
         eliminado: sucursal.eliminado || false,
         latitud: sucursal.latitud || 0,
         longitud: sucursal.longitud || 0,
+        
         domicilio: {
             id: sucursal.domicilio?.id || 0,
             calle: sucursal.domicilio?.calle || "",
@@ -49,28 +51,24 @@ const ModalEditSucursal : FC<IModalEditSucursal> = ({modalCloseEdit, sucursal}) 
     //Funcion que maneja el envio de los campos del form a la api
     const handleSubmit = async (e :  React.MouseEvent<HTMLButtonElement> ) => {
         e.preventDefault();
-        const sendData = JSON.stringify(formValues) //Convierto a json el objeto
         try{
-            const response = await fetch(`http://190.221.207.224:8090/empresas/${sucursal.id}`, {
-                method : 'PUT', //Metodo para actualizar
-                headers: {
-                    'Content-Type' : 'application/json',
-                },
-                body: sendData
-            });
+            await sucursalService.updateSucursal(formValues.id, formValues)
+            
 
-            if(response.ok){
                 Swal.fire({
                     icon: "success",
                     title: "Empresa actualizada",
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
+                    willClose: ()=>{
+                        modalCloseEdit();
+                        window.location.reload() 
+                    }
                     });
-                modalCloseEdit();
-                window.location.reload() 
-            }else{
-                alert("Error al actualizar la empresa")
-            }
+                
+                
+                
+            
         }catch(error){
             console.error("El problema es: ", error)
             alert("Hubo un problema")
