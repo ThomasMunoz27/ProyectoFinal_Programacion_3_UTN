@@ -1,14 +1,18 @@
 import { AdministrationAside } from "../../../UI/Administration/Aside/AdministrationAside"
 import { AdministrationHeader } from "../../../UI/Administration/Header/AdministrationHeader"
-
+import styles from "./Alergenos.module.css";
 
 
 export const Alergenos = () => {
   return (
     <>
-    <AdministrationHeader/>
-    <AdministrationAside/> 
-    <h3>Alergenos</h3>
+      <AdministrationHeader />
+      <div className={styles.mainContent}>
+        <AdministrationAside />
+        <div className={styles.contentHero}>
+          Categories
+        </div>
+      </div>
     </>
   )
 }

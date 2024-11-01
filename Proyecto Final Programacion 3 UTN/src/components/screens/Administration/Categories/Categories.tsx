@@ -1,13 +1,19 @@
 import { AdministrationAside } from "../../../UI/Administration/Aside/AdministrationAside"
+import ListCategories from "../../../UI/Administration/Categories/ListCategories/ListCategories";
 import { AdministrationHeader } from "../../../UI/Administration/Header/AdministrationHeader"
+import styles from "./Categories.module.css";
 
 
 export const Categories = () => {
   return (
     <>
-    <AdministrationHeader/>
-    <AdministrationAside/> 
-    <div>Categories</div>
+      <AdministrationHeader />
+      <div className={styles.mainContent}>
+        <AdministrationAside />
+        <div className={styles.contentHero}>
+          <ListCategories/>
+        </div>
+      </div>
     </>
   )
 }
