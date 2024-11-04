@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias";
-import axios from "axios";
 import CategoryCard from "../CategoryCard/CategoryCard";
 import styles from "./ListCategories.module.css";
 import { RootState } from "../../../../../redux/store/store";
 import { useSelector } from "react-redux";
+import { categoryService } from "../../../../../Services/categoryServices";
 
 
 
@@ -19,13 +19,8 @@ const ListCategories = () => {
 
     useEffect(() => {
         const fetchCategories = async () =>{
-            try{
-                const response = await axios.get('http://190.221.207.224:8090/categorias/allCategoriasPorSucursal/1') //Llamo a la api para ver las categorias por sucursal
-                setCategories(response.data); // Actualizo el estado
-            }catch(error){
-                console.error("Error al obtener las categorias");
-                alert("Hubo un error");
-            }
+            const data = await categoryService.getCategoriesBySucursal(selectedSucursal?.id);
+            setCategories(data);
         }
 
         fetchCategories();
