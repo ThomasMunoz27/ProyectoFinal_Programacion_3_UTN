@@ -83,7 +83,7 @@ export const ViewSucursals: FC = () => {
         {/* Meto un div abajo para que impida pulsar otro elemento */}
           <div className={styles.backgroundDisabled}>
           </div>
-          <ModalAddSucursal closeModalAdd={handleCloseModal}/> 
+          <ModalAddSucursal closeModalAdd={handleCloseModal} idEmpresa={selectedCompanyId ?? 0}/> 
         </>
               )}
     </>
