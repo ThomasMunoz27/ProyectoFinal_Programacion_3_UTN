@@ -9,7 +9,8 @@ export const AdministrationHero = () => {
   );
 
   return (
-
+    //aca se hace el navigate de los botones del aside
+    
     
     <div className={styles.hero}>
       <h3>Administracion de la sucursal: {selectedSucursal?.nombre}</h3>

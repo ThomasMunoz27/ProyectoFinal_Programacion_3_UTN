@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias";
 import axios from "axios";
 import CategoryCard from "../CategoryCard/CategoryCard";
+import styles from "./ListCategories.module.css";
+import { Button } from "react-bootstrap";
 
 const ListCategories = () => {
     const [categories , setCatecories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
@@ -23,8 +25,9 @@ const ListCategories = () => {
     
 
     return(
-        <div>
-            <ol>
+        <div className={styles.contentHero}>
+            <Button className={styles.butttonAddCategory}>Agregar Categoria</Button>
+            <ol className={styles.categoriesContainer}>
                 {categories.map(categories => (
                     <li key={categories.id}>
                         <CategoryCard category={categories}/>
