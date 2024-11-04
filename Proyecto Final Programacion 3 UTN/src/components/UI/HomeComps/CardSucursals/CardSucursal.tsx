@@ -43,15 +43,15 @@ export const CardSucursal: FC<ICardSucursal> = ({sucursal}) => {
   
   return (
     <>
-        <Card onClick={handleSelectSucursal} className={styles.card}>
-            <Card.Body>
-                <img className={styles.cardImg} 
+        <Card  className={styles.card}>
+            <Card.Body >
+                <img className={styles.cardImg}  onClick={handleSelectSucursal}
                     src={
                     sucursal.logo ? sucursal.logo : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s"  // Si es null o undefined
                     }  
                     alt="" />
-                <Card.Title>{sucursal.nombre}</Card.Title>
-                <Card.Subtitle>{sucursal.horarioApertura} - {sucursal.horarioCierre}</Card.Subtitle>
+                <Card.Title onClick={handleSelectSucursal}>{sucursal.nombre}</Card.Title>
+                <Card.Subtitle onClick={handleSelectSucursal}>{sucursal.horarioApertura} - {sucursal.horarioCierre}</Card.Subtitle>
                 <div className={styles.containerButtons}>
                 <Button onClick={handleButtonShow}>Ver</Button>
                 <Button onClick={handleButtonEdit} variant="secondary">Editar</Button>
