@@ -15,6 +15,8 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
             </div>
             <div className={styles.containerBody}>
                 <h2>Subcategorias</h2>
+                
+                {/* Lista que renderiza  las subcategorias*/}
                 {category.subCategorias && category.subCategorias.length > 0 ? (
                     <ul className={styles.subcategoryList}>
                     {category.subCategorias.map((subCategory) => (
