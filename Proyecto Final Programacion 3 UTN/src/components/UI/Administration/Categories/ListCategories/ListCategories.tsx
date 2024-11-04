@@ -4,9 +4,11 @@ import axios from "axios";
 import CategoryCard from "../CategoryCard/CategoryCard";
 import styles from "./ListCategories.module.css";
 import { Button } from "react-bootstrap";
+import { ModalAddCategory } from "../ModalAddCategory/ModalAddCategory";
 
 const ListCategories = () => {
     const [categories , setCatecories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
+    const [showModalAddCategory, setShowModalAddCategory] = useState<boolean>(false); //Estado para controlar el modal
 
     useEffect(() => {
         const fetchCategories = async () =>{
@@ -22,11 +24,17 @@ const ListCategories = () => {
         fetchCategories();
     },[])
 
+    const handleShowModalAddCategory = () => {
+        setShowModalAddCategory(true);
+    }
     
+    // const handleCloseModalCategory = () => {
+    //     setShowModalAddCategory(false);
+    // }
 
     return(
         <div className={styles.contentHero}>
-            <Button className={styles.butttonAddCategory}>Agregar Categoria</Button>
+            <Button className={styles.butttonAddCategory} onClick={handleShowModalAddCategory}>Agregar Categoria</Button>
             <ol className={styles.categoriesContainer}>
                 {categories.map(categories => (
                     <li key={categories.id}>
@@ -34,7 +42,23 @@ const ListCategories = () => {
                     </li>
                 ))}
             </ol>
+
+
+            {showModalAddCategory && (
+
+            <>
+            <div className={styles.backgroundDisabled}>
+            </div>
+            <ModalAddCategory/>
+            </>
+            )}
+
+
+
+
         </div>
+
+        
     )
 }
 
