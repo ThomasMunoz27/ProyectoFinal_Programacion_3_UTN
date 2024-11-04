@@ -1,12 +1,27 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias"
 import styles from "./CardCategory.module.css";
+import { categoryService } from "../../../../../Services/categoryServices";
 
 interface ICategoryCard {
     category : ICategorias;
 }
 
 const CategoryCard : FC<ICategoryCard> = ({category}) => {
+
+    const [subCategories, setSubCategories] = useState<ICategorias[]>([]);
+    
+    useEffect(() => {
+        const fetchSubCategories = async () => {
+            
+            const subCategoriesfetched = await categoryService.getAllSubCategoriesByCategoryId(category.id);
+            setSubCategories(subCategoriesfetched);
+        }
+        fetchSubCategories();
+    }, [category])
+
+    
+
 
     return(
         <div className={styles.containerPrincipal}>
@@ -17,19 +32,18 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
                 <h2>Subcategorias</h2>
                 
                 {/* Lista que renderiza  las subcategorias*/}
-                {category.subCategorias && category.subCategorias.length > 0 ? (
+                {subCategories.length > 0 ? (
+
                     <ul className={styles.subcategoryList}>
-                    {category.subCategorias.map((subCategory) => (
+                    {subCategories.map((subCategory) => (
                         <li key={subCategory.id} className={styles.subcategoryItem}>
-                            {subCategory.denominacion}
+                        {subCategory.denominacion}
                         </li>
                     ))}
-                </ul>
-                ) : (
-                    <ul>
-                        <li>No hay subcategorias</li>
                     </ul>
-                    
+
+                ) : (
+                    <div><p>No hay subcategorías</p></div>
                 )}
             </div>
 

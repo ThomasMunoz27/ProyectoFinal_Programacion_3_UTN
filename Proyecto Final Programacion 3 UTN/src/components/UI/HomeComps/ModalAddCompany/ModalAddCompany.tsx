@@ -43,7 +43,7 @@ const ModalAddCompany : FC<IModalAdd> = ({closeModalAdd}) =>{
             
             Swal.fire({
                 icon: "success",
-                title: "Empresa actualizada",
+                title: "Empresa agregada",
                 showConfirmButton: false,
                 timer: 1500,
                 willClose: ()=>{

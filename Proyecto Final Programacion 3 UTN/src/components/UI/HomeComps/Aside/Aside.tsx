@@ -8,7 +8,9 @@ import { companyService } from "../../../../Services/companyServices";
 
 
 export const Aside = () => {
+  
   const[companies, setCompanies] = useState<IEmpresa[]>([]);
+
   const[showModalAddCompany, setShowModalAddCompany] = useState<boolean>(false); //Estado para controlar el modal
 
 
