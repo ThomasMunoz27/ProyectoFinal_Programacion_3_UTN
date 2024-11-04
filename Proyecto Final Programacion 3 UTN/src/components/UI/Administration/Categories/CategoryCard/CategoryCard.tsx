@@ -10,14 +10,25 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
 
     return(
         <div className={styles.containerPrincipal}>
-            <div>
-                <h4>{category.denominacion}</h4>
+            <div className={styles.containerTitle}>
+                <h1>{category.denominacion}</h1>
             </div>
-            <div>
-                <h5>Subcategorias</h5>
-                <div>
-                    Articulos
-                </div>
+            <div className={styles.containerBody}>
+                <h2>Subcategorias</h2>
+                {category.subCategorias && category.subCategorias.length > 0 ? (
+                    <ul className={styles.subcategoryList}>
+                    {category.subCategorias.map((subCategory) => (
+                        <li key={subCategory.id} className={styles.subcategoryItem}>
+                            {subCategory.denominacion}
+                        </li>
+                    ))}
+                </ul>
+                ) : (
+                    <ul>
+                        <li>No hay subcategorias</li>
+                    </ul>
+                    
+                )}
             </div>
 
         </div>

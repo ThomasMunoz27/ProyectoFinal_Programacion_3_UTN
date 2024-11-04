@@ -26,13 +26,13 @@ const ListCategories = () => {
 
     return(
         <div className={styles.contentHero}>
-            <ol>
+            <ul className={styles.containerList}>
                 {categories.map(categories => (
                     <li key={categories.id} className={styles.containerPrincipal} typeof="inherit">
                         <CategoryCard category={categories}/>
                     </li>
                 ))}
-            </ol>
+            </ul>
         </div>
 
         

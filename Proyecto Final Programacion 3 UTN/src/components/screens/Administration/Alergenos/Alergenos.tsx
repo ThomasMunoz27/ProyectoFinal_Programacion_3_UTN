@@ -10,7 +10,7 @@ export const Alergenos = () => {
       <div className={styles.mainContent}>
         <AdministrationAside />
         <div className={styles.contentHero}>
-          Categories
+          Alergenos
         </div>
       </div>
     </>

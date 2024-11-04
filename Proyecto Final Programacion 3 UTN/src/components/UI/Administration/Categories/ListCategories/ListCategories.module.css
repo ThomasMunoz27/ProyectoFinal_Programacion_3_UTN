@@ -1,7 +1,11 @@
 .contentHero{
-    list-style-type: none;
-    padding: 15px;
-    height: 100%;
     width: 100%;
+    padding: 10px;
+}
+.containerList{
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    list-style: none;
 }
 

@@ -30,5 +30,10 @@ export const categoryService = {
     async createCategory(newCategory: ICategorias): Promise<ICategorias> {
         const response = await axios.post<ICategorias>(`${BASE_URL}/create`, newCategory)
         return response.data;
-    }
+    },
+
+    async getAllSubCategoriesByCategoryId(categoryId: number, page: number = 1): Promise<ICategorias[]> {
+        const response = await axios.get<ICategorias[]>(`${BASE_URL}/allSubCategoriasPorCategoriaPadre/${categoryId}/${page}`);
+        return response.data;
+    }
 }
