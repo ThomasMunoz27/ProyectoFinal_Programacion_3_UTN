@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias";
 import axios from "axios";
 import CategoryCard from "../CategoryCard/CategoryCard";
+import styles from "./ListCategories.module.css";
 
 const ListCategories = () => {
     const [categories , setCatecories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
@@ -20,17 +21,15 @@ const ListCategories = () => {
         fetchCategories();
     },[])
 
-    
-
     return(
         <div>
-            <ol>
+            <ul>
                 {categories.map(categories => (
-                    <li key={categories.id}>
+                    <li key={categories.id} className={styles.containerPrincipal}>
                         <CategoryCard category={categories}/>
                     </li>
                 ))}
-            </ol>
+            </ul>
         </div>
     )
 }

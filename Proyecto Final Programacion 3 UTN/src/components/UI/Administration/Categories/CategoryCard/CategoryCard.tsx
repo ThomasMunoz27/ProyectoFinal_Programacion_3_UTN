@@ -1,5 +1,7 @@
 import { FC } from "react"
 import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias"
+import styles from "./CardCategory.module.css";
+
 interface ICategoryCard {
     category : ICategorias;
 }
@@ -7,12 +9,12 @@ interface ICategoryCard {
 const CategoryCard : FC<ICategoryCard> = ({category}) => {
 
     return(
-        <div>
+        <div className={styles.containerPrincipal}>
             <div>
-                <h1>{category.denominacion}</h1>
+                <h4>{category.denominacion}</h4>
             </div>
             <div>
-                <h2>Subcategorias</h2>
+                <h5>Subcategorias</h5>
                 <div>
                     Articulos
                 </div>
@@ -20,7 +22,5 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
 
         </div>
     )
-
 }
-
 export default CategoryCard
