@@ -4,8 +4,11 @@ import axios from "axios";
 import CategoryCard from "../CategoryCard/CategoryCard";
 import styles from "./ListCategories.module.css";
 
+
+
 const ListCategories = () => {
     const [categories , setCatecories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
+    // const [showModalAddCategory, setShowModalAddCategory] = useState<boolean>(false); //Estado para controlar el modal
 
     useEffect(() => {
         const fetchCategories = async () =>{
@@ -22,15 +25,17 @@ const ListCategories = () => {
     },[])
 
     return(
-        <div>
-            <ul>
+        <div className={styles.contentHero}>
+            <ol>
                 {categories.map(categories => (
-                    <li key={categories.id} className={styles.containerPrincipal}>
+                    <li key={categories.id} className={styles.containerPrincipal} typeof="inherit">
                         <CategoryCard category={categories}/>
                     </li>
                 ))}
-            </ul>
+            </ol>
         </div>
+
+        
     )
 }
 

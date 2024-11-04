@@ -1,6 +1,6 @@
 .containerPrincipal{
     min-height: 50vh;
-    min-width: 25vw;
+    min-width: 60vw;
     background-color: white;
     border-radius: 3vh;
     box-shadow: 5px 5px 25px;
@@ -18,14 +18,30 @@
 }
 .containerForm{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     gap: 1vh;
     padding: 2vh;
+    width: 90%;
+    border: 1px solid;
+    margin: 0 auto;
+    justify-content: space-between;
 }
 .containerButtons{
     display: flex;
     justify-content: center;
     gap: 5vw;
     padding: 2vh;   
+}
+
+.blockOne{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.blockTwo{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
 }

@@ -10,9 +10,9 @@ export const Categories = () => {
       <AdministrationHeader />
       <div className={styles.mainContent}>
         <AdministrationAside />
-        <div className={styles.contentHero}>
-          <ListCategories/>
-        </div>
+        
+        <ListCategories/>
+        
       </div>
     </>
   )
