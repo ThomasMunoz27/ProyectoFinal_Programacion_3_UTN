@@ -10,6 +10,7 @@ interface ICategoryCard {
 const CategoryCard : FC<ICategoryCard> = ({category}) => {
 
     const [subCategories, setSubCategories] = useState<ICategorias[]>([]);
+    const [showSubCategory, setShowSubCategory] = useState(false);
     
     useEffect(() => {
         const fetchSubCategories = async () => {
@@ -20,7 +21,10 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
         fetchSubCategories();
     }, [category])
 
-    
+    //Funcion que maneja el renderizado de las subcategorias
+    const handleShowSubCategory = () =>{
+        setShowSubCategory(!showSubCategory);
+    }
 
 
     return(
@@ -28,22 +32,28 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
             <div className={styles.containerTitle}>
                 <h1>{category.denominacion}</h1>
             </div>
-            <div className={styles.containerBody}>
-                <h2>Subcategorias</h2>
+            <div className={styles.containerBody} onClick={handleShowSubCategory}>
+                <div className={styles.containerSubTitle}>
+                    <span className={`material-icons ${styles.arrowIcon} ${showSubCategory ? styles.rotated : ""}`}>
+                        arrow_right
+                    </span>
+                    <h2>Subcategorias</h2>
+                </div>
+                
                 
                 {/* Lista que renderiza  las subcategorias*/}
                 {subCategories.length > 0 ? (
-
-                    <ul className={styles.subcategoryList}>
-                    {subCategories.map((subCategory) => (
-                        <li key={subCategory.id} className={styles.subcategoryItem}>
-                        {subCategory.denominacion}
-                        </li>
-                    ))}
-                    </ul>
-
+                    <div className={showSubCategory ? styles.containerSubcategoryTrue : styles.containerSubcategoryFalse}>
+                        <ul>
+                        {subCategories.map((subCategory) => (
+                            <li key={subCategory.id} className={styles.subcategoryItem}>
+                            {subCategory.denominacion}
+                            </li>
+                        ))}
+                        </ul>
+                    </div>
                 ) : (
-                    <div><p>No hay subcategorías</p></div>
+                    <div className={showSubCategory ? styles.containerSubcategoryTrue : styles.containerSubcategoryFalse}><p>No hay subcategorías</p></div>
                 )}
             </div>
 

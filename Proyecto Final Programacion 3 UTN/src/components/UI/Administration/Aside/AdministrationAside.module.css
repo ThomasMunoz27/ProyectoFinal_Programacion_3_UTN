@@ -14,8 +14,6 @@
     width: 350px;
     padding: 10px;
 }
-
-
 .asideButtons{
     display: flex;
     flex-direction: column;
