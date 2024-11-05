@@ -4,17 +4,8 @@ import styles from "./Alergenos.module.css";
 import { FC, MouseEventHandler, useState } from "react";
 
 // Función para mostrar alérgenos (no está implementada)
-function showAlergens(alergen: HTMLCollection) {
-  const alergens = document.getElementsByClassName("Alergen");
-}
 
-const Alergen = () => {
-  return (
-    <div className={styles.Alergen}>
-      {/* Aquí puedes añadir contenido para cada alergeno */}
-    </div>
-  );
-};
+
 
 const BodyDeploy = () => {
   return (
@@ -24,13 +15,6 @@ const BodyDeploy = () => {
   );
 };
 
-const AddAlergen = () => {
-  return (
-    <div className={styles.AddAlergen}>
-      {/* Aquí puedes añadir contenido para agregar alérgenos */}
-    </div>
-  );
-};
 
 type AddAlergenButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
@@ -51,7 +35,7 @@ const ModalAddAlergen: FC<ModalAddAlergenProps> = ({ isVisible, closeModal }) =>
   };
 
   return (
-    <form className={`${styles.ModalAddAlergen} ${isVisible ? styles.ModalAddAlergenActive : ''}`}>
+    <form className={`${styles.ModalAddAlergen} ${isVisible ? styles.ModalAddAlergen : styles.hidden}`}>
       <div className={styles.ModalAddAlergenTitle}>Crear un alergeno</div>
       <input type="text" placeholder="Ingresa una denominación" className={styles.ModalAddAlergenInputDen} />
       <div className={styles.ModalAddAlergenImageSelector}>
@@ -67,7 +51,7 @@ const ModalAddAlergen: FC<ModalAddAlergenProps> = ({ isVisible, closeModal }) =>
   );
 };
 
-const AddAlergenButton: FC<AddAlergenButtonProps> = ({ onClick, closeModal }) => {
+const AddAlergenButton: FC<AddAlergenButtonProps> = ({ onClick }) => {
   return (
     <button className={styles.AddAlergen} onClick={onClick}>Agregar un alergeno</button>
   );
@@ -82,8 +66,11 @@ export const Alergenos = () => {
   const MainDiv: FC = () => {
     return (
       <div className={styles.MainDiv}>
-        <h1 className={styles.MainDivTitle}>Alergenos</h1>
+        <div className={styles.titleContainer}>
+
+        <h1>Alergenos</h1>
         <AddAlergenButton onClick={openModal} closeModal={closeModal} /> {/* Aquí se pasa closeModal */}
+        </div>
         <BodyDeploy />
       </div>
     );
@@ -95,9 +82,7 @@ export const Alergenos = () => {
       <div className={styles.mainContent}>
         <AdministrationAside />
 
-        <div className={styles.contentHero}>
-          Alergenos
-        </div>
+       
 
         <MainDiv />
         <ModalAddAlergen isVisible={isModalVisible} closeModal={closeModal} />
