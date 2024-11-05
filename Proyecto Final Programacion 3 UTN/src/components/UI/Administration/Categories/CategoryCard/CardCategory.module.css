@@ -10,6 +10,32 @@
 .containerBody{
     margin-left: 2vw ;
 }
-.containerBody h2{    
+.containerSubTitle{
+    display: flex;
+    cursor: pointer;
+}
+.containerSubTitle h2{    
     font-size: 20px;
 }
+.containerSubcategoryTrue{
+    max-height: 200px; 
+    opacity: 1;
+}
+.containerSubcategoryTrue :hover{
+    transition: max-height 0.3s ease, opacity 0.3s ease;;
+}
+.containerSubcategoryFalse{
+    overflow:hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+.arrowIcon {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+    margin-left: 8px;
+}
+.rotated {
+    transform: rotate(90deg); 
+}
+
