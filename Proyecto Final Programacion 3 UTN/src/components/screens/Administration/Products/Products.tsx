@@ -10,7 +10,8 @@ export const Products = () => {
       <div className={styles.mainContent}>
         <AdministrationAside />
         <div className={styles.contentHero}>
-          <ListProducts/>
+          
+          <ListProducts/>          
         </div>
       </div>
     </>
