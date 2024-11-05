@@ -6,3 +6,121 @@
     height: 100%;
     width: 100%;
 }
+
+.MainDiv {
+    
+    display: flex;
+    text-align: center;
+    width: 100%;
+}
+
+.MainDivTitle {
+    border: solid rgb(47, 224, 255) 0.3vh;
+    border-radius: 5px;
+    background-color: slateblue;
+    color: white;
+    font-size: large;
+    margin-inline: 450px;
+    margin-bottom: auto;
+
+}
+
+.AddAlergen {
+    font-size: small;
+    width: 140px;
+    margin-bottom: auto;
+    margin-top: 3vh;
+    position: absolute;
+    margin-left: 800px;
+    border-radius: 10px;
+    color: blueviolet;
+    background-color: transparent;
+    border: solid blue 0.1vh;
+
+}
+
+.AddAlergen:hover {
+    background-color: blueviolet;
+    color: white;
+}
+
+.ModalAddAlergenTitle {
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.ModalAddAlergen {
+    
+    font-size: medium;
+    text-align: center;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    gap: 50px;
+    top: 100px;
+    right: 300px;
+    border: solid black 2px;
+    width: 700px;
+    height: 400px;
+    background-color: white;
+    border-radius: 18px;
+}
+
+.ModalAddAlergenActive {
+    font-size: medium;
+    text-align: center;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    top: 100px;
+    right: 300px;
+    border: solid black 2px;
+    width: 700px;
+    height: 400px;
+    background-color: white;
+    border-radius: 18px;
+}
+
+.ModalAddAlergenInputDen {
+    margin-inline: 20px;
+    height: 70px;
+    width: 400px;
+    margin-left: 140px;
+}
+
+.ModalAddAlergenButtons {
+    margin-inline: 40px;
+    display: flex;
+    gap: 220px;
+    margin-left: 120px;
+    height: 40px;    
+}
+
+.ModalCancel {
+    padding-inline: 15px;
+    background-color: transparent;
+    outline: none;
+    border: solid rgb(0, 60, 255) 1px;
+    color: rgb(0, 17, 255);
+    border-radius: 10px;
+}
+
+.ModalConfirm {
+    padding-inline: 15px;
+    background-color: transparent;
+    outline: none;
+    border: solid rgb(4, 0, 255) 1px;
+    color: rgb(25, 0, 255);
+    border-radius: 10px;
+}
+
+.ModalConfirm:hover {
+    background-color: rgb(17, 0, 255);
+    color: black;
+}
+
+.ModalCancel:hover {
+    background-color: rgb(0, 47, 255);
+    color: black;
+}
