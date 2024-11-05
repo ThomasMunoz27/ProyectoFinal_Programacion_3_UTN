@@ -9,10 +9,12 @@ import { categoryService } from "../../../../../Services/categoryServices";
 
 
 const ListCategories = () => {
-
-    const selectedSucursal = useSelector(
+    const storedSucursal = localStorage.getItem('sucursal');
+    const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
         (state: RootState) => state.sucursal.selectedSucursal
-    );
+    )
+
+    
 
     const [categories , setCategories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
     // const [showModalAddCategory, setShowModalAddCategory] = useState<boolean>(false); //Estado para controlar el modal

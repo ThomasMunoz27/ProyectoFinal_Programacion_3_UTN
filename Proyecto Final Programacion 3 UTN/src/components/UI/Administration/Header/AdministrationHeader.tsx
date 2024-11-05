@@ -13,10 +13,10 @@ export const AdministrationHeader = () => {
   return (
     <header className={styles.header}>
       <Button className={styles.headerBtn} onClick={handleNavigateBack}>
-        <span className="material-symbols-outlined">
-          arrow_back
-        </span> 
-      </Button>
+                    <span className="material-symbols-outlined">
+                    arrow_back
+                  </span> 
+                  </Button>
     
     </header>
   )

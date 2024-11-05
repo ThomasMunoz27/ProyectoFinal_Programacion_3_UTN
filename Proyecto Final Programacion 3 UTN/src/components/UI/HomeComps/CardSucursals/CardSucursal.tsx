@@ -19,8 +19,11 @@ export const CardSucursal: FC<ICardSucursal> = ({sucursal}) => {
     const navigate = useNavigate();
     
     const dispatch = useDispatch()
+
+
   
     const handleSelectSucursal = ()=>{
+      localStorage.setItem('sucursal', JSON.stringify(sucursal))
       dispatch(setSelectedSucursal(sucursal))
       navigate(`/administracion`)
     }
