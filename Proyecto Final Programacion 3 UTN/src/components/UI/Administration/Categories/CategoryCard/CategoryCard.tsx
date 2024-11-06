@@ -26,7 +26,6 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
         setShowSubCategory(!showSubCategory);
     }
 
-
     return(
         <div className={styles.containerPrincipal}>
             <div className={styles.containerTitle}>
