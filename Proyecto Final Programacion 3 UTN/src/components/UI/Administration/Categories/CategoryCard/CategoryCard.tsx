@@ -37,6 +37,7 @@ const CategoryCard : FC<ICategoryCard> = ({category}) => {
                         arrow_right
                     </span>
                     <h2>Subcategorias</h2>
+                    
                 </div>
                 
                 

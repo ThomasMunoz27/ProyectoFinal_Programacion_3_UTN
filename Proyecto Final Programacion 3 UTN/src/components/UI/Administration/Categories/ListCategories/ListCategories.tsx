@@ -17,12 +17,7 @@ const ListCategories = () => {
     const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
         (state: RootState) => state.sucursal.selectedSucursal
     )
-    //Selecciono empresa
-    const storedCompany = localStorage.getItem('company');
-    const selectedCompany = storedCompany ? JSON.parse(storedCompany) : useSelector(
-        (state : RootState) => state.company.selectedCompany
-    )
-
+    
     const [showModalAddCategory, setShowModalAddCategory] = useState<boolean>(false); //Estado para controlar el modal
 
     const [categories , setCategories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
@@ -62,7 +57,7 @@ const ListCategories = () => {
                 <>
                 {/* Meto un div abajo para que impida pulsar otro elemento */}
                     <div className={styles.backgroundDisabled}></div>
-                    <ModalAddCategory closeModalAdd={closeModal} idCompany={selectedCompany.id}/>
+                    <ModalAddCategory closeModalAdd={closeModal} idSucursal={selectedSucursal.id}/>
                 </>
             )}
 

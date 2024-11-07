@@ -10,18 +10,18 @@ import { categoryService } from "../../../../../Services/categoryServices";
 
 interface IModalAddCategory{
   closeModalAdd : () => void //Funcion para cerrar el modal
-  idCompany: number; //id de la company
+  idSucursal: number; //id de la company
 }
 
-const ModalAddCategory : FC<IModalAddCategory>  = ({idCompany, closeModalAdd}) => { //Estado para crear la categoria
+const ModalAddCategory : FC<IModalAddCategory>  = ({idSucursal, closeModalAdd}) => { //Estado para crear la categoria
   const [newCategory, setNewCategory] = useState<ICreateCategoria>({
     denominacion: "",
-    idEmpresa: idCompany, //id de la empresa
+    idSucursales: [idSucursal], //id de la sucursal
     idCategoriaPadre: null
   })
 
   //Funcion para manejar el cambio de los inputs
-  const handleCahnge = (e : ChangeEvent<HTMLInputElement>) => {
+  const handleCahge = (e : ChangeEvent<HTMLInputElement>) => {
     const {name , value} = e.target;
     setNewCategory((prev) => ({...prev,
       [name] : value,
@@ -34,11 +34,13 @@ const ModalAddCategory : FC<IModalAddCategory>  = ({idCompany, closeModalAdd}) =
 
     if(!newCategory.denominacion){
       alert("No puede dejar en blanco el campo");
+      return;
     }
 
     try{
       console.log("Datos enviados", newCategory);
-      //categoryService.createCategory()
+      categoryService.createCategory(newCategory)
+      closeModalAdd();
     }catch(error){
       console.error("El problema es: ", error);
       Swal.fire({
@@ -46,6 +48,7 @@ const ModalAddCategory : FC<IModalAddCategory>  = ({idCompany, closeModalAdd}) =
           title: "Oops...",
           text: "Something went wrong!",
       });
+
     }
   }
 
@@ -56,7 +59,7 @@ const ModalAddCategory : FC<IModalAddCategory>  = ({idCompany, closeModalAdd}) =
       </div>
       <div className={styles.containerBody}>
         <label htmlFor="">Ingrese Denominacion</label>
-        <input type="text" placeholder="Denominacion" value={newCategory.denominacion} name="denominacion" onChange={handleCahnge}/>
+        <input type="text" placeholder="Denominacion" value={newCategory.denominacion} name="denominacion" onChange={handleCahge}/>
       </div>
       <div className={styles.containerButtons}>
           <Button onClick={handleSubmit}>Aceptar</Button>

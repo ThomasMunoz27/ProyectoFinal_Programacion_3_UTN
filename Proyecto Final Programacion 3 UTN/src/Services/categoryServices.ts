@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ICategorias } from "../types/dtos/categorias/ICategorias";
+import { ICreateCategoria } from "../types/dtos/categorias/ICreateCategoria";
 
 
 
@@ -27,7 +28,7 @@ export const categoryService = {
         return response.data;
     },
 
-    async createCategory(newCategory: ICategorias): Promise<ICategorias> {
+    async createCategory(newCategory: ICreateCategoria): Promise<ICategorias> {
         const response = await axios.post<ICategorias>(`${BASE_URL}/create`, newCategory)
         return response.data;
     },
