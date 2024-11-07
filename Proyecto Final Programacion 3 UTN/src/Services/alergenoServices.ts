@@ -2,6 +2,7 @@ import axios from "axios"
 import { IAlergenos } from "../types/dtos/alergenos/IAlergenos";
 
 
+
 const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/alergenos`
 
 

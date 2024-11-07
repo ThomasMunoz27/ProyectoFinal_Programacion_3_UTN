@@ -3,6 +3,7 @@ import { ICategorias } from "../types/dtos/categorias/ICategorias";
 
 
 
+
 const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/categorias`
 
 export const categoryService = {

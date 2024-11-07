@@ -2,8 +2,8 @@ import axios from "axios";
 import { IProductos } from "../types/dtos/productos/IProductos";
 
 
-const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/articulos`
 
+const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/articulos`
 
 
 export const articleService = {
