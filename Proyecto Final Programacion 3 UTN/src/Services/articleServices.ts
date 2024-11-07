@@ -2,7 +2,7 @@ import axios from "axios";
 import { IProductos } from "../types/dtos/productos/IProductos";
 
 
-const BASE_URL = `http://190.221.207.224:8090/articulos`
+const BASE_URL = `http://localhost:8090/articulos`
 
 
 

@@ -2,7 +2,7 @@ import axios from "axios"
 import { IAlergenos } from "../types/dtos/alergenos/IAlergenos";
 
 
-const BASE_URL = `http://190.221.207.224:8090/alergenos`
+const BASE_URL = `http://localhost:8090/alergenos`
 
 
 

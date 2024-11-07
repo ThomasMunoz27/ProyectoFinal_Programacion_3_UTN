@@ -1,5 +1,4 @@
 import axios from "axios";
-import { IPais } from "../types/IPais"
 import { IProvincia } from "../types/IProvincia";
 
 
