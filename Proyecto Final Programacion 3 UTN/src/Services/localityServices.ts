@@ -2,7 +2,7 @@ import axios from "axios"
 import { ILocalidad } from "../types/ILocalidad"
 
 
-const BASE_URL = `http://190.221.207.224:8090/localidades`
+const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/localidades`
 
 export const localityService = {
 

@@ -1,9 +1,8 @@
 import axios from "axios";
-import { IPais } from "../types/IPais"
 import { IProvincia } from "../types/IProvincia";
 
 
-const BASE_URL = `http://190.221.207.224:8090/provincias`
+const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/provincias`
 
 export const provinceService = {
 

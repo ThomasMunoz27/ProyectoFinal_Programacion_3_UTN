@@ -3,7 +3,7 @@ import { ISucursal } from '../types/dtos/sucursal/ISucursal';
 import { ICreateSucursal } from '../types/dtos/sucursal/ICreateSucursal';
 import { IUpdateSucursal } from '../types/dtos/sucursal/IUpdateSucursal';
 
-const BASE_URL = 'http://190.221.207.224:8090/sucursales';  // URL base de tu API
+const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/sucursales`;  // URL base de tu API
 
 export const sucursalService = {
     async getSucursalesByCompany(companyId: number): Promise<ISucursal[]> {

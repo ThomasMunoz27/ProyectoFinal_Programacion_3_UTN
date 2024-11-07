@@ -3,7 +3,7 @@ import { ICategorias } from "../types/dtos/categorias/ICategorias";
 
 
 
-const BASE_URL = 'http://190.221.207.224:8090/categorias';
+const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/categorias`
 
 export const categoryService = {
 
