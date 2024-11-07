@@ -3,8 +3,10 @@ import { IEmpresa } from '../types/dtos/empresa/IEmpresa';
 import { ICreateEmpresaDto } from '../types/dtos/empresa/ICreateEmpresaDto';
 import { IUpdateEmpresaDto } from '../types/dtos/empresa/IUpdateEmpresaDto';
 
-const BASE_URL = 'http://190.221.207.224:8090/empresas';
 
+const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/empresas`;
+
+console.log(import.meta.env.REACT_APP_BASE_URL_API);
 export const companyService = {
     // Obtener una empresa por ID (GET)
     async getEmpresa(id: number): Promise<IEmpresa> {

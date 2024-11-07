@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios"
 import { IImagen } from "../types/IImagen";
 
 
-const BASE_URL = `http://190.221.207.224:8090/images`
+const BASE_URL = `${import.meta.env.VITE_BASE_URL_API}/images`
 
 export const imageService = {
 

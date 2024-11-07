@@ -29,7 +29,7 @@ export const ListProducts = () => {
   return (
     <div>
         
-        <TableContainer component={Paper} style={{ marginTop: '20px' }}>
+        <TableContainer component={Paper} style={{ marginTop: '20px', height: '82vh'}}>
         <Table>
             <TableHead>
                 <TableRow>
