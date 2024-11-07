@@ -11,12 +11,12 @@ interface IModalAddSubCategory {
     idCategoriaPadre : number
 }
 
-const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idSucursal,closeModalAdd}) => {
+const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCategoriaPadre, idSucursal,closeModalAdd}) => {
 
     const [newSubCategory, setNewCategory] = useState<ICreateCategoria>({
         denominacion: "",
-        idSucursal : idSucursal, //id de la sucursal
-        idCategoriaPadre: 1 //id de la categoria padre
+        idSucursales : [idSucursal], //id de la sucursal
+        idCategoriaPadre: idCategoriaPadre //id de la categoria padre
         })
 
         //Funcion para manejar el cambio de los inputs

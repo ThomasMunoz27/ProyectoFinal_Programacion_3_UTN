@@ -5,15 +5,13 @@ import { ICreateCategoria } from "../../../../../types/dtos/categorias/ICreateCa
 import Swal from "sweetalert2";
 import { categoryService } from "../../../../../Services/categoryServices";
 
-
-
 interface IModalAddCategory{
   closeModalAdd : () => void //Funcion para cerrar el modal
   idSucursal: number; //id de la company
 }
 
-const ModalAddCategory : FC<IModalAddCategory>  = ({idSucursal, closeModalAdd}) => { //Estado para crear la categoria
-  const [newCategory, setNewCategory] = useState<ICreateCategoria>({
+const ModalAddCategory : FC<IModalAddCategory>  = ({idSucursal, closeModalAdd}) => { 
+const [newCategory, setNewCategory] = useState<ICreateCategoria>({ //Estado para crear la categoria
     denominacion: "",
     idSucursales: [
       idSucursal //id de la sucursal
