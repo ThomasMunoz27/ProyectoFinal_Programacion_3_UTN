@@ -1,4 +1,3 @@
-//import { useState } from "react";
 import { ChangeEvent, FC, useState } from "react";
 import styles from "./ModalAddCategory.module.css";
 import { Button } from "react-bootstrap";
@@ -16,7 +15,9 @@ interface IModalAddCategory{
 const ModalAddCategory : FC<IModalAddCategory>  = ({idSucursal, closeModalAdd}) => { //Estado para crear la categoria
   const [newCategory, setNewCategory] = useState<ICreateCategoria>({
     denominacion: "",
-    idSucursales: [idSucursal], //id de la sucursal
+    idSucursales: [
+      idSucursal //id de la sucursal
+    ], 
     idCategoriaPadre: null
   })
 
@@ -29,7 +30,7 @@ const ModalAddCategory : FC<IModalAddCategory>  = ({idSucursal, closeModalAdd}) 
   }
 
   //Funcion para controlar el envio de la nueva categoria
-  const handleSubmit = (e : React.MouseEvent<HTMLButtonElement>) =>{
+  const handleSubmit = async(e : React.MouseEvent<HTMLButtonElement>) =>{
     e.preventDefault();
 
     if(!newCategory.denominacion){
@@ -38,17 +39,30 @@ const ModalAddCategory : FC<IModalAddCategory>  = ({idSucursal, closeModalAdd}) 
     }
 
     try{
-      console.log("Datos enviados", newCategory);
-      categoryService.createCategory(newCategory)
-      closeModalAdd();
+      // Verificamos los datos que vamos a enviar
+    console.log("Enviando datos:", JSON.stringify(newCategory));
+
+    await categoryService.createCategory(newCategory)
+
+    Swal.fire({
+      icon: "success",
+      title: "Categoría creada",
+      text: "La categoría se ha creado exitosamente.",
+    });
+
+    closeModalAdd();
     }catch(error){
       console.error("El problema es: ", error);
       Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-      });
-
+        icon: "success",
+        title: "Categoria agregada",
+        showConfirmButton: false,
+        timer: 1500,
+        willClose: ()=>{
+          closeModalAdd();
+          window.location.reload() 
+        }
+        });
     }
   }
 

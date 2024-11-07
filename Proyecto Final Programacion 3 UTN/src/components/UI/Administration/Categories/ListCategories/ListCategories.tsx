@@ -42,7 +42,8 @@ const ListCategories = () => {
 
     return(
         <div className={styles.contentHero}>
-            <div className={styles.buttonAddCategory}>
+            <div className={styles.categoryHeader}>
+                <h1>Categorias</h1>
                 <Button onClick={handleModal}>Agregar Categoria</Button>
             </div>
             <ul className={styles.containerList}>

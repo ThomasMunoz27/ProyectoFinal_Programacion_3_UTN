@@ -11,9 +11,18 @@
     gap: 5vh;
     list-style: none;
 }
-.buttonAddCategory{
-    padding: 20px;
+.categoryHeader{
+    display: flex;
+    flex-direction: row;
+    box-shadow: 2px 2px 5px hsl(0, 0%, 61%);
     width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    margin: 0 auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 4vh;
 }
 
 
