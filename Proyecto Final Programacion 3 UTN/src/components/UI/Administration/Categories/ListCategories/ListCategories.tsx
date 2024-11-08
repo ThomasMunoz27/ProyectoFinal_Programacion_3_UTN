@@ -26,9 +26,6 @@ const ListCategories = () => {
 
     const [categories , setCategories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
 
-    
-    
-
     useEffect(() => {
         const fetchCategories = async () =>{
             const data = await categoryService.getCategoriesBySucursal(selectedSucursal?.id);
@@ -64,11 +61,9 @@ const ListCategories = () => {
                 <>
                 {/* Meto un div abajo para que impida pulsar otro elemento */}
                     <div className={styles.backgroundDisabled}></div>
-                    <ModalAddCategory closeModalAdd={closeModal} idEmpresa={selectedEmpresa?.id}  />
+                    <ModalAddCategory closeModalAdd={closeModal} idEmpresa={selectedEmpresa?.id} />
                 </>
             )}
-
-
         </div>
 
         

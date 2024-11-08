@@ -4,20 +4,23 @@ import { ChangeEvent, FC, useState } from "react";
 import { ICreateCategoria } from "../../../../../types/dtos/categorias/ICreateCategoria";
 import { categoryService } from "../../../../../Services/categoryServices";
 import Swal from "sweetalert2";
+import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias";
+
+
 
 interface IModalAddSubCategory {
     closeModalAdd : () => void,
-    idSucursal : number,
-    idCategoriaPadre : number
+    categoriaPadre: ICategorias 
+    idCompany : number
 }
 
-const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCategoriaPadre, idSucursal,closeModalAdd}) => {
+const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCompany,categoriaPadre,closeModalAdd}) => {
 
     const [newSubCategory, setNewCategory] = useState<ICreateCategoria>({
         denominacion: "",
-        idSucursales : [idSucursal], //id de la sucursal
-        idCategoriaPadre: idCategoriaPadre //id de la categoria padre
-        })
+        idEmpresa : idCompany, //id de empresa
+        idCategoriaPadre: categoriaPadre.id //id de la categoria padre
+    })
 
         //Funcion para manejar el cambio de los inputs
     const handleCahnge = (e : ChangeEvent<HTMLInputElement>) => {
@@ -28,24 +31,40 @@ const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCategoriaPadre, idSuc
     }
 
     //Funcion para controlar el envio de la nueva categoria
-    const handleSubmit = (e : React.MouseEvent<HTMLButtonElement>) =>{
-    e.preventDefault();
+    const handleSubmit = async(e : React.MouseEvent<HTMLButtonElement>) =>{
+        e.preventDefault();
 
-    if(!newSubCategory.denominacion){
-        alert("No puede dejar en blanco el campo");
-    }
+        if(!newSubCategory.denominacion){
+            alert("No puede dejar en blanco el campo");
+            return;
+        }
 
-    try{
-        console.log("Datos enviados", newSubCategory);
-        categoryService.createCategory(newSubCategory)
-    }catch(error){
-        console.error("El problema es: ", error);
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Something went wrong!",
-        });
-      }
+        try{
+            // Verificamos los datos que vamos a enviar
+            console.log("Enviando datos:", JSON.stringify(newSubCategory));
+
+            await categoryService.createCategory(newSubCategory)
+
+            Swal.fire({
+                icon: "success",
+                title: "Categoría creada",
+                text: "La categoría se ha creado exitosamente.",
+            });
+
+            closeModalAdd();
+            }catch(error){
+            console.error("El problema es: ", error);
+            Swal.fire({
+                icon: "success",
+                title: "Categoria agregada",
+                showConfirmButton: false,
+                timer: 1500,
+                willClose: ()=>{
+                closeModalAdd();
+                window.location.reload() 
+                }
+            });
+        }
     }
 
     return (
