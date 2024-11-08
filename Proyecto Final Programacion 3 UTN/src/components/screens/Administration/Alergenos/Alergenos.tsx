@@ -7,10 +7,16 @@ import { AdministrationHeader } from "../../../UI/Administration/Header/Administ
 import styles from "./Alergenos.module.css";
 import { FC, MouseEventHandler, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import ModalAddAlergen from "../../../UI/Administration/ModalAddAlergen/ModalAddAlergen";
 
 export const Alergenos: FC = () => {
+  const [showModal, setShowModal] = useState(false); //Estado que se va a usar para mostrar el popup
+
+  const handleCloseModal = () =>{ //Deja de mostrar el modal de View
+    setShowModal(false);  
+  }
+
   const [alergenos, setAlergenos] = useState<IAlergenos[]>([]);
-  const [isModalVisible, setModalVisible] = useState(false);
 
   const storedSucursal = localStorage.getItem('sucursal');
   const selectedSucursal = storedSucursal
@@ -26,8 +32,12 @@ export const Alergenos: FC = () => {
     fetchAlergenos();
   }, []);
 
-  const openModal = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
+  const handleButtonShow = () =>{ //Muestra el modal de View
+    setShowModal(true);
+}
+
+
+
 
   const BodyDeploy = () => (
     <div className={styles.BodyDeploy}>
@@ -60,30 +70,7 @@ export const Alergenos: FC = () => {
     </button>
   );
 
-  const ModalAddAlergen: FC<{ isVisible: boolean; closeModal: () => void }> = ({ isVisible, closeModal }) => {
-    if (!isVisible) return null;
 
-    const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      closeModal();
-    };
-
-    return (
-      <form className={`${styles.ModalAddAlergen} ${isVisible ? styles.ModalAddAlergen : styles.hidden}`}>
-        <div className={styles.ModalAddAlergenTitle}>Crear un alergeno</div>
-        <input type="text" placeholder="Ingresa una denominación" className={styles.ModalAddAlergenInputDen} />
-        <div className={styles.ModalAddAlergenImageSelector}>
-          Elija una imagen:
-          <input type="file" />
-          <img className={styles.ModalAddAlergenImage} src="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=no_photography" />
-        </div>
-        <div className={styles.ModalAddAlergenButtons}>
-          <button className={styles.ModalCancel} onClick={handleCancel}>CANCELAR</button>
-          <button type="submit" className={styles.ModalConfirm}>CONFIRMAR</button>
-        </div>
-      </form>
-    );
-  };
 
   return (
     <>
@@ -93,11 +80,18 @@ export const Alergenos: FC = () => {
         <div className={styles.MainDiv}>
           <div className={styles.titleContainer}>
             <h1>Alergenos</h1>
-            <AddAlergenButton onClick={openModal} />
+            <AddAlergenButton onClick={handleButtonShow} />
           </div>
           <BodyDeploy />
         </div>
-        <ModalAddAlergen isVisible={isModalVisible} closeModal={closeModal} />
+        {showModal && (
+        <>
+        {/* Meto un div abajo para que impida pulsar otro elemento */}
+          <div className={styles.backgroundDisabled}>
+          </div>
+          <ModalAddAlergen closeModalAdd={handleCloseModal}/> 
+        </>
+              )}
       </div>
     </>
   );
