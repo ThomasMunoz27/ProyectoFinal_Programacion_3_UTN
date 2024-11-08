@@ -1,5 +1,6 @@
 import axios from "axios"
 import { IAlergenos } from "../types/dtos/alergenos/IAlergenos";
+import { ICreateAlergeno } from "../types/dtos/alergenos/ICreateAlergeno";
 
 
 
@@ -18,7 +19,7 @@ export const alergenoService = {
         return response.data;
     },
 
-    async createAlergeno(newAlergeno: IAlergenos) : Promise<IAlergenos> {
+    async createAlergeno(newAlergeno: ICreateAlergeno) : Promise<ICreateAlergeno> {
         const response = await axios.post(BASE_URL, newAlergeno)
         return response.data;
     },

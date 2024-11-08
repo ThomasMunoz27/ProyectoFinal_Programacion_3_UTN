@@ -19,7 +19,7 @@ const [newCategory, setNewCategory] = useState<ICreateCategoria>({//Estado para 
   })
 
   //Funcion para manejar el cambio de los inputs
-  const handleChage = (e : ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
     const {name , value} = e.target;
     setNewCategory((prev) => ({...prev,
       [name] : value,
@@ -50,6 +50,7 @@ const [newCategory, setNewCategory] = useState<ICreateCategoria>({//Estado para 
       closeModalAdd();
     }catch(error){
       console.error("El problema es: ", error);
+
       Swal.fire({
         icon: "success",
         title: "Categoria agregada",
@@ -70,7 +71,7 @@ const [newCategory, setNewCategory] = useState<ICreateCategoria>({//Estado para 
       </div>
       <div className={styles.containerBody}>
         <label htmlFor="">Ingrese Denominacion</label>
-        <input type="text" placeholder="Denominacion" value={newCategory.denominacion} name="denominacion" onChange={handleChage}/>
+        <input type="text" placeholder="Denominacion" value={newCategory.denominacion} name="denominacion" onChange={handleChange}/>
       </div>
       <div className={styles.containerButtons}>
           <Button onClick={handleSubmit}>Aceptar</Button>
