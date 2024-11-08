@@ -74,7 +74,7 @@ const ModalAddAlergen : FC<IModalAdd> = ({closeModalAdd}) =>{
           <img className={styles.ModalAddAlergenImage} src="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=no_photography" />
         </div>
         <div className={styles.ModalAddAlergenButtons}>
-          <button type="submit" className={styles.ModalConfirm} onClick={handleSubmit}>CONFIRMAR</button>
+          <button  className={styles.ModalConfirm} onClick={handleSubmit}>CONFIRMAR</button>
           <button className={styles.ModalCancel} onClick={closeModalAdd}>CANCELAR</button>
         </div>
       </form>

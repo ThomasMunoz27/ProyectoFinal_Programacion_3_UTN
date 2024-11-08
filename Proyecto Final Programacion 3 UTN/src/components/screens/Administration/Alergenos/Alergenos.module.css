@@ -30,12 +30,13 @@
 .containerList{
     box-shadow: 2px 2px 5px #696969;
     border-radius: 12px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 75vh;
+    height: 76vh;
     justify-content: center;
+    overflow-y: scroll;
+
 }
 
 ul{
@@ -44,7 +45,8 @@ ul{
 }
 .containerItem {
     width: 80%;
-    margin: 0 auto;
+    height: 60px;
+    margin: 10px auto;
     display: flex;
     justify-content: space-between;
     box-shadow: 2px 2px 5px #696969;
