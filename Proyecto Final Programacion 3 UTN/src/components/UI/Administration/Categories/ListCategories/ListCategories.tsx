@@ -8,8 +8,6 @@ import { categoryService } from "../../../../../Services/categoryServices";
 import { Button } from "react-bootstrap";
 import ModalAddCategory from "../ModalAddCategory/ModalAddCategory";
 
-
-
 const ListCategories = () => {
 
     //Selecciono sucursal
@@ -17,10 +15,18 @@ const ListCategories = () => {
     const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
         (state: RootState) => state.sucursal.selectedSucursal
     )
+
+    //Selecciono empresa
+    const storedEmpresa = localStorage.getItem('empresa');
+    const selectedEmpresa = storedEmpresa ? JSON.parse(storedEmpresa) : useSelector(
+        (state : RootState) => state.company.selectedCompany
+    )
     
     const [showModalAddCategory, setShowModalAddCategory] = useState<boolean>(false); //Estado para controlar el modal
 
     const [categories , setCategories] = useState<ICategorias[]>([]); //Inicializo el estado con una lista vacia
+
+    
     
 
     useEffect(() => {
@@ -30,7 +36,7 @@ const ListCategories = () => {
         }
 
         fetchCategories();
-    },[])
+    },[]);
 
     const handleModal = () =>{
         setShowModalAddCategory(true);
@@ -58,7 +64,7 @@ const ListCategories = () => {
                 <>
                 {/* Meto un div abajo para que impida pulsar otro elemento */}
                     <div className={styles.backgroundDisabled}></div>
-                    <ModalAddCategory closeModalAdd={closeModal} idSucursal={selectedSucursal.id}/>
+                    <ModalAddCategory closeModalAdd={closeModal} idEmpresa={selectedEmpresa?.id}  />
                 </>
             )}
 

@@ -7,15 +7,13 @@ import { categoryService } from "../../../../../Services/categoryServices";
 
 interface IModalAddCategory{
   closeModalAdd : () => void //Funcion para cerrar el modal
-  idSucursal: number; //id de la company
+  idEmpresa: number; //id de la company
 }
 
-const ModalAddCategory : FC<IModalAddCategory>  = ({idSucursal, closeModalAdd}) => { 
-const [newCategory, setNewCategory] = useState<ICreateCategoria>({ //Estado para crear la categoria
+const ModalAddCategory : FC<IModalAddCategory>  = ({idEmpresa, closeModalAdd}) => { 
+const [newCategory, setNewCategory] = useState<ICreateCategoria>({//Estado para crear categoria
     denominacion: "",
-    idSucursales: [
-      idSucursal //id de la sucursal
-    ], 
+    idEmpresa: idEmpresa, //id de la empresa 
     idCategoriaPadre: null
   })
 
