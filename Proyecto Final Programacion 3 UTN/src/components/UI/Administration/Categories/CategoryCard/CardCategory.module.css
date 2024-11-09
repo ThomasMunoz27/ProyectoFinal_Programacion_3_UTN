@@ -3,6 +3,7 @@
     border-radius: 8px;
     box-shadow: 2px 2px 10px;
     padding: 10px;
+    
 }
 .containerTitle{
     font-size: 30px;
@@ -30,8 +31,7 @@
 .containerSubTitle h2{    
     font-size: 20px;
 }
-.containerSubcategoryTrue{
-    max-height: 200px; 
+.containerSubcategoryTrue{ 
     opacity: 1;
 }
 .containerSubcategoryTrue :hover{
@@ -47,6 +47,7 @@
     font-size: 24px;
     transition: transform 0.3s ease;
     margin-left: 8px;
+    
 }
 .rotated {
     transform: rotate(90deg); 

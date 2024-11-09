@@ -8,7 +8,6 @@ import { categoryService } from "../../../../../Services/categoryServices";
 interface IModalAddCategory{
   closeModalAdd : () => void //Funcion para cerrar el modal
   idEmpresa: number; //id de la company
-  
 }
 
 const ModalAddCategory : FC<IModalAddCategory>  = ({idEmpresa, closeModalAdd}) => { 

@@ -31,10 +31,10 @@ const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCompany,categoriaPadr
     }
 
     //Funcion para controlar el envio de la nueva categoria
-    const handleSubmit = async(e : React.MouseEvent<HTMLButtonElement>) =>{
+    const handleSubmit = async(e : React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        if(!newSubCategory.denominacion){
+        if(!newSubCategory.denominacion || (newSubCategory === null || newSubCategory === undefined)){
             alert("No puede dejar en blanco el campo");
             return;
         }
@@ -47,10 +47,9 @@ const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCompany,categoriaPadr
 
             Swal.fire({
                 icon: "success",
-                title: "Categoría creada",
-                text: "La categoría se ha creado exitosamente.",
+                title: "Subategoría creada",
+                text: "La subcategoría se ha creado exitosamente.",
             });
-
             closeModalAdd();
             }catch(error){
             console.error("El problema es: ", error);
