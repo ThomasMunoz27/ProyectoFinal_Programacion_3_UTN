@@ -31,7 +31,8 @@
 .containerSubTitle h2{    
     font-size: 20px;
 }
-.containerSubcategoryTrue{ 
+.containerSubcategoryTrue{
+    max-height: 800px; 
     opacity: 1;
 }
 .containerSubcategoryTrue :hover{
@@ -47,7 +48,6 @@
     font-size: 24px;
     transition: transform 0.3s ease;
     margin-left: 8px;
-    
 }
 .rotated {
     transform: rotate(90deg); 
