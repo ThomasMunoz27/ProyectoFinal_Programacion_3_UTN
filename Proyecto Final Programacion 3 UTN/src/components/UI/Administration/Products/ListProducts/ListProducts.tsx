@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import { IProductos } from "../../../../../types/dtos/productos/IProductos";
 import { articleService } from "../../../../../Services/articleServices";
 import { ProductRow } from "../ProductRow/ProductRow";
-
+import { Button } from "react-bootstrap";
+import styles from "./ListProducts.module.css";
+import { ModalAddProduct } from "../ModalAddProduct/ModalAddProduct";
 
 export const ListProducts = () => {
 
@@ -20,6 +22,8 @@ export const ListProducts = () => {
 
     const [products, setProducts] = useState<IProductos[]>([]);
 
+    const [showModalAddProduct, setShowModalAddProduct] = useState<boolean>(false);
+
     useEffect(() => {
         const fetchProducts = async () => {
             const data = await articleService.getArticlesBySucursalId(selectedSucursal?.id);
@@ -29,9 +33,20 @@ export const ListProducts = () => {
         fetchProducts();
     },[selectedSucursal])
 
+
+    const handleShowModalAddProduct = () => {
+        setShowModalAddProduct(true);
+    }
+    const handleCloseModalAddProduct = () => {
+            setShowModalAddProduct(false);
+    }
+
   return (
     <div>
         
+        <Button
+        onClick={handleShowModalAddProduct}>Agregar Producto</Button>
+
         <TableContainer component={Paper} style={{ marginTop: '20px', height: '82vh'}}>
         <Table>
             <TableHead>
@@ -54,7 +69,13 @@ export const ListProducts = () => {
             </Table>
         </TableContainer>
         
+        {showModalAddProduct && (
+            <div className={styles.backgroundDisabled}>
 
+                <ModalAddProduct closeModal={handleCloseModalAddProduct} sucursal ={selectedSucursal}/>
+
+            </div>
+        )}
          
     </div>
   )

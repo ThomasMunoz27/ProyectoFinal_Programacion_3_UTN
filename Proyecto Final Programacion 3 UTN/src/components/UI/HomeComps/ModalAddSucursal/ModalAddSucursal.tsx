@@ -181,73 +181,74 @@ const ModalAddSucursal: FC<IModalAdd> = ({ closeModalAdd, idEmpresa }) => {
 
                     <div className={style.blockOne}>
 
-                    <label htmlFor="nombre">Nombre</label>
-                    <input type="text" placeholder="Nombre de la Sucursal" name="nombre" value={newSucursal.nombre} onChange={handleChange} />
-                    
-                    <label htmlFor="horarioApertura">Horario de apertura</label>
-                    <input type="text" placeholder="Horario Apertura" name="horarioApertura" value={newSucursal.horarioApertura} onChange={handleChange} />
-                    
-                    <label htmlFor="horarioCierre">Horario de cierre</label>
-                    <input type="text" placeholder="Horario Cierre" name="horarioCierre" value={newSucursal.horarioCierre} onChange={handleChange} />
-                    
-                    <label htmlFor="esCasaMatriz">Es Casa Matriz</label>
-                    <input type="checkbox" name="esCasaMatriz" checked={newSucursal.esCasaMatriz} onChange={handleChange} />
+                        <label htmlFor="nombre">Nombre</label>
+                        <input type="text" placeholder="Nombre de la Sucursal" name="nombre" value={newSucursal.nombre} onChange={handleChange} />
+                        
+                        <label htmlFor="horarioApertura">Horario de apertura</label>
+                        <input type="text" placeholder="Horario Apertura" name="horarioApertura" value={newSucursal.horarioApertura} onChange={handleChange} />
+                        
+                        <label htmlFor="horarioCierre">Horario de cierre</label>
+                        <input type="text" placeholder="Horario Cierre" name="horarioCierre" value={newSucursal.horarioCierre} onChange={handleChange} />
+                        
+                        <label htmlFor="esCasaMatriz">Es Casa Matriz</label>
+                        <input type="checkbox" name="esCasaMatriz" checked={newSucursal.esCasaMatriz} onChange={handleChange} />
 
-                    <label htmlFor="latitud">Latitud</label>
-                    <input type="number" placeholder="Latitud" name="latitud" value={newSucursal.latitud} onChange={handleChange} />
+                        <label htmlFor="latitud">Latitud</label>
+                        <input type="number" placeholder="Latitud" name="latitud" value={newSucursal.latitud} onChange={handleChange} />
 
-                    <label htmlFor="longitud">Longitud</label>
-                    <input type="number" placeholder="Longitud" name="longitud" value={newSucursal.longitud} onChange={handleChange} />
+                        <label htmlFor="longitud">Longitud</label>
+                        <input type="number" placeholder="Longitud" name="longitud" value={newSucursal.longitud} onChange={handleChange} />
 
-                    <label htmlFor="calle">Calle</label>
-                    <input type="text" placeholder="Calle de la sucursal" name="calle" value={newSucursal.domicilio.calle} onChange={handleChange} />
-                    
-                    <label htmlFor="numero">Número</label>
-                    <input type="number" placeholder="Número de la calle" name="numero" value={newSucursal.domicilio.numero} onChange={handleChange} />
+                        <label htmlFor="calle">Calle</label>
+                        <input type="text" placeholder="Calle de la sucursal" name="calle" value={newSucursal.domicilio.calle} onChange={handleChange} />
+                        
+                        <label htmlFor="numero">Número</label>
+                        <input type="number" placeholder="Número de la calle" name="numero" value={newSucursal.domicilio.numero} onChange={handleChange} />
 
                     </div>
+                    
                     <div className={style.blockTwo}>
-                    <label htmlFor="cp">Código Postal</label>
-                    <input type="number" placeholder="Código Postal" name="cp" value={newSucursal.domicilio.cp} onChange={handleChange} />
+                        <label htmlFor="cp">Código Postal</label>
+                        <input type="number" placeholder="Código Postal" name="cp" value={newSucursal.domicilio.cp} onChange={handleChange} />
 
-                    <label htmlFor="piso">Piso</label>
-                    <input type="number" placeholder="Piso" name="piso" value={newSucursal.domicilio.piso} onChange={handleChange} />
+                        <label htmlFor="piso">Piso</label>
+                        <input type="number" placeholder="Piso" name="piso" value={newSucursal.domicilio.piso} onChange={handleChange} />
 
-                    <label htmlFor="nroDpto">Número de Departamento</label>
-                    <input type="number" placeholder="Nro. Departamento" name="nroDpto" value={newSucursal.domicilio.nroDpto} onChange={handleChange} />
+                        <label htmlFor="nroDpto">Número de Departamento</label>
+                        <input type="number" placeholder="Nro. Departamento" name="nroDpto" value={newSucursal.domicilio.nroDpto} onChange={handleChange} />
 
-                    <label htmlFor="country">País</label>
-                    <select id="country" value={selectedCountry} onChange={handleCountryChange}>
-                        <option value="">Seleccione un país</option>
-                        {countries.map((country) => (
-                            <option key={country.id} value={country.id}>
-                                {country.nombre}
-                            </option>
-                        ))}
-                    </select>
+                        <label htmlFor="country">País</label>
+                        <select id="country" value={selectedCountry} onChange={handleCountryChange}>
+                            <option value="">Seleccione un país</option>
+                            {countries.map((country) => (
+                                <option key={country.id} value={country.id}>
+                                    {country.nombre}
+                                </option>
+                            ))}
+                        </select>
 
-                    <label htmlFor="province">Provincia</label>
-                    <select id="province" value={selectedProvince} onChange={handleProvinceChange} disabled={!selectedCountry}>
-                        <option value="">Seleccione una provincia</option>
-                        {provinces.map((province) => (
-                            <option key={province.id} value={province.id}>
-                                {province.nombre}
-                            </option>
-                        ))}
-                    </select>
+                        <label htmlFor="province">Provincia</label>
+                        <select id="province" value={selectedProvince} onChange={handleProvinceChange} disabled={!selectedCountry}>
+                            <option value="">Seleccione una provincia</option>
+                            {provinces.map((province) => (
+                                <option key={province.id} value={province.id}>
+                                    {province.nombre}
+                                </option>
+                            ))}
+                        </select>
 
-                    <label htmlFor="locality">Localidad</label>
-                    <select id="locality" value={selectedLocality} onChange={handleLocalityChange} disabled={!selectedProvince}>
-                        <option value="">Seleccione una localidad</option>
-                        {localities.map((locality) => (
-                            <option key={locality.id} value={locality.id}>
-                                {locality.nombre}
-                            </option>
-                        ))}
-                    </select>
+                        <label htmlFor="locality">Localidad</label>
+                        <select id="locality" value={selectedLocality} onChange={handleLocalityChange} disabled={!selectedProvince}>
+                            <option value="">Seleccione una localidad</option>
+                            {localities.map((locality) => (
+                                <option key={locality.id} value={locality.id}>
+                                    {locality.nombre}
+                                </option>
+                            ))}
+                        </select>
 
-                    <label htmlFor="logo">Imagen</label>
-                    <input type="text" placeholder="Link de imagen" name="logo" value={newSucursal.logo || ""} onChange={handleChange} />
+                        <label htmlFor="logo">Imagen</label>
+                        <input type="text" placeholder="Link de imagen" name="logo" value={newSucursal.logo || ""} onChange={handleChange} />
 
                     </div>
                 </form>
