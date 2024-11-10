@@ -6,7 +6,6 @@ import { AdministrationAside } from "../../../UI/Administration/Aside/Administra
 import { AdministrationHeader } from "../../../UI/Administration/Header/AdministrationHeader";
 import styles from "./Alergenos.module.css";
 import { FC, MouseEventHandler, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import ModalAddAlergen from "../../../UI/Administration/ModalAddAlergen/ModalAddAlergen";
 import Swal from "sweetalert2";
 
@@ -48,7 +47,6 @@ export const Alergenos: FC = () => {
         timer: 1500,
         willClose: ()=>{
           handleCloseModal();
-          window.location.reload() 
         }
       });
     } catch (error) {
