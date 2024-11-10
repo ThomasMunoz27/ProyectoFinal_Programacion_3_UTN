@@ -42,6 +42,7 @@ const ModalAddAlergen : FC<IModalAdd> = ({closeModalAdd}) =>{
                 timer: 1500,
                 willClose: ()=>{
                     closeModalAdd();
+                    window.location.reload()
                 }
                 });
         }catch(error){
