@@ -1,22 +1,31 @@
+import { FC, MouseEventHandler, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { RootState } from "../../../../redux/store/store";
 import { alergenoService } from "../../../../Services/alergenoServices";
 import { IAlergenos } from "../../../../types/dtos/alergenos/IAlergenos";
 import { AdministrationAside } from "../../../UI/Administration/Aside/AdministrationAside";
 import { AdministrationHeader } from "../../../UI/Administration/Header/AdministrationHeader";
-import styles from "./Alergenos.module.css";
-import { FC, MouseEventHandler, useEffect, useState } from "react";
 import ModalAddAlergen from "../../../UI/Administration/ModalAddAlergen/ModalAddAlergen";
+import { ModalViewAlergen } from "../../../UI/Administration/ModalViewAlergen/ModalViewAlergen";
 import Swal from "sweetalert2";
+import styles from "./Alergenos.module.css";
 
 export const Alergenos: FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showModalViewAlergen, setShowModalViewAlergen] = useState<boolean>(false);
   const [alergenos, setAlergenos] = useState<IAlergenos[]>([]);
+  const [selectedAlergeno, setSelectedAlergeno] = useState<IAlergenos | null>(null);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseModal = () => setShowModal(false);
+
+  const handleShowModalViewAlergen = (alergeno: IAlergenos) => {
+    setSelectedAlergeno(alergeno);
+    setShowModalViewAlergen(true);
   };
 
+  const handleCloseModalViewAlergen = () => {
+    setSelectedAlergeno(null);
+    setShowModalViewAlergen(false);
+  };
 
   useEffect(() => {
     const fetchAlergenos = async () => {
@@ -31,32 +40,28 @@ export const Alergenos: FC = () => {
     fetchAlergenos();
   }, []);
 
-  const handleButtonShow = () => {
-    setShowModal(true);
-  };
+  const handleButtonShow = () => setShowModal(true);
 
   const deleteAlergen = async (id: number) => {
     try {
       await alergenoService.deleteAlergeno(id);
       setAlergenos((prevAlergenos) => prevAlergenos.filter((alergeno) => alergeno.id !== id));
-       Swal.fire({
+      Swal.fire({
         icon: "success",
         title: "Alergeno eliminado",
         text: "El Alergeno se ha eliminado exitosamente.",
         showConfirmButton: false,
         timer: 1500,
-        willClose: ()=>{
-          handleCloseModal();
-        }
+        willClose: handleCloseModal,
       });
     } catch (error) {
       console.error("Error deleting alergeno:", error);
       Swal.fire({
         icon: "error",
-        title: "Error al eliminar  alergeno",
+        title: "Error al eliminar alergeno",
         text: "El Alergeno no se ha eliminado exitosamente.",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
     }
   };
@@ -68,7 +73,7 @@ export const Alergenos: FC = () => {
           <li key={alergeno.id} className={styles.containerItem}>
             {alergeno.denominacion}
             <div className={styles.containerButtons}>
-              <Button aria-label="Ver detalles del alergeno">
+              <Button onClick={() => handleShowModalViewAlergen(alergeno)} aria-label="Ver detalles del alergeno">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
               </Button>
               <Button aria-label="Editar alergeno">
@@ -106,6 +111,12 @@ export const Alergenos: FC = () => {
           <>
             <div className={styles.backgroundDisabled}></div>
             <ModalAddAlergen closeModalAdd={handleCloseModal} />
+          </>
+        )}
+        {showModalViewAlergen && selectedAlergeno && (
+          <>
+            <div className={styles.backgroundDisabled}></div>
+            <ModalViewAlergen alergen={selectedAlergeno} modalClose={handleCloseModalViewAlergen} />
           </>
         )}
       </div>
