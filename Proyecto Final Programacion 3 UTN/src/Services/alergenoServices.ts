@@ -38,7 +38,7 @@ export const alergenoService = {
     async deleteImgAlergeno(id: number, publicId: string): Promise<void> {
         try {
             const url = `${BASE_URL}/?id=${id}&publicId=${publicId}`;
-            const response = await axios.post(url);
+            const response = await axios.delete(url);
             console.log('Imagen eliminada con éxito:', response.data);
         } catch (error) {
             console.error('Error al eliminar la imagen:', error);
