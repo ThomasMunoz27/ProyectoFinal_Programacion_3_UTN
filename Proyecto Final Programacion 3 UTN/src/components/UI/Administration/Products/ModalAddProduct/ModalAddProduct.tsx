@@ -7,17 +7,20 @@ import { categoryService } from "../../../../../Services/categoryServices"
 import { ISucursal } from "../../../../../types/dtos/sucursal/ISucursal"
 import { IAlergenos } from "../../../../../types/dtos/alergenos/IAlergenos"
 import { alergenoService } from "../../../../../Services/alergenoServices"
+import Swal from "sweetalert2"
+import { articleService } from "../../../../../Services/articleServices"
 
 interface IModalAddProduct{
     closeModal : () => void //Funcion para cerrar el modal
     sucursal : ISucursal
-  }
+}
 
 
 export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) => {
     const [categories, setCategories] = useState<ICategorias[]>([])
     const [alergenos, setAlergenos] = useState<IAlergenos[]>([])
-
+    const [selectedAlergenos, setSelectedAlergenos] = useState<number[]>([])
+    const [isAlergenosOpen, setIsAlergenosOpen] = useState(false);
 
     const [newProduct, setNewProduct] = useState<ICreateProducto>({
         denominacion: "",
@@ -57,45 +60,134 @@ export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) =
         newProduct.idCategoria = parseInt(e.target.value);
     }
 
+    const handleAlergenosToggle = () => {
+        setIsAlergenosOpen(!isAlergenosOpen);
+        console.log(selectedAlergenos);
+      };
+
+    const toggleAlergeno = (alergenoid: number) => {
+        
+        setSelectedAlergenos((prev) => {
+          if (prev.includes(alergenoid)) {
+            return prev.filter((id) => id !== alergenoid);
+          } else {
+            return [...prev, alergenoid];
+          }
+        });
+        
+        
+      };
+
+      const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) =>{
+        e.preventDefault();
+
+
+        if(!newProduct.denominacion || !newProduct.descripcion || (newProduct.idCategoria <= 0 || newProduct.precioVenta <= 0)  || !newProduct.codigo ){
+            alert("Complete todos los campos");
+            return;
+        }
+        
+        try{
+            console.log("Datos enviados:", newProduct);
+            await articleService.createArticle(newProduct);
+            
+            
+            Swal.fire({
+                icon: "success",
+                title: "Producto agregado",
+                showConfirmButton: false,
+                timer: 1500,
+                willClose: ()=>{
+                    closeModal();
+                    window.location.reload() 
+                }
+                });
+        }catch(error){
+            console.error("El problema es: ", error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+            });
+        }
+    }
+
+
   return (
     <div className={styles.containerPrincipal}>
         <div className={styles.containerTitle}>
             <h1>Agregar Producto</h1>
         </div>
         <div className={styles.containerBody}>
-            <form action="">
+            <form action="" className={styles.formContainer}>
 
-            <label htmlFor="denominacion">Denominacion: </label>
-            <input type="text" placeholder="Denominacion" value={newProduct.denominacion} name="denominacion" onChange={handleChange}/>
+            <div className={styles.formBlockOne}>
+                <label htmlFor="denominacion">Denominacion: </label>
+                <input type="text" placeholder="Denominacion" value={newProduct.denominacion} name="denominacion" onChange={handleChange}/>
 
-            <label htmlFor="precioVenta">Precio de venta: </label>
-            <input type="number" placeholder="Precio de venta" value={newProduct.precioVenta} name="precioVenta" onChange={handleChange}/>
+                <label htmlFor="precioVenta">Precio de venta: </label>
+                <input type="number" placeholder="Precio de venta" min={0} value={newProduct.precioVenta} name="precioVenta" onChange={handleChange}/>
 
-            <label htmlFor="descripcion">Descripcion: </label>
-            <textarea
-                id="descripcion"
-                placeholder="Descripción"
-                value={newProduct.descripcion}
-                name="descripcion"
-                onChange ={handleChange}
-            ></textarea>
+                <label htmlFor="descripcion">Descripcion: </label>
+                <textarea
+                    id="descripcion"
+                    placeholder="Descripción"
+                    value={newProduct.descripcion}
+                    name="descripcion"
+                    onChange ={handleChange}
+                ></textarea>
+
+            </div>
             
-            <label htmlFor="">Código: </label>
-            <input type="text" placeholder="Código" value={newProduct.codigo} name="codigo" onChange={handleChange} />
+            
+            <div className={styles.formBlockTwo}>
 
-            <label htmlFor="">Categoria: </label>
-            <select name="" id="" onChange={handleCategoryChange}>
-                <option value="">Seleccione una Categotía</option>
-                {categories.map((category) => (
-                    <option key={category.id} value={category.id}>{category.denominacion}</option>
-                ))}
-            </select>
+                <label htmlFor="codigo">Código: </label>
+                <input type="text" placeholder="Código" value={newProduct.codigo} name="codigo" onChange={handleChange} />
+
+                <label htmlFor="categoria">Categoria: </label>
+                <select name="" id="" onChange={handleCategoryChange}>
+                    <option value="">Seleccione una Categoría</option>
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.id}>{category.denominacion}</option>
+                    ))}
+                </select>
+
+
+                <label htmlFor="alergenos">Alergenos</label>
+            <div className={styles.alergenosDropdown}>
+              <button type="button" onClick={handleAlergenosToggle}>
+                Seleccionar alérgenos
+              </button>
+              {isAlergenosOpen && (
+                <div className={styles.alergenosList}>
+                    {alergenos.map((alergeno) => (
+                        <div key={alergeno.id} className={styles.alergenoOption}>
+                            <input
+                                type="checkbox"
+                                id={`alergeno-${alergeno.id}`}
+                                checked={selectedAlergenos.includes(alergeno.id)}
+                                onChange={() => toggleAlergeno(alergeno.id)}
+                            />
+                            <label htmlFor={`alergeno-${alergeno.id}`}>{alergeno.denominacion}</label>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <label htmlFor="imagenes">Imagen</label>
+            <input type="text" name="" id="" placeholder="Imagen" onChange={handleChange}/>
+
+            </div>
+
+            
             </form>
         </div>
 
 
         <div className={styles.containerButtons}>
-          <Button onClick={closeModal}>Aceptar</Button>
+          <Button onClick={handleSubmit}>Aceptar</Button>
           <Button onClick={closeModal}>Cancelar</Button>
       </div>
     </div>

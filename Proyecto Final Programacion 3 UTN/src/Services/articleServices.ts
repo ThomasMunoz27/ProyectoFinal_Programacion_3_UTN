@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IProductos } from "../types/dtos/productos/IProductos";
+import { ICreateProducto } from "../types/dtos/productos/ICreateProducto";
 
 
 
@@ -17,7 +18,7 @@ export const articleService = {
         return response.data
     },
 
-    async createArticle(newArticle: IProductos) : Promise<void> {
+    async createArticle(newArticle: ICreateProducto) : Promise<void> {
         const response = await axios.post(`${BASE_URL}/create`, newArticle)
         return response.data
     },
