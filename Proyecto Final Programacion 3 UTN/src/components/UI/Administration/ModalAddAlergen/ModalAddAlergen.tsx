@@ -5,21 +5,15 @@ import { ICreateAlergeno } from '../../../../types/dtos/alergenos/ICreateAlergen
 import { alergenoService } from '../../../../Services/alergenoServices';
 import Swal from 'sweetalert2';
 
+
 interface IModalAdd{
     closeModalAdd : () => void //Funcion que recibe desde CardCompany para cerrar el modal
 }
 
 const ModalAddAlergen : FC<IModalAdd> = ({closeModalAdd}) =>{
     const initialState = {
-        id: 273,
         denominacion : '',
-        eliminado: false,
-        imagen: {
-            id: 0,
-            eliminado: false,
-            name: 'name',
-            url: 'imagen',
-        },
+        imagen: null
     }
     const [newAlergen, setNewAlergen] = useState<ICreateAlergeno>(initialState)
     const handleChange = (e : ChangeEvent<HTMLInputElement>) => {
@@ -31,8 +25,8 @@ const ModalAddAlergen : FC<IModalAdd> = ({closeModalAdd}) =>{
     const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault();
 
-        if(newAlergen.denominacion || !newAlergen.imagen){
-            alert("Complete todos los campos");
+        if (!newAlergen.denominacion) {
+            alert("No pudo crearse");
             return;
         }
         
@@ -48,7 +42,7 @@ const ModalAddAlergen : FC<IModalAdd> = ({closeModalAdd}) =>{
                 timer: 1500,
                 willClose: ()=>{
                     closeModalAdd();
-                    window.location.reload() 
+                    window.location.reload()
                 }
                 });
         }catch(error){
@@ -67,7 +61,7 @@ const ModalAddAlergen : FC<IModalAdd> = ({closeModalAdd}) =>{
   return (
     <form className={styles.ModalAddAlergen}>
         <div className={styles.ModalAddAlergenTitle}>Crear un alergeno</div>
-        <input type="text" placeholder="Ingresa una denominación" className={styles.ModalAddAlergenInputDen} onChange={handleChange}/>
+        <input type="text" name='denominacion' placeholder="Ingresa una denominación" className={styles.ModalAddAlergenInputDen} onChange={handleChange}/>
         <div className={styles.ModalAddAlergenImageSelector}>
           Elija una imagen:
           <input type="file" onChange={handleChange} />
