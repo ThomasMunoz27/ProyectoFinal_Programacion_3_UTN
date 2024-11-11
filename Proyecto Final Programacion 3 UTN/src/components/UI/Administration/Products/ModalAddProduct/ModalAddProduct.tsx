@@ -38,19 +38,29 @@ export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) =
 
     useEffect(() => {
         const fetchCategories = async () => {
-            const data = await categoryService.getCategoriesBySucursal(sucursal.id);
-            setCategories(data);
-        }
+            try {
+                const data = await categoryService.getCategoriesBySucursal(sucursal.id);
+                setCategories(data);
+            } catch (error) {
+                console.error("Error al cargar categorías:", error);
+                Swal.fire("Error", "No se pudieron cargar las categorías.", "error");
+            }
+        };
         fetchCategories();
-    },[])
-
+    }, []);
+    
     useEffect(() => {
         const fetchAlergenos = async () => {
-            const data = await alergenoService.getAllAlergenos();
-            setAlergenos(data);
-        }
+            try {
+                const data = await alergenoService.getAllAlergenos();
+                setAlergenos(data);
+            } catch (error) {
+                console.error("Error al cargar alérgenos:", error);
+                Swal.fire("Error", "No se pudieron cargar los alérgenos.", "error");
+            }
+        };
         fetchAlergenos();
-    },[])
+    }, []);
 
     const handleChange = (e : ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
         const {name, value } = e.target;
@@ -60,7 +70,8 @@ export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) =
     }
 
     const handleCategoryChange = (e : ChangeEvent<HTMLSelectElement>) => {
-        newProduct.idCategoria = parseInt(e.target.value);
+        const idCategoria = parseInt(e.target.value);
+        setNewProduct((prev) => ({ ...prev, idCategoria }));
     }
 
     const handleAlergenosToggle = () => {
@@ -94,7 +105,8 @@ export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) =
 
             const productToCreate = {
                 ...newProduct,
-                imagenes: [imageProduct] || []
+                idAlergenos: selectedAlergenos,
+                imagenes: imageProduct?[imageProduct] : []
             }
             console.log("Datos enviados:", newProduct);
             await articleService.createArticle(productToCreate);
@@ -187,7 +199,7 @@ export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) =
                 <UploadImage 
                 imageObjeto={imageProduct}
                 setImageObjeto={setImageProduct}
-                typeElement="product"
+                typeElement="images"
                 />
                 
             </div>

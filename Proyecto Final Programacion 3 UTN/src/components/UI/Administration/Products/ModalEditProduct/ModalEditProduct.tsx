@@ -9,6 +9,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../../redux/store/store";
 import { IAlergenos } from "../../../../../types/dtos/alergenos/IAlergenos";
 import { alergenoService } from "../../../../../Services/alergenoServices";
+import { UploadImage } from "../../../../UploadImage";
+import { IImagen } from "../../../../../types/IImagen";
+import Swal from "sweetalert2";
+import { articleService } from "../../../../../Services/articleServices";
 
 
 interface IModalViewProduct {
@@ -18,9 +22,11 @@ interface IModalViewProduct {
 
 export const ModalEditProduct : FC<IModalViewProduct> = ({product, modalClose}) => {
   const [categories, setCategories] = useState<ICategorias[]>([])
-  const [selectedAlergenos, setSelectedAlergenos] = useState<number[]>([])
+  const arrayAlergenos = product.alergenos.map((alergeno) => alergeno.id);
+  const [selectedAlergenos, setSelectedAlergenos] = useState<number[]>(arrayAlergenos)
   const [isAlergenosOpen, setIsAlergenosOpen] = useState(false);
   const [alergenos, setAlergenos] = useState<IAlergenos[]>([])
+  const [imageProduct, setImageProduct] = useState<IImagen | null>(null);
 
 
   const storedSucursal = localStorage.getItem('sucursal');
@@ -28,7 +34,7 @@ export const ModalEditProduct : FC<IModalViewProduct> = ({product, modalClose}) 
   const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
       (state: RootState) => state.sucursal.selectedSucursal
   )
-  const arrayAlergenos = product.alergenos.map((alergeno) => alergeno.id);
+  
 
   const [productToEdit, setProductToEdit] = useState<IUpdateProducto>({
     id: product.id,
@@ -59,6 +65,60 @@ useEffect(() => {
   fetchAlergenos();
 },[])
 
+
+const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+
+  if (!productToEdit.denominacion || !productToEdit.descripcion || (productToEdit.idCategoria <= 0 || productToEdit.precioVenta <= 0)  || !productToEdit.codigo ) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "La denominación es obligatoria.",
+    });
+    return;
+  }
+
+  // Validar que se haya seleccionado una imagen
+  if (!imageProduct && productToEdit.imagenes.length === 0) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Debe cargar una imagen.",
+    });
+    return;
+  }
+  
+
+  try {
+    const productToSend = {
+      ...productToEdit,
+      idAlergenos: selectedAlergenos,
+      imagenes: imageProduct?[imageProduct] : productToEdit.imagenes
+  }
+
+    await articleService.updateArticle(product.id, productToSend);
+
+    Swal.fire({
+      icon: "success",
+      title: "Alergeno actualizado",
+      showConfirmButton: false,
+      timer: 1500,
+      willClose: () => {
+        modalClose();
+        
+      },
+    });
+  } catch (error) {
+    console.error("El problema es: ", error);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+  }
+};
+
+
   const handleChange = (e : ChangeEvent<HTMLInputElement>) => { 
     const {name, value } = e.target;
      //Evito que se ingresen espacios en blanco
@@ -69,9 +129,12 @@ useEffect(() => {
     
 };
 
-const handleCategoryChange = (e : ChangeEvent<HTMLSelectElement>) => {
-  productToEdit.idCategoria = parseInt(e.target.value);
-}
+const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  setProductToEdit((prev) => ({
+    ...prev,
+    idCategoria: parseInt(e.target.value),
+  }));
+};
 
 const toggleAlergeno = (alergenoid: number) => {
         
@@ -140,6 +203,16 @@ const handleAlergenosToggle = () => {
                 </div>
               )}
             </div>
+
+            <div className={styles.uploadImage}>
+
+              <UploadImage 
+                imageObjeto={imageProduct}
+                setImageObjeto={setImageProduct}
+                typeElement="images"
+                />
+                </div>
+
                 </form>
             
 
@@ -147,6 +220,7 @@ const handleAlergenosToggle = () => {
 
         </div>
         <div className={styles.containerButton}>
+            <Button onClick={handleSubmit}>Confirmar</Button>
             <Button onClick={modalClose}>Cerrar</Button>
         </div>
 

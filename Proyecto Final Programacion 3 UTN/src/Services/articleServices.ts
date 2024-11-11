@@ -1,6 +1,7 @@
 import axios from "axios";
 import { IProductos } from "../types/dtos/productos/IProductos";
 import { ICreateProducto } from "../types/dtos/productos/ICreateProducto";
+import { IUpdateProducto } from "../types/dtos/productos/IUpdateProducto";
 
 
 
@@ -23,8 +24,8 @@ export const articleService = {
         return response.data
     },
 
-    async updateArticle(articleId: number, articleActualizado: IProductos) : Promise<IProductos> {
-        const response = await axios.put(`${BASE_URL}/${articleId}`, articleActualizado)
+    async updateArticle(articleId: number, articleActualizado: IUpdateProducto) : Promise<IProductos> {
+        const response = await axios.put(`${BASE_URL}/update/${articleId}`, articleActualizado)
         return response.data
     },
 }
