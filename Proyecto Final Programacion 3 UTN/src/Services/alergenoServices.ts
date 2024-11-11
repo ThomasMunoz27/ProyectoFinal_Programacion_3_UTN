@@ -1,6 +1,7 @@
 import axios from "axios"
 import { IAlergenos } from "../types/dtos/alergenos/IAlergenos";
 import { ICreateAlergeno } from "../types/dtos/alergenos/ICreateAlergeno";
+import { IUpdateAlergeno } from "../types/dtos/alergenos/IUpdateAlergeno";
 
 
 
@@ -24,7 +25,7 @@ export const alergenoService = {
         return response.data;
     },
 
-    async updateAlergeno(alergenoId: number, alergenoActualizado: IAlergenos) : Promise<void> {
+    async updateAlergeno(alergenoId: number, alergenoActualizado: IAlergenos) : Promise<IUpdateAlergeno> {
         const response = await axios.put(`${BASE_URL}/${alergenoId}`, alergenoActualizado)
         return response.data;
     },
