@@ -44,6 +44,11 @@ const [newCategory, setNewCategory] = useState<ICreateCategoria>({//Estado para 
         icon: "success",
         title: "Categoría creada",
         text: "La categoría se ha creado exitosamente.",
+        timer: 1500,
+        willClose: ()=>{
+          closeModalAdd();
+          window.location.reload() 
+        }
       });
 
       closeModalAdd();

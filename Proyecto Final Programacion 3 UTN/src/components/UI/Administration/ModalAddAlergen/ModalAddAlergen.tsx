@@ -83,26 +83,26 @@ const ModalAddAlergen: FC<IModalAdd> = ({ closeModalAdd }) => {
   return (
     <>
       <form className={styles.ModalAddAlergen}>
+        <div className={styles.containerBody}>
+
         <div className={styles.ModalAddAlergenTitle}>Crear un alergeno</div>
 
         <input
           type="text"
           name="denominacion"
           placeholder="Ingresa una denominación"
-          className={styles.ModalAddAlergenInputDen}
+          className={styles.ModalAddAlergenInput}
           onChange={handleChange}
         />
+        <div className={styles.uploadImage}>
 
         <UploadImage
           imageObjeto={imageAlergeno}
           setImageObjeto={setImageAlergeno}
           typeElement="alergenos"
-        />
+          />
+        </div>
 
-        <img
-          className={styles.ModalAddAlergenImage}
-          src="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=no_photography"
-        />
 
         <div className={styles.ModalAddAlergenButtons}>
           <button className={styles.ModalConfirm} onClick={handleSubmit}>
@@ -111,6 +111,7 @@ const ModalAddAlergen: FC<IModalAdd> = ({ closeModalAdd }) => {
           <button className={styles.ModalCancel} onClick={closeModalAdd}>
             CANCELAR
           </button>
+        </div>
         </div>
       </form>
     </>

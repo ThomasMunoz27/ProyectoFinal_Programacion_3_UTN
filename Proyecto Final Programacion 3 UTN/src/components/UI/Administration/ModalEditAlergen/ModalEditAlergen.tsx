@@ -102,22 +102,26 @@ const ModalEditAlergen: FC<IModalEdit> = ({ closeModalEdit, alergenoId }) => {
 
   return (
     <form className={styles.ModalEditAlergen}>
+      <div className={styles.containerBody}>
       <div className={styles.ModalEditAlergenTitle}>Editar Alergeno</div>
+
 
       <input
         type="text"
         name="denominacion"
         placeholder="Editar denominación"
         value={editAlergen.denominacion}
-        className={styles.ModalEditAlergenInputDen}
+        className={styles.ModalEditAlergenInput}
         onChange={handleChange}
       />
+      <div className={styles.uploadImage}>
 
-      <UploadImage
+      <UploadImage 
         imageObjeto={imageAlergeno}
         setImageObjeto={setImageAlergeno}
         typeElement="images"
-      />
+        />
+        </div>
 
       <div className={styles.ModalEditAlergenButtons}>
         <button className={styles.ModalConfirm} onClick={handleSubmit}>
@@ -127,6 +131,7 @@ const ModalEditAlergen: FC<IModalEdit> = ({ closeModalEdit, alergenoId }) => {
           CANCELAR
         </button>
       </div>
+        </div>
     </form>
   );
 };

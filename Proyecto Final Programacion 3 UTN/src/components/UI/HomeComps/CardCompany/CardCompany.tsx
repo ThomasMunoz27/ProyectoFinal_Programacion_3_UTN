@@ -18,6 +18,7 @@ export const CardCompany : FC<ICardCompany>= ({company}) => {
   const dispatch = useDispatch()
 
   const handleSelectCompany = ()=>{
+    localStorage.setItem('empresa',JSON.stringify(company))
     dispatch(setSelectedCompany(company))
   }
 

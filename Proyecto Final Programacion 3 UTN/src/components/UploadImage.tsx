@@ -5,158 +5,130 @@ import noImage from "../assets/images/noImage.jpeg";
 import { IImagen } from "../types/IImagen";
 import { ImageService } from "../Services/ImageService";
 
-
-// Definimos la interfaz de las propiedades que recibirá el componente UploadImage
 interface IUploadImage {
-  image?: string | null; // URL de la imagen cargada, opcional
-  setImage?: (image: string | null) => void; // Función para actualizar la imagen cargada
-  imageObjeto?: IImagen | null; // Objeto de tipo IImagen que representa la imagen cargada
-  setImageObjeto?: (image: IImagen | null) => void; // Función para actualizar el objeto de imagen
-  typeElement?: string; // Tipo de elemento que se utilizará al eliminar la imagen
+  image?: string | null;
+  setImage?: (image: string | null) => void;
+  imageObjeto?: IImagen | null;
+  setImageObjeto?: (image: IImagen | null) => void;
+  typeElement?: string;
+  elementActiveId?: number; // Añadido para identificar el elemento activo
 }
 
-// Componente funcional que permite subir y eliminar imágenes
 export const UploadImage: FC<IUploadImage> = ({
   image,
   setImage,
   imageObjeto,
   setImageObjeto,
   typeElement,
+  elementActiveId = 45, // Parámetro por defecto para pruebas
 }) => {
-  // Instanciamos el servicio para manejar las imágenes
   const imageService = new ImageService("images");
 
-  // Función para manejar el cambio de archivo en el input de carga de imágenes
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // Verificamos si existe un archivo seleccionado
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      const formData = new FormData();
-      formData.append("uploads", file); // Agregamos el archivo al FormData para enviarlo
+    const [file] = event.target.files || [];
+    if (!file) return;
 
-      // Muestra un mensaje de carga con SweetAlert2
-      Swal.fire({
-        title: "Subiendo...",
+    const formData = new FormData();
+    formData.append("uploads", file);
 
-        didOpen: () => {
-          Swal.showLoading(); // Activa el icono de carga
-        },
-      });
+    Swal.fire({
+      title: "Subiendo...",
+      didOpen: () => Swal.showLoading(),
+    });
 
-      try {
-        // Subimos la imagen utilizando el servicio y obtenemos la URL de la imagen cargada
-        const data = await imageService.uploadImage(formData);
+    try {
+      const data = await imageService.uploadImage(formData);
 
-        // Si setImage está definido, actualizamos la URL de la imagen cargada
-        if (setImage) {
-          setImage(data);
-        }
-
-        // Si setImageObjeto está definido, actualizamos el objeto de imagen con la URL y el nombre del archivo
-        if (setImageObjeto) {
-          setImageObjeto({
-            url: data,
-            name: file.name,
-          });
-        }
-      } catch (error) {
-        console.log(error); // En caso de error, lo mostramos en la consola
-      }
-
-      Swal.close(); // Cerramos el mensaje de carga
+      setImage?.(data);
+      setImageObjeto?.({ url: data, name: file.name });
+    } catch (error) {
+      console.error("Error al subir la imagen:", error);
+      Swal.fire("Error", "No se pudo subir la imagen.", "error");
+    } finally {
+      Swal.close();
     }
   };
 
-  // Objeto de ejemplo para identificar el elemento activo (simulado)
-  const elementActive = { id: 45 };
-
-  // Función para manejar la eliminación de la imagen
   const handleDeleteImagen = async () => {
-    // Si existe un objeto de imagen y la función para actualizarlo
-    if (imageObjeto && setImageObjeto && elementActive && typeElement) {
-      await imageService
-        .deleteImgItems(elementActive?.id, imageObjeto.url, typeElement)
-        .then(() => {
-          setImageObjeto(null); // Eliminamos el objeto de imagen
-        });
+    try {
+      if (imageObjeto && setImageObjeto && elementActiveId && typeElement) {
+        await imageService.deleteImgItems(elementActiveId, imageObjeto.url, typeElement);
+        setImageObjeto(null);
+      } else if (image && setImage) {
+        await imageService.deleteImgCloudinary(image);
+        setImage(null);
+      }
+    } catch (error) {
+      console.error("Error al eliminar la imagen:", error);
+      Swal.fire("Error", "No se pudo eliminar la imagen.", "error");
     }
-    // Si existe solo la URL de la imagen
-    else if (image && setImage) {
-      await imageService.deleteImgCloudinary(image).then(() => {
-        setImage(null); // Eliminamos la URL de la imagen
-      });
-    }
+  };
+
+  const containerStyle = {
+    width: "100%",
+    border: "1px solid black",
+    borderRadius: ".4rem",
+    padding: ".4rem",
+    height: "100%",
+    gap: ".4rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  };
+
+  const imageContainerStyle = {
+    borderRadius: ".4rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: ".4rem",
   };
 
   return (
-    <div
-      style={{
-        width: "22vw",
-        border: "1px solid #ccc",
-        borderRadius: ".4rem",
-        padding: ".4rem",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
-    >
-      {/* Si hay una imagen cargada, mostramos la vista con la imagen y el botón para eliminarla */}
+    <div style={containerStyle}>
       {image || imageObjeto ? (
-        <div
-          style={{
-            borderRadius: ".4rem",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: ".4rem",
-          }}
-        >
-          <div style={{ width: "10vw" }}>
-            <Button
-              onClick={handleDeleteImagen} // Ejecuta la función de eliminación de imagen
-              variant="outlined"
-              color="error"
-            >
-              Eliminar imagen
-            </Button>
-          </div>
+        <div style={imageContainerStyle}>
+          <Button
+            onClick={handleDeleteImagen}
+            variant="outlined"
+            color="error"
+            style={{ marginRight: "1rem" }}
+          >
+            Eliminar imagen
+          </Button>
           <img
-            src={imageObjeto ? imageObjeto.url : image!} // Muestra la imagen desde el objeto o URL
+            src={imageObjeto ? imageObjeto.url : image || noImage}
             alt="Uploaded"
             style={{
               backgroundColor: "#ccc",
               width: "10vw",
               borderRadius: ".4rem",
               height: "10vh",
-              objectFit: "fill",
+              objectFit: "cover",
             }}
           />
         </div>
       ) : (
         <>
-          {/* Si no hay imagen cargada, mostramos el input para seleccionar una nueva imagen */}
           <input
             accept="image/*"
             style={{ display: "none" }}
             id="contained-button-file"
             type="file"
-            onChange={handleFileChange} // Ejecuta la función de cambio de archivo
+            onChange={handleFileChange}
           />
           <label htmlFor="contained-button-file">
             <Button variant="outlined" component="span">
               Elige una imagen
             </Button>
           </label>
-          <div>
-            <img
-              src={noImage} // Muestra una imagen de reemplazo si no hay imagen cargada
-              alt="Uploaded"
-              style={{ maxWidth: "100px", height: "auto" }}
-            />
-          </div>
+          <img
+            src={noImage}
+            alt="Sin imagen"
+            style={{ maxWidth: "100px", height: "auto", marginLeft: "1rem" }}
+          />
         </>
       )}
     </div>

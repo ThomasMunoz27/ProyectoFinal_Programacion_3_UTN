@@ -34,7 +34,7 @@ const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCompany,categoriaPadr
     const handleSubmit = async(e : React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        if(!newSubCategory.denominacion || (newSubCategory === null || newSubCategory === undefined)){
+        if (!newSubCategory.denominacion || (newSubCategory.idCategoriaPadre === null || newSubCategory.idCategoriaPadre === undefined)) {
             alert("No puede dejar en blanco el campo");
             return;
         }
@@ -42,6 +42,7 @@ const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCompany,categoriaPadr
         try{
             // Verificamos los datos que vamos a enviar
             console.log("Enviando datos:", JSON.stringify(newSubCategory));
+            console.log(newSubCategory) 
 
             await categoryService.createCategory(newSubCategory)
 
@@ -49,8 +50,14 @@ const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCompany,categoriaPadr
                 icon: "success",
                 title: "Subategoría creada",
                 text: "La subcategoría se ha creado exitosamente.",
+                timer : 1500,
+                willClose: () => {
+                    closeModalAdd();
+                    window.location.reload();
+                }
             });
             closeModalAdd();
+            
             }catch(error){
             console.error("El problema es: ", error);
             Swal.fire({
@@ -59,8 +66,8 @@ const ModalAddSubCategory : FC<IModalAddSubCategory> = ({idCompany,categoriaPadr
                 showConfirmButton: false,
                 timer: 1500,
                 willClose: ()=>{
-                closeModalAdd();
-                window.location.reload() 
+                    closeModalAdd();
+                    window.location.reload() 
                 }
             });
         }
