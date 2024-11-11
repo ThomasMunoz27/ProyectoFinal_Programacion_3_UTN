@@ -107,7 +107,6 @@ ul{
     z-index:2 !important
 }
 .itemText{
-    color: rebeccapurple;
     width: 50%;
     max-width: 300px;
     overflow-x: scroll;
