@@ -10,7 +10,6 @@ import ModalAddCategory from "../ModalAddCategory/ModalAddCategory";
 
 const ListCategories = () => {
     
-
     //Selecciono sucursal
     const storedSucursal = localStorage.getItem('sucursal');
     const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
@@ -32,7 +31,6 @@ const ListCategories = () => {
             const data = await categoryService.getCategoriesBySucursal(selectedSucursal?.id);
             setCategories(data);
         }
-
         fetchCategories();
     },[]);
 
@@ -51,9 +49,9 @@ const ListCategories = () => {
                 <Button onClick={handleModal}>Agregar Categoria</Button>
             </div>
             <ul className={styles.containerList}>
-                {categories.map(categories => (
-                    <li key={categories.id} className={styles.containerPrincipal} typeof="inherit">
-                        <CategoryCard category={categories}/>
+                {categories.filter(category => category.categoriaPadre !== null).map(category => (
+                    <li key={category.id} className={styles.containerPrincipal} typeof="inherit">
+                        <CategoryCard category={category} />
                     </li>
                 ))}
             </ul>
