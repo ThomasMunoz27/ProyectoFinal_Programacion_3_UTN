@@ -22,7 +22,7 @@ export const ModalViewAlergen: FC<IModalViewAlergen> =({alergen, modalClose}) =>
             
                 <img 
                 src={
-                    alergen.imagen?.url ? alergen.imagen.url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s" 
+                   alergen.imagen ? alergen.imagen.url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQppJKxBxJI-9UWLe2VVmzuBd24zsq4_ihxZw&s" 
                     }     
                 alt="" />
         </div>
