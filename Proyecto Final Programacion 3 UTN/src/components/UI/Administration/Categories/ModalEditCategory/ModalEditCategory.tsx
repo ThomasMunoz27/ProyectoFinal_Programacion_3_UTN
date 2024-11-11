@@ -20,7 +20,6 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
         subCategorias: category.subCategorias,
         categoriaPadre: category.categoriaPadre,
         articulos : category.articulos
-        
     })
 
     const handleChage = (e : ChangeEvent<HTMLInputElement>) =>{
@@ -33,7 +32,7 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
     const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
-        if(!categoryEdit.denominacion){
+        if(!categoryEdit){
             alert("No se pudo editar");
             return;
         }
@@ -61,8 +60,8 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
                 showConfirmButton: false,
                 timer: 1500,
                 willClose: ()=>{
-                closeModalEdit();
-                window.location.reload() 
+                    closeModalEdit();
+                    window.location.reload() 
                 }
             });
         }

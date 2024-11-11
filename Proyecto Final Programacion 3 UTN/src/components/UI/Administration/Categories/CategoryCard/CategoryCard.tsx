@@ -8,8 +8,6 @@ import { RootState } from "../../../../../redux/store/store";
 import { useSelector } from "react-redux";
 import ModalEditCategory from "../ModalEditCategory/ModalEditCategory";
 
-
-
 interface ICategoryCard {
     category : ICategorias;
 }
