@@ -11,12 +11,13 @@ export class ImageService extends BackendClient<IImagen> {
 
   // Método para subir una imagen a la API
   async uploadImage(data: FormData): Promise<string> {
+    
     Swal.fire({
       title: "Subiendo Imagen...",
       allowOutsideClick: false,
       didOpen: () => {
         Swal.showLoading();
-      },
+},
     });
   
     try {

@@ -3,7 +3,6 @@ import styles from './ModalEditAlergen.module.css';
 import { ICreateAlergeno } from '../../../../types/dtos/alergenos/ICreateAlergeno';
 import { alergenoService } from '../../../../Services/alergenoServices';
 import Swal from 'sweetalert2';
-import { Button } from "@mui/material";
 
 import { IImagen } from '../../../../types/IImagen';
 import { UploadImage } from '../../../UploadImage';
@@ -45,48 +44,56 @@ const ModalEditAlergen: FC<IModalEdit> = ({ closeModalEdit, alergenoId }) => {
     }));
   };
 
- const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-  e.preventDefault();
-
-  if (!editAlergen.denominacion) {
-    alert("La denominación es obligatoria");
-    return;
-  }
-
-  // Validar que se haya seleccionado una imagen
-  if (!imageAlergeno && !editAlergen.imagen) {
-    alert("Debe cargar una imagen.");
-    return;
-  }
-
-  try {
-    const alergenoToUpdate: IAlergenos = {
-      id: alergenoId,
-      denominacion: editAlergen.denominacion,
-      imagen: imageAlergeno ?? editAlergen.imagen,
-    };
-
-    await alergenoService.updateAlergeno(alergenoId, alergenoToUpdate);
-
-    Swal.fire({
-      icon: "success",
-      title: "Alergeno actualizado",
-      showConfirmButton: false,
-      timer: 1500,
-      willClose: () => {
-        closeModalEdit();
-        window.location.reload();
-      },
-    });
-  } catch (error) {
-    console.error("El problema es: ", error);
-    Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Something went wrong!",
-    });
-  }
-};
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  
+    if (!editAlergen.denominacion) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "La denominación es obligatoria.",
+      });
+      return;
+    }
+  
+    // Validar que se haya seleccionado una imagen
+    if (!imageAlergeno && editAlergen.imagen == null) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Debe cargar una imagen.",
+      });
+      return;
+    }
+  
+    try {
+      const alergenoToUpdate: IAlergenos = {
+        id: alergenoId,
+        denominacion: editAlergen.denominacion,
+        imagen: imageAlergeno ?? editAlergen.imagen,
+      };
+  
+      await alergenoService.updateAlergeno(alergenoId, alergenoToUpdate);
+  
+      Swal.fire({
+        icon: "success",
+        title: "Alergeno actualizado",
+        showConfirmButton: false,
+        timer: 1500,
+        willClose: () => {
+          closeModalEdit();
+          window.location.reload();
+        },
+      });
+    } catch (error) {
+      console.error("El problema es: ", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+  };
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

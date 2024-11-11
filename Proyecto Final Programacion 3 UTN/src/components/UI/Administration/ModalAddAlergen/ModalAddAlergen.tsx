@@ -30,8 +30,23 @@ const ModalAddAlergen: FC<IModalAdd> = ({ closeModalAdd }) => {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+   
     if (!newAlergen.denominacion) {
-      alert("No pudo crearse");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "La denominación es obligatoria.",
+      });
+      return;
+    }
+  
+    // Validar que se haya seleccionado una imagen
+    if (!imageAlergeno && newAlergen.imagen == null) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Debe cargar una imagen.",
+      });
       return;
     }
 
