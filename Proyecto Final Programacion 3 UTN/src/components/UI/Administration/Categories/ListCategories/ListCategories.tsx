@@ -9,6 +9,7 @@ import { Button } from "react-bootstrap";
 import ModalAddCategory from "../ModalAddCategory/ModalAddCategory";
 
 const ListCategories = () => {
+    
 
     //Selecciono sucursal
     const storedSucursal = localStorage.getItem('sucursal');
