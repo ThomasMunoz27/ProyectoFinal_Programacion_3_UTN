@@ -39,6 +39,7 @@ export const UploadImage: FC<IUploadImage> = ({
       // Muestra un mensaje de carga con SweetAlert2
       Swal.fire({
         title: "Subiendo...",
+
         didOpen: () => {
           Swal.showLoading(); // Activa el icono de carga
         },

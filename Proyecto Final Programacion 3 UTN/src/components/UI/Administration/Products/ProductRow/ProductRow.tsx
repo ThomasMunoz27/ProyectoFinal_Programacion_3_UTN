@@ -24,7 +24,7 @@ export const ProductRow : FC<IProductRow> = ({ product }) => {
 
 
   const handleShowModalEditProduct = () => {
-      setShowModalEditProduct(true);
+    setShowModalEditProduct(true);
   }
   const handleCloseModalEditProduct = () => {
       setShowModalEditProduct(false);
@@ -56,23 +56,30 @@ export const ProductRow : FC<IProductRow> = ({ product }) => {
                         </TableCell>
 
 
-                        {showModalViewProduct && (
+                        
+
+                    </TableRow>
+                    {showModalViewProduct && (
                             <>
-                                <div className={styles.backgroundDisabled}></div>
-                                <ModalViewProduct product ={product} modalClose={handleCloseModalViewProduct} />
+                                <div className={styles.backgroundDisabled}>
+
+                                    <ModalViewProduct product ={product} modalClose={handleCloseModalViewProduct} />
+
+                                </div>
                             </>
 
                         )}
 
                         {showModalEditProduct && ( 
                             <>
-                                <div className={styles.backgroundDisabled}></div>
-                                <ModalEditProduct product ={product} modalClose={handleCloseModalEditProduct} />
+                                <div className={styles.backgroundDisabled}>
+
+                                    <ModalEditProduct product ={product} modalClose={handleCloseModalEditProduct} />
+
+                                </div>
                             </>
 
                         )}
-
-                    </TableRow>
     </>
   )
 }
