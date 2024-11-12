@@ -26,7 +26,8 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
         denominacion: category.denominacion,
         eliminado: category.eliminado,
         idEmpresa: selectedEmpresa?.id,
-        idSucursales: category.sucursales.map((el) => el.id),
+        idSucursales: Array.isArray(category.sucursales) ? category.sucursales.map((e) => e.id) : [],
+
         idCategoriaPadre: category.categoriaPadre?.id
     })
 
