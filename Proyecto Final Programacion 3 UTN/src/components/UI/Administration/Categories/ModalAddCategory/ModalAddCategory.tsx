@@ -57,7 +57,7 @@ const [newCategory, setNewCategory] = useState<ICreateCategoria>({//Estado para 
 
       Swal.fire({
         icon: "success",
-        title: "Categoria agregada",
+        title: "Categoria no ha sido agregada",
         showConfirmButton: false,
         timer: 1500,
         willClose: ()=>{

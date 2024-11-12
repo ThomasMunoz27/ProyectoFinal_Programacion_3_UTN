@@ -49,8 +49,8 @@ const ListCategories = () => {
                 <Button onClick={handleModal}>Agregar Categoria</Button>
             </div>
             <ul className={styles.containerList}>
-                {categories.filter(category => category.categoriaPadre !== null).map(category => (
-                    <li key={category.id} className={styles.containerPrincipal} typeof="inherit">
+                {categories.filter(category => (!category.categoriaPadre)).map(category => (
+                    <li key={category.id} className={styles.containerPrincipal}>
                         <CategoryCard category={category} />
                     </li>
                 ))}

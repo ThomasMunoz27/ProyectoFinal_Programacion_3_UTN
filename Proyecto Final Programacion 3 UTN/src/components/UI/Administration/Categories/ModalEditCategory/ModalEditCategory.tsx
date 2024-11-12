@@ -4,6 +4,9 @@ import { ChangeEvent, FC, useState } from "react";
 import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias";
 import { categoryService } from "../../../../../Services/categoryServices";
 import Swal from "sweetalert2";
+import { IUpdateCategoria } from "../../../../../types/dtos/categorias/IUpdateCategoria";
+import { RootState } from "../../../../../redux/store/store";
+import { useSelector } from "react-redux";
 
 interface IModalEditCategory{
     closeModalEdit : () => void
@@ -12,14 +15,19 @@ interface IModalEditCategory{
 
 const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) =>{
 
-    const [categoryEdit, setCategoryEdit] = useState<ICategorias>({
-        id : category.id,
+    //Selecciono empresa
+    const storedEmpresa = localStorage.getItem('empresa');
+    const selectedEmpresa = storedEmpresa ? JSON.parse(storedEmpresa) : useSelector(
+        (state : RootState) => state.company.selectedCompany
+    )
+
+    const [categoryEdit, setCategoryEdit] = useState<IUpdateCategoria>({
+        id: category.id,
         denominacion: category.denominacion,
         eliminado: category.eliminado,
-        sucursales: category.sucursales,
-        subCategorias: category.subCategorias,
-        categoriaPadre: category.categoriaPadre,
-        articulos : category.articulos
+        idEmpresa: selectedEmpresa?.id,
+        idSucursales: category.sucursales.map((el) => el.id),
+        idCategoriaPadre: category.categoriaPadre?.id
     })
 
     const handleChage = (e : ChangeEvent<HTMLInputElement>) =>{
@@ -56,7 +64,7 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
             console.error("El problema es: ", error);
             Swal.fire({
                 icon: "success",
-                title: "Categoria Editada",
+                title: "Categoria no editada",
                 showConfirmButton: false,
                 timer: 1500,
                 willClose: ()=>{

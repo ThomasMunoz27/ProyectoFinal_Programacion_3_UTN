@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ICategorias } from "../types/dtos/categorias/ICategorias";
 import { ICreateCategoria } from "../types/dtos/categorias/ICreateCategoria";
+import { IUpdateCategoria } from "../types/dtos/categorias/IUpdateCategoria";
 
 
 
@@ -24,7 +25,7 @@ export const categoryService = {
         return response.data;
     },
 
-    async updateCategory(categoryId: number, categoryActualizada: ICategorias): Promise<ICategorias> {
+    async updateCategory(categoryId: number, categoryActualizada: IUpdateCategoria): Promise<ICategorias> {
         const response = await axios.put<ICategorias>(`${BASE_URL}/update/${categoryId}`, categoryActualizada);
         return response.data;
     },
