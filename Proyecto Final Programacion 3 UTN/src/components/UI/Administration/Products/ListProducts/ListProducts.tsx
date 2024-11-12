@@ -26,17 +26,43 @@ export const ListProducts = () => {
     const [categories, setCategories] = useState<ICategorias[]>([]);
     const [showModalAddProduct, setShowModalAddProduct] = useState<boolean>(false);
     const [selectedCategory, setSelectedCategory] = useState<ICategorias | undefined>(undefined);
+    const [productsLoaded, setProductsLoaded] = useState(false);
+    const [categoriesLoaded, setCategoriesLoaded] = useState(false);
+
+    const filteredProducts = selectedCategory ? products.filter(product => product.categoria.denominacion === selectedCategory.denominacion) : products
+
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const data = await articleService.getArticlesBySucursalId(selectedSucursal?.id);
-            setProducts(data);
-        }
-
+            if (!productsLoaded) {
+                try {
+                    const data = await articleService.getArticlesBySucursalId(selectedSucursal?.id);
+                    setProducts(data);
+                    setProductsLoaded(true);
+                } catch (error) {
+                    console.error("Error al cargar productos:", error);
+                }
+            }
+        };
+    
         fetchProducts();
-    },[selectedSucursal])
-
-
+    }, [selectedSucursal, productsLoaded]);
+    
+    useEffect(() => {
+        const fetchCategories = async () => {
+            if (!categoriesLoaded) {
+                try {
+                    const data = await categoryService.getCategoriesBySucursal(selectedSucursal?.id);
+                    setCategories(data);
+                    setCategoriesLoaded(true);
+                } catch (error) {
+                    console.error("Error al cargar categorías:", error);
+                }
+            }
+        };
+    
+        fetchCategories();
+    }, [selectedSucursal, categoriesLoaded]);
 
     const handleShowModalAddProduct = () => {
         setShowModalAddProduct(true);
@@ -51,18 +77,25 @@ export const ListProducts = () => {
         
     }
 
+
   return (
     <div>
         
-        <Button
-        onClick={handleShowModalAddProduct}>Agregar Producto</Button>
+        <div className={styles.upContainer}>
+            <Button
+                onClick={handleShowModalAddProduct}>Agregar Producto
+            </Button>
+            <select onChange={handleCategoryChange}>
+                <option value="">Filtrar por categoría</option>
+                <option value="">Todas|</option>
+                {categories.map(category =>(
+                    <option key={category.id} >{category.denominacion}</option>
+                ))}
+            </select>
 
-        <select onChange={handleCategoryChange}>
-            <option value="">Filtrar por categoría</option>
-            {categories.map(category =>(
-                <option key={category.id} >{category.denominacion}</option>
-            ))}
-        </select>
+        </div>
+        
+
 
         <TableContainer component={Paper} style={{ marginTop: '20px', height: '82vh'}}>
         <Table>
@@ -77,7 +110,7 @@ export const ListProducts = () => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {products.map(product => (
+                {filteredProducts.map(product => (
                     <ProductRow key={product.id} product={product} />
 
                 ))}

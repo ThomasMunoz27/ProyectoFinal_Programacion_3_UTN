@@ -7,3 +7,15 @@
     height: 100%;
     z-index:2 !important
 }
+
+.upContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
+    justify-content: space-between;
+    
+}
+
+.upContainer select{
+    text-align: center;
+}
