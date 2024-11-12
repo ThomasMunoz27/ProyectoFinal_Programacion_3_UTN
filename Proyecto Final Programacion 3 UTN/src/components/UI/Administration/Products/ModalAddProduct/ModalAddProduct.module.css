@@ -29,6 +29,12 @@
     border-radius: 5px;
 }
 
+.formContainer button{
+    border-radius: .4rem;
+    border: blueviolet solid 2px;
+    
+}
+
 .containerButtons{
     padding: 20px;
     display: flex;

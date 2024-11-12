@@ -61,7 +61,7 @@ export const ListProducts = () => {
             </TableHead>
             <TableBody>
                 {products.map(product => (
-                    <ProductRow product={product}/>
+                    <ProductRow key={product.id} product={product}/>
 
                 ))}
             </TableBody>
