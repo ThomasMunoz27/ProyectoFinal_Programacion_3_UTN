@@ -28,4 +28,9 @@ export const articleService = {
         const response = await axios.put(`${BASE_URL}/update/${articleId}`, articleActualizado)
         return response.data
     },
+
+    async deleteArticle(articleId: number) : Promise<void> {
+        const response = await axios.delete(`${BASE_URL}/${articleId}`)
+        return response.data
+    }
 }
