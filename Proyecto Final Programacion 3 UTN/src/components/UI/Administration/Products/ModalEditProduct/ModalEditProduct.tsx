@@ -100,7 +100,7 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 
     Swal.fire({
       icon: "success",
-      title: "Alergeno actualizado",
+      title: "Producto actualizado",
       showConfirmButton: false,
       timer: 1500,
       willClose: () => {

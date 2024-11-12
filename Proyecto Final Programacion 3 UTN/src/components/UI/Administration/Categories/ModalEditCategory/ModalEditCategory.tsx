@@ -21,12 +21,17 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
         (state : RootState) => state.company.selectedCompany
     )
 
+    const storedSucursal = localStorage.getItem('sucursal');
+    const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
+        (state : RootState) => state.sucursal.selectedSucursal
+    )
+
     const [categoryEdit, setCategoryEdit] = useState<IUpdateCategoria>({
         id: category.id,
         denominacion: category.denominacion,
         eliminado: category.eliminado,
         idEmpresa: selectedEmpresa?.id,
-        idSucursales: category.sucursales.map((el) => el.id),
+        idSucursales:[selectedSucursal?.id],
         idCategoriaPadre: category.categoriaPadre?.id
     })
 
