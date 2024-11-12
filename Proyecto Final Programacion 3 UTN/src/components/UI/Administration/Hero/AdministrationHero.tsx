@@ -4,9 +4,10 @@ import { RootState } from '../../../../redux/store/store';
 
 export const AdministrationHero = () => {
 
-  const selectedSucursal = useSelector(
-    (state: RootState) => state.sucursal.selectedSucursal
-  );
+  const storedSucursal = localStorage.getItem('sucursal');
+    const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
+        (state: RootState) => state.sucursal.selectedSucursal
+    )
 
   return (
     //aca se hace el navigate de los botones del aside

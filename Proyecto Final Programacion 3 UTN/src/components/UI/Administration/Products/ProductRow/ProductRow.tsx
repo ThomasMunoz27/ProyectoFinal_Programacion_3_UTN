@@ -10,9 +10,10 @@ import { articleService } from "../../../../../Services/articleServices";
 
 interface IProductRow {
   product: IProductos
+
 }
 
-export const ProductRow : FC<IProductRow> = ({ product }) => {
+export const ProductRow : FC<IProductRow> = ({ product  }) => {
   const [showModalViewProduct, setShowModalViewProduct] = useState<boolean>(false);
   const [showModalEditProduct, setShowModalEditProduct] = useState<boolean>(false);
 

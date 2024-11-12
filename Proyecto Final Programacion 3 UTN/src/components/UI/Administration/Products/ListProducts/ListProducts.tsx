@@ -1,7 +1,7 @@
 import {  Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material"
 import { RootState } from "../../../../../redux/store/store";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import { IProductos } from "../../../../../types/dtos/productos/IProductos";
 import { articleService } from "../../../../../Services/articleServices";
@@ -9,6 +9,8 @@ import { ProductRow } from "../ProductRow/ProductRow";
 import { Button } from "react-bootstrap";
 import styles from "./ListProducts.module.css";
 import { ModalAddProduct } from "../ModalAddProduct/ModalAddProduct";
+import { ICategorias } from "../../../../../types/dtos/categorias/ICategorias";
+import { categoryService } from "../../../../../Services/categoryServices";
 
 export const ListProducts = () => {
 
@@ -21,8 +23,9 @@ export const ListProducts = () => {
     )
 
     const [products, setProducts] = useState<IProductos[]>([]);
-
+    const [categories, setCategories] = useState<ICategorias[]>([]);
     const [showModalAddProduct, setShowModalAddProduct] = useState<boolean>(false);
+    const [selectedCategory, setSelectedCategory] = useState<ICategorias | undefined>(undefined);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -34,6 +37,7 @@ export const ListProducts = () => {
     },[selectedSucursal])
 
 
+
     const handleShowModalAddProduct = () => {
         setShowModalAddProduct(true);
     }
@@ -41,11 +45,24 @@ export const ListProducts = () => {
             setShowModalAddProduct(false);
     }
 
+    const handleCategoryChange = (e : ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCategory(categories.find(category => category.denominacion === e.target.value));
+        console.log(selectedCategory);
+        
+    }
+
   return (
     <div>
         
         <Button
         onClick={handleShowModalAddProduct}>Agregar Producto</Button>
+
+        <select onChange={handleCategoryChange}>
+            <option value="">Filtrar por categoría</option>
+            {categories.map(category =>(
+                <option key={category.id} >{category.denominacion}</option>
+            ))}
+        </select>
 
         <TableContainer component={Paper} style={{ marginTop: '20px', height: '82vh'}}>
         <Table>
@@ -61,7 +78,7 @@ export const ListProducts = () => {
             </TableHead>
             <TableBody>
                 {products.map(product => (
-                    <ProductRow key={product.id} product={product}/>
+                    <ProductRow key={product.id} product={product} />
 
                 ))}
             </TableBody>

@@ -21,23 +21,31 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
         (state : RootState) => state.company.selectedCompany
     )
 
+    //Selecciono sucursal
+    const storedSucursal = localStorage.getItem('sucursal');
+    const selectedSucursal = storedSucursal ? JSON.parse(storedSucursal) : useSelector(
+        (state : RootState) => state.sucursal.selectedSucursal
+    )
+
+    //Creo estado para el objeto de categoria
     const [categoryEdit, setCategoryEdit] = useState<IUpdateCategoria>({
         id: category.id,
         denominacion: category.denominacion,
         eliminado: category.eliminado,
         idEmpresa: selectedEmpresa?.id,
-        idSucursales: Array.isArray(category.sucursales) ? category.sucursales.map((e) => e.id) : [],
-
+        idSucursales:[selectedSucursal?.id],
         idCategoriaPadre: category.categoriaPadre?.id
     })
 
-    const handleChage = (e : ChangeEvent<HTMLInputElement>) =>{
+    //Funcion que controla los cambios del form
+    const handleChange = (e : ChangeEvent<HTMLInputElement>) =>{
         const {name , value} = e.target;
         setCategoryEdit((prev) => ({...prev,
             [name] : value,
         }))
     }
 
+    //Funcion que actualiza la categoria
     const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
@@ -83,7 +91,7 @@ const ModalEditCategory : FC<IModalEditCategory> = ({closeModalEdit, category}) 
             </div>
             <div className={styles.containerBody}>
                 <label htmlFor="">Ingrese Denominacion</label>
-                <input type="text" placeholder="Denominacion" value={categoryEdit.denominacion} name="denominacion" onChange={handleChage}/>
+                <input type="text" placeholder="Denominacion" value={categoryEdit.denominacion} name="denominacion" onChange={handleChange}/>
             </div>
             <div className={styles.containerButtons}>
                 <Button onClick={handleSubmit}>Aceptar</Button>
