@@ -52,6 +52,16 @@
 .rotated {
     transform: rotate(90deg); 
 }
+.subcategoryItem{
+    display: flex;
+    justify-content: center;
+    padding: 1px;
+}
+.denominationSubCategory{
+    display: flex;
+    border-bottom:solid 1px;
+    width: 100%;
+}
 .backgroundDisabled{
     background-color:rgba(0, 0, 0, 0.5) !important ;
     position: fixed;
