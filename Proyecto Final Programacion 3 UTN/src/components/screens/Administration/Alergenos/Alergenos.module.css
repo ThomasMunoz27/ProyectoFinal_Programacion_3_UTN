@@ -34,17 +34,15 @@
     flex-direction: column;
     gap: 10px;
     height: 76vh;
-    justify-content: center;
     overflow-y: scroll;
 
 }
 
 .containerList{
-    padding-top: 150px;
+    padding-top: 10px;
 }
 ul{
     list-style: none;
-    padding: 0px;
 }
 .containerItem {
     width: 95%;
