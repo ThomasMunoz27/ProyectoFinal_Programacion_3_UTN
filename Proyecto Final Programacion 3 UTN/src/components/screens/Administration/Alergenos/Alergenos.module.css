@@ -33,12 +33,15 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 74vh;
+    height: 76vh;
     justify-content: center;
     overflow-y: scroll;
 
 }
 
+.containerList{
+    padding-top: 150px;
+}
 ul{
     list-style: none;
     padding: 0px;
@@ -52,16 +55,16 @@ ul{
     box-shadow: 2px 2px 5px #696969;
     padding: 10px;
     border-radius: 12px;
-    background-color: #f8f8f8;
+    background-color: aliceblue;
     padding-left: 20px;
     font-size: 1.1rem;
     padding-right: 30px;
 }
 .BodyDeploy {
-    padding: 10px;
+    margin-top: 20px;
 }
 .containerButtons{
-    width: 40%;
+    width: 45%;
     max-width: 200px;
     display: flex;
     justify-content: space-between;
@@ -116,3 +119,4 @@ ul{
     text-align: left;
     height: 100%;
 }
+
