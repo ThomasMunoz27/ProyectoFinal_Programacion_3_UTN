@@ -20,6 +20,11 @@ export const categoryService = {
         return response.data;
     },
 
+    async getCategoriesPadresBySucursal(sucursalId: number|undefined): Promise<ICategorias[]> {
+        const response = await axios.get<ICategorias[]>(`${BASE_URL}/allCategoriasPadrePorSucursal/${sucursalId}`);
+        return response.data;
+    },
+
     async getCategoriesBySucursal(sucursalId: number|undefined): Promise<ICategorias[]> {
         const response = await axios.get<ICategorias[]>(`${BASE_URL}/allCategoriasPorSucursal/${sucursalId}`);
         return response.data;

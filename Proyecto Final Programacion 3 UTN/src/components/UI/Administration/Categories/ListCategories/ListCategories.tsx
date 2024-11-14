@@ -28,7 +28,7 @@ const ListCategories = () => {
 
     useEffect(() => {
         const fetchCategories = async () =>{
-            const data = await categoryService.getCategoriesBySucursal(selectedSucursal?.id);
+            const data = await categoryService.getCategoriesPadresBySucursal(selectedSucursal?.id);
             setCategories(data);
         }
         fetchCategories();
