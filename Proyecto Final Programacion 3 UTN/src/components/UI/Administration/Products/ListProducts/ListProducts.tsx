@@ -28,16 +28,24 @@ export const ListProducts = () => {
     const [selectedCategory, setSelectedCategory] = useState<ICategorias | undefined>(undefined);
     const [productsLoaded, setProductsLoaded] = useState(false);
     const [categoriesLoaded, setCategoriesLoaded] = useState(false);
+    const [page, setPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+    const [totalElements, setTotalElements] = useState<number>(0);
+    const [loading, setLoading] = useState<boolean>(false);
+
 
     const filteredProducts = selectedCategory ? products.filter(product => product.categoria.denominacion === selectedCategory.denominacion) : products
 
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
             if (!productsLoaded) {
                 try {
-                    const data = await articleService.getArticlesBySucursalId(selectedSucursal?.id);
-                    setProducts(data);
+                    const data = await articleService.getPagedArticles(selectedSucursal?.id, page -1 );
+                    setProducts(data.content);
+                    setTotalPages(data.totalPages);
+                    setTotalElements(data.totalElements);
                     setProductsLoaded(true);
                 } catch (error) {
                     console.error("Error al cargar productos:", error);
@@ -46,7 +54,8 @@ export const ListProducts = () => {
         };
     
         fetchProducts();
-    }, [selectedSucursal, productsLoaded]);
+        setLoading(false);
+    }, [selectedSucursal, productsLoaded, page]);
     
     useEffect(() => {
         const fetchCategories = async () => {
@@ -77,9 +86,25 @@ export const ListProducts = () => {
         
     }
 
+    const handleNextPage = () => {
+        if (page < totalPages) {
+            setPage(page + 1);
+            //seteo products loaded false para que recargue cada vez que cambie de página
+            setProductsLoaded(false);
+        }
+    };
+    
+    const handlePrevPage = () => {
+        if (page > 1) {
+            setPage(page - 1);
+            //seteo products loaded false para que recargue cada vez que cambie de página
+            setProductsLoaded(false);
+        }
+    };
+
 
   return (
-    <div>
+    <div className={styles.heroContainer}>
         
         <div className={styles.upContainer}>
             <Button
@@ -87,7 +112,7 @@ export const ListProducts = () => {
             </Button>
             <select onChange={handleCategoryChange}>
                 <option value="">Filtrar por categoría</option>
-                <option value="">Todas|</option>
+                <option value="">Todas</option>
                 {categories.map(category =>(
                     <option key={category.id} >{category.denominacion}</option>
                 ))}
@@ -95,9 +120,16 @@ export const ListProducts = () => {
 
         </div>
         
+        {loading && (
+        <div className="d-flex justify-content-center">
+            <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+        )}
 
 
-        <TableContainer component={Paper} style={{ marginTop: '20px', height: '82vh'}}>
+        <TableContainer component={Paper} style={{ marginTop: '20px', height: '73vh'}}>
         <Table>
             <TableHead>
                 <TableRow>
@@ -118,6 +150,20 @@ export const ListProducts = () => {
 
             </Table>
         </TableContainer>
+        
+        <div className={styles.pagination}>
+            <Button onClick={handlePrevPage} disabled={page === 1}>
+                Anterior
+            </Button>
+            <span>
+                Página {page} de {totalPages} (Total: {totalElements} productos)
+            </span>
+            <Button onClick={handleNextPage} disabled={page === totalPages}>
+                Siguiente
+            </Button>
+
+            
+        </div>
         
         {showModalAddProduct && (
             <div className={styles.backgroundDisabled}>

@@ -32,5 +32,10 @@ export const articleService = {
     async deleteArticle(articleId: number) : Promise<void> {
         const response = await axios.delete(`${BASE_URL}/${articleId}`)
         return response.data
-    }
+    },
+
+    async getPagedArticles(sucursalId: number, page: number)/*: Promise<IProductos[]>*/ {
+        const response = await axios.get(`${BASE_URL}/pagedPorSucursal/${sucursalId}?page=${page}&size=${10}`);
+        return response.data;
+    },
 }

@@ -43,5 +43,10 @@ export const categoryService = {
     async getAllSubCategoriesByCategoryId(categoryId: number, page: number = 1): Promise<ICategorias[]> {
         const response = await axios.get<ICategorias[]>(`${BASE_URL}/allSubCategoriasPorCategoriaPadre/${categoryId}/${page}`);
         return response.data;
-    }
+    },
+
+    async getAllSubCategoriesBySucursalId(sucursalId: number): Promise<ICategorias[]> {
+        const response = await axios.get<ICategorias[]>(`${BASE_URL}/allSubCategoriasPorSucursal/${sucursalId}`);
+        return response.data;
+    },
 }

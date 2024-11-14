@@ -37,16 +37,16 @@ export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) =
     })
 
     useEffect(() => {
-        const fetchCategories = async () => {
+        const fetchSubCategories = async () => {
             try {
-                const data = await categoryService.getCategoriesBySucursal(sucursal.id);
+                const data = await categoryService.getAllSubCategoriesBySucursalId(sucursal.id);
                 setCategories(data);
             } catch (error) {
                 console.error("Error al cargar categorías:", error);
                 Swal.fire("Error", "No se pudieron cargar las categorías.", "error");
             }
         };
-        fetchCategories();
+        fetchSubCategories();
     }, []);
     
     useEffect(() => {

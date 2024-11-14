@@ -19,3 +19,10 @@
 .upContainer select{
     text-align: center;
 }
+
+.heroContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    align-items: center;
+}
