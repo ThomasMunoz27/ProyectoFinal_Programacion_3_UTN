@@ -81,9 +81,14 @@ export const ListProducts = () => {
     }
 
     const handleCategoryChange = (e : ChangeEvent<HTMLSelectElement>) => {
-        setSelectedCategory(categories.find(category => category.denominacion === e.target.value));
-        console.log(selectedCategory);
         
+        const filtredCategories =(categories.find(category => category.denominacion === e.target.value));
+
+        if (filtredCategories?.denominacion === "" ) {
+            setSelectedCategory(undefined);
+        }else{
+            setSelectedCategory(filtredCategories);
+        }
     }
 
     const handleNextPage = () => {

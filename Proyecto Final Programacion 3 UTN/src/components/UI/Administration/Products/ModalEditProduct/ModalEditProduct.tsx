@@ -41,7 +41,7 @@ export const ModalEditProduct : FC<IModalViewProduct> = ({product, modalClose}) 
     denominacion: product.denominacion,
     precioVenta: product.precioVenta,
     descripcion: product.descripcion, 
-    habilitado: product.habilitado,
+    habilitado: product.habilitado ?? false,
     imagenes: product.imagenes,
     codigo: product.codigo,
     idCategoria: product.categoria.id,
@@ -79,14 +79,14 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
   }
 
   // Validar que se haya seleccionado una imagen
-  if (!imageProduct && productToEdit.imagenes.length === 0) {
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "Debe cargar una imagen.",
-    });
-    return;
-  }
+  // if (!imageProduct && productToEdit.imagenes.length === 0) {
+  //   Swal.fire({
+  //     icon: "error",
+  //     title: "Error",
+  //     text: "Debe cargar una imagen.",
+  //   });
+  //   return;
+  // }
   
 
   try {
@@ -105,11 +105,13 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
       timer: 1500,
       willClose: () => {
         modalClose();
-        
+        window.location.reload();
       },
     });
   } catch (error) {
     console.error("El problema es: ", error);
+    console.log("datos envidos", productToEdit);
+    
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -119,14 +121,13 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 };
 
 
-  const handleChange = (e : ChangeEvent<HTMLInputElement>) => { 
-    const {name, value } = e.target;
-     //Evito que se ingresen espacios en blanco
-        setProductToEdit({
-            ...productToEdit, //Copio el estado anterior para que solo se actualice los inputs que estan llenos
-            [name] : value
-        });
-    
+const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const { name, value, type, checked } = e.target;
+
+  setProductToEdit({
+      ...productToEdit,
+      [name]: type === "checkbox" ? checked : value,
+  });
 };
 
 const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -163,13 +164,16 @@ const handleAlergenosToggle = () => {
         <div className={ styles.containerData }>
         <form action="" className={styles.containerForm} >
                     <label htmlFor="">Denominacion</label>
-                    <input type="text" placeholder="Nombre del Producto" name="nombre" value={productToEdit.denominacion} onChange={handleChange}/>
-                    <label htmlFor="">Razon Social</label>
-                    <input type="text" placeholder="Razon Social de la empresa" name="razonSocial" value={productToEdit.precioVenta} onChange={handleChange}/>
+                    <input type="text" placeholder="Nombre del Producto" name="denominacion" value={productToEdit.denominacion} onChange={handleChange}/>
+
+                    <label htmlFor="">Precio venta</label>
+                    <input type="text" placeholder="Razon Social de la empresa" name="precioVenta" value={productToEdit.precioVenta} onChange={handleChange}/>
+
                     <label htmlFor="">Descripcion</label>
-                    <input type="text" placeholder="Descripcion del producto" name="cuit" value={productToEdit.descripcion} onChange={handleChange}/>
+                    <input type="text" placeholder="Descripcion del producto" name="descripcion" value={productToEdit.descripcion} onChange={handleChange}/>
+
                     <label htmlFor="">Código</label>                    
-                    <input type="text" placeholder="Link de imagen" name="logo" value={productToEdit.codigo} onChange={handleChange}/>
+                    <input type="text" placeholder="Link de imagen" name="codigo" value={productToEdit.codigo} onChange={handleChange}/>
 
                     <label htmlFor="categoria">Categoria: </label>
                       <select name="" id="" onChange={handleCategoryChange}>
@@ -181,6 +185,9 @@ const handleAlergenosToggle = () => {
                           </option>
                           ))}
                   </select>
+
+                  <label htmlFor="">Habilitado</label>
+                    <input type="checkbox" name="habilitado"id="habilitado" checked={productToEdit.habilitado}  onChange={handleChange}/>
                     
 
                   <div className={styles.alergenosDropdown}>
