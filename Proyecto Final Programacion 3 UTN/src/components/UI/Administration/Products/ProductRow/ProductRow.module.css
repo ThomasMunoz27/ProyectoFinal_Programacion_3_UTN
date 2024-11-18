@@ -7,3 +7,9 @@
     height: 100%;
     z-index:2 !important
 }
+.containerButtons{
+    width: 200px;
+    display: flex;
+
+    justify-content: space-between;
+}

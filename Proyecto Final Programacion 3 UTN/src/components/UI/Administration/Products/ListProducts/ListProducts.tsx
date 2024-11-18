@@ -134,7 +134,7 @@ export const ListProducts = () => {
         )}
 
 
-        <TableContainer component={Paper} style={{ marginTop: '20px', height: '73vh'}}>
+        <TableContainer component={Paper} style={{ marginTop: '20px', height: '68vh'}}>
         <Table>
             <TableHead>
                 <TableRow>
@@ -148,7 +148,7 @@ export const ListProducts = () => {
             </TableHead>
             <TableBody>
                 {filteredProducts.map(product => (
-                    <ProductRow key={product.id} product={product} />
+                    <ProductRow  key={product.id} product={product} />
 
                 ))}
             </TableBody>

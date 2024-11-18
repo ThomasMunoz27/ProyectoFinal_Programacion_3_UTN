@@ -163,6 +163,8 @@ const handleAlergenosToggle = () => {
         
         <div className={ styles.containerData }>
         <form action="" className={styles.containerForm} >
+        <div className={styles.blockOne}>
+
                     <label htmlFor="">Denominacion</label>
                     <input type="text" placeholder="Nombre del Producto" name="denominacion" value={productToEdit.denominacion} onChange={handleChange}/>
 
@@ -171,6 +173,9 @@ const handleAlergenosToggle = () => {
 
                     <label htmlFor="">Descripcion</label>
                     <input type="text" placeholder="Descripcion del producto" name="descripcion" value={productToEdit.descripcion} onChange={handleChange}/>
+        </div>
+
+        <div className={styles.blockTwo}>
 
                     <label htmlFor="">Código</label>                    
                     <input type="text" placeholder="Link de imagen" name="codigo" value={productToEdit.codigo} onChange={handleChange}/>
@@ -181,7 +186,7 @@ const handleAlergenosToggle = () => {
                             {categories.find((category) => category.id === productToEdit.idCategoria)?.denominacion}
                           </option>
                             {categories.map((category) => (
-                                <option key={category.id} value={category.id}>{category.denominacion}
+                              <option key={category.id} value={category.id}>{category.denominacion}
                           </option>
                           ))}
                   </select>
@@ -191,13 +196,13 @@ const handleAlergenosToggle = () => {
                     
 
                   <div className={styles.alergenosDropdown}>
-              <button type="button" onClick={handleAlergenosToggle}>
+              <Button type="button" onClick={handleAlergenosToggle}>
                 Seleccionar alérgenos
-              </button>
+              </Button>
               {isAlergenosOpen && (
                 <div className={styles.alergenosList}>
                     {alergenos.map((alergeno) => (
-                        <div key={alergeno.id} className={styles.alergenoOption}>
+                      <div key={alergeno.id} className={styles.alergenoOption}>
                             <input
                                 type="checkbox"
                                 id={`alergeno-${alergeno.id}`}
@@ -220,6 +225,7 @@ const handleAlergenosToggle = () => {
                 />
                 </div>
 
+              </div>
                 </form>
             
 

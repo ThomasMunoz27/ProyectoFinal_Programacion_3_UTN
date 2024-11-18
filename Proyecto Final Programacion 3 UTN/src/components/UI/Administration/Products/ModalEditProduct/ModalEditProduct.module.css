@@ -1,6 +1,6 @@
 .containerPrincipal{
     min-height: 50vh;
-    min-width: 25vw;
+    min-width: 600px;
     background-color: white;
     border-radius: 3vh;
     box-shadow: 5px 5px 25px;
@@ -25,9 +25,20 @@
     text-align: left;
 }
 
+.containerForm{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .containerButton{
     padding: 10px;
     text-align: center;
+    margin-top: 10px;
+    width: 79%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
 }
 .containerButton button{
     width: 8vw;
@@ -58,3 +69,19 @@
     margin-right: 10px;
     height: 30px;
   }
+
+  .blockOne{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.blockTwo{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    align-items: flex-start;
+}
+#habilitado{
+    margin-left: -100px;
+}
