@@ -33,9 +33,13 @@ export const ListProducts = () => {
     const [totalElements, setTotalElements] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
 
-
     const filteredProducts = selectedCategory ? products.filter(product => product.categoria.denominacion === selectedCategory.denominacion) : products
-
+    
+    useEffect(() => {
+        // Si hay una categoría seleccionada, mostramos el total de productos filtrados
+        setTotalElements(filteredProducts.length);
+    }, [filteredProducts]);
+    
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -157,12 +161,15 @@ export const ListProducts = () => {
         </TableContainer>
         
         <div className={styles.pagination}>
+
             <Button onClick={handlePrevPage} disabled={page === 1}>
                 Anterior
             </Button>
+
             <span>
                 Página {page} de {totalPages} (Total: {totalElements} productos)
             </span>
+
             <Button onClick={handleNextPage} disabled={page === totalPages}>
                 Siguiente
             </Button>
