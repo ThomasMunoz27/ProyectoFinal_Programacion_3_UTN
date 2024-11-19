@@ -134,7 +134,7 @@ export const ListProducts = () => {
         )}
 
 
-        <TableContainer component={Paper} style={{ marginTop: '20px', height: '68vh'}}>
+        <TableContainer component={Paper} style={{ marginTop: '20px', height: '68vh', width: '65vw'}}>
         <Table>
             <TableHead>
                 <TableRow>

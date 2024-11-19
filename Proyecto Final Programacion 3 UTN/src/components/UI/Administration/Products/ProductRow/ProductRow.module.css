@@ -13,3 +13,9 @@
 
     justify-content: space-between;
 }
+
+.buttonDelete{
+    background-color: transparent !important;
+    border: solid red !important;
+}
+

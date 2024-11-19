@@ -176,9 +176,9 @@ export const ModalAddProduct : FC<IModalAddProduct> = ({closeModal, sucursal}) =
 
                 <label htmlFor="alergenos">Alergenos</label>
             <div className={styles.alergenosDropdown}>
-              <button type="button" onClick={handleAlergenosToggle}>
+              <Button type="button" onClick={handleAlergenosToggle}>
                 Seleccionar alérgenos
-              </button>
+              </Button>
               {isAlergenosOpen && (
                 <div className={styles.alergenosList}>
                     {alergenos.map((alergeno) => (

@@ -26,7 +26,7 @@ export const ModalEditProduct : FC<IModalViewProduct> = ({product, modalClose}) 
   const [selectedAlergenos, setSelectedAlergenos] = useState<number[]>(arrayAlergenos)
   const [isAlergenosOpen, setIsAlergenosOpen] = useState(false);
   const [alergenos, setAlergenos] = useState<IAlergenos[]>([])
-  const [imageProduct, setImageProduct] = useState<IImagen | null>(null);
+  const [imageProduct, setImageProduct] = useState<IImagen | null>(product.imagenes[0]);
 
 
   const storedSucursal = localStorage.getItem('sucursal');
@@ -73,21 +73,12 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     Swal.fire({
       icon: "error",
       title: "Error",
-      text: "La denominación es obligatoria.",
+      text: "Rellene todos los campos.",
     });
     return;
   }
 
-  // Validar que se haya seleccionado una imagen
-  // if (!imageProduct && productToEdit.imagenes.length === 0) {
-  //   Swal.fire({
-  //     icon: "error",
-  //     title: "Error",
-  //     text: "Debe cargar una imagen.",
-  //   });
-  //   return;
-  // }
-  
+
 
   try {
     const productToSend = {

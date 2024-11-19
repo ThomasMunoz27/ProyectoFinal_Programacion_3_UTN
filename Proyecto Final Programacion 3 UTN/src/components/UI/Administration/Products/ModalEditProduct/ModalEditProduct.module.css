@@ -35,13 +35,18 @@
     padding: 10px;
     text-align: center;
     margin-top: 10px;
-    width: 79%;
+    width: 60%;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
+    ;
 }
 .containerButton button{
-    width: 8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  width: 100px;
 }
 
 
@@ -84,4 +89,10 @@
 }
 #habilitado{
     margin-left: -100px;
+}
+
+.containerForm textarea{
+  max-height: 150px;
+  min-height: 30px;
+
 }
